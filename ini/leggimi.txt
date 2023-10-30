@@ -1,0 +1,18 @@
+Versione DynoTractor 1.1.0
+
+Utilizzo del file_impo:
+
+Versione banco:
+
+- Trattore, Twin  utilizzano il file_impo_trac.Dmt (di default).
+
+Numero impulsi/giro: 16
+Calcolo della coppia freno utilizza due celle di carico
+
+- Trailer utilizza il file_impo_trailer.Dmt da rinominare in file_impo_trac.Dmt
+
+Numero impulsi/giro: 64
+Calcolo della coppia freno utilizza una sola cella di carico
+
+
+

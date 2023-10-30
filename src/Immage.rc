@@ -1,0 +1,18 @@
+//  Questo file contiene le Bmp sorgenti del programma DynoRace Frenato
+
+//  16/03/2007  Dimsport s.r.l
+
+#ifndef WORKSHOP_INVOKED
+#include <windows.h>
+#endif
+
+// Visualizza/Chiudi tutti gli strumenti selezionati
+Show_All	        BITMAP  Show_All.bmp
+Hide_All          BITMAP  Hide_All.bmp
+
+
+// Logo aziendale
+Logo BITMAP DynoTractor_2014.bmp
+
+// Logo aziendale
+Logo1 BITMAP Logo.bmp

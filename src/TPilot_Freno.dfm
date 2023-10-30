@@ -1,0 +1,180 @@
+object Pilot_Freno: TPilot_Freno
+  Left = 797
+  Top = 3
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Carico del freno'
+  ClientHeight = 258
+  ClientWidth = 264
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -19
+  Font.Name = 'Tahoma'
+  Font.Style = [fsBold]
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 23
+  object VrTrackBar1: TVrTrackBar
+    Left = 0
+    Top = 191
+    Width = 264
+    Height = 33
+    MaxValue = 254
+    Frequency = 1
+    GutterBevel.InnerShadow = clBtnShadow
+    GutterBevel.InnerHighlight = clBtnHighlight
+    GutterBevel.InnerWidth = 1
+    GutterBevel.InnerStyle = bsNone
+    GutterBevel.InnerSpace = 0
+    GutterBevel.InnerColor = clBtnFace
+    GutterBevel.OuterShadow = clBtnShadow
+    GutterBevel.OuterHighlight = clBtnHighlight
+    GutterBevel.OuterStyle = bsLowered
+    GutterBevel.OuterOutline = osNone
+    TickMarks = tmTopLeft
+    ScaleOffset = 2
+    OnChange = VrTrackBar1Change
+    Align = alBottom
+    Color = clWhite
+    ParentColor = False
+    TabOrder = 0
+    TabStop = True
+  end
+  object AnalogMeterHQ1: TAnalogMeterHQ
+    Left = 0
+    Top = 0
+    Width = 264
+    Height = 191
+    DataBindings = <>
+    TabStop = False
+    Align = alClient
+    TabOrder = 1
+    ControlData = {
+      00000100491B0000BE1300000200000003302025000000000000000000000000
+      0000F43F333333333333C33F000000000000F83F7B14AE47E17AB43F01000100
+      000000000500050000000000000000000000000000005940000000000000F03F
+      00000000000000000200FF000000FF000000FFFF000000FF000003252E669A99
+      99999999C93FFFFFFF0000000000FFFFFF00000352E30B918FCE119DE300AA00
+      4BB85101000000900174B70100065461686F6D61000352E30B918FCE119DE300
+      AA004BB8510100000090013C670200065461686F6D619A9999999999F13F713D
+      0AD7A370ED3F0000000000000000000000000000494000000000000054400004
+      52E30B918FCE119DE300AA004BB8516C74000000000000}
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 224
+    Width = 264
+    Height = 34
+    Align = alBottom
+    BevelOuter = bvLowered
+    TabOrder = 2
+    object BitBtn2: TBitBtn
+      Left = 8
+      Top = 4
+      Width = 121
+      Height = 29
+      Caption = 'Libera'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Times New Roman'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
+      Kind = bkCancel
+    end
+    object BitBtn1: TBitBtn
+      Left = 136
+      Top = 4
+      Width = 121
+      Height = 29
+      Caption = 'Ritorna'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Times New Roman'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = BitBtn1Click
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333444444
+        33333333333F8888883F33330000324334222222443333388F3833333388F333
+        000032244222222222433338F8833FFFFF338F3300003222222AAAAA22243338
+        F333F88888F338F30000322222A33333A2224338F33F8333338F338F00003222
+        223333333A224338F33833333338F38F00003222222333333A444338FFFF8F33
+        3338888300003AAAAAAA33333333333888888833333333330000333333333333
+        333333333333333333FFFFFF000033333333333344444433FFFF333333888888
+        00003A444333333A22222438888F333338F3333800003A2243333333A2222438
+        F38F333333833338000033A224333334422224338338FFFFF8833338000033A2
+        22444442222224338F3388888333FF380000333A2222222222AA243338FF3333
+        33FF88F800003333AA222222AA33A3333388FFFFFF8833830000333333AAAAAA
+        3333333333338888883333330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+    end
+  end
+  object PrintStep: TBitBtn
+    Left = 192
+    Top = 112
+    Width = 65
+    Height = 33
+    Caption = 'ACQ   '
+    Default = True
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Times New Roman'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    OnClick = PrintStepClick
+    Glyph.Data = {
+      FE000000424DFE00000000000000760000002800000010000000110000000100
+      04000000000088000000C40E0000C40E00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFF00000000000000000FFFFFFFFFFFFFF00F00F00F00F0
+      00F00FFFFFFFFFFFFFF00F00F00F00F000F00FFFFFFFFFFFFFF00F00F00F00F0
+      00F00FFFFFFFFFFFFFF00F00F00F00F000F00FFFFFFFFFFFFFF00CCCCCCCCCCC
+      CCC0088CCCCCCCCCC8800000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF}
+  end
+  object ResetTabStep: TBitBtn
+    Left = 192
+    Top = 152
+    Width = 65
+    Height = 31
+    Caption = 'RESET'
+    Default = True
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Times New Roman'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 4
+    OnClick = ResetTabStepClick
+    Glyph.Data = {
+      FE000000424DFE00000000000000760000002800000010000000110000000100
+      04000000000088000000C40E0000C40E00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFF00000000000000000FFFFFFFFFFFFFF00F00F00F00F0
+      00F00FFFFFFFFFFFFFF00F00F00F00F000F00FFFFFFFFFFFFFF00F00F00F00F0
+      00F00FFFFFFFFFFFFFF00F00F00F00F000F00FFFFFFFFFFFFFF00CCCCCCCCCCC
+      CCC0088CCCCCCCCCC8800000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF}
+  end
+end

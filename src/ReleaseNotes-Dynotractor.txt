@@ -1,0 +1,179 @@
+﻿DynoTractor 1.0.3
+Build:
+//-----------
+9:
+	inserita funzione di rimozione parti di acquisizione prova con rpm decrescenti
+	in caso di risalita degli RPM	
+//-----------
+10:
+	inserito contalitri totale
+//-----------
+11:
+	aggiunte traduzioni
+//----------
+12:
+	aggiunto salvataggio e apertura nell'acquisizione dei consumi
+
+
+
+DynoTractor 1.1.0 
+
+build 0
+
+1) Gestione file impo/ini in cartelle con diritti lettura/scrittura:
+I file impostazioni (file_impo, file_tara, .ini) sono spostati e gestiti nelle cartelle:
+
+Win7:
+C:\ProgramData
+
+WinXp/98:
+C:\Documents and Settings\All Users\Dati applicazioni\DimSport\DynoTractor
+
+ove l'utente corrente ha diritti di amministrazione dei file
+
+2) Correzioni effettuate nelle stampe dei grafici
+3) Eliminazione globale del componente Vcc e sue componenti grafiche
+4) Correzione dell'ordine e contenuto della ComboBox all'interno della finestra di setup
+5) Correzioni sulla gestione della tabella Acq Step (pulsanti Acq e Reset nella finestra Test Step)
+6) Correzione su calcolo delle potenze massime (salvataggio nei file dyn)
+
+build 1 25/03/2013
+
+ - bug fix: mancata visualizzazione dei giri a potenza massima a fine prova
+ - bug fix: errori nella gestione della ricerca porte seriali
+
+
+build 3
+ - Correzioni nella gestione della comunicazione con Dyn3 (freno)
+ - Esecuzione in modalità protetta x compatibilità win7 win8
+ -  Correzione sul rilevamento porte seriali in fase di apertura del programma e mancato aggancio iniziale
+ - Correzione bug inizio area grafico shiftato rispetto ai giri di inizio della prova
+
+build 4
+ -  Aggiunta la gestione della lingua tedesca, piccole modifiche alla disposizione etichette nelle maschere,modifiche grafiche (centratura dei pannelli laterali), nuovo setup ottimizzato, sostituzione files delle traduzioni con unico file traduzioni.ini.
+build 5
+ - Bugfix gestione della taratura mediante barra di taratura
+ - Bugfix visualizzazione stampa dei grafici (coppia motore) e logo
+build 6:
+ - bug fix calcolo consumo totale in litri
+ - bugfix nei calcoli del consumometro
+ - Aggiunta visualizzazione consumi nell'unità di misura preferita nell'anteprima grafici e nel pannello laterale. Il consumo in g/Kwh viene sempre visualizzato accanto al valore nell'unità di misura scelta
+ - La barra di anteprima dati della prova selezionata come anteprima assume il colore della prova
+ - Inserito parametro ImpulsiLitro in file DynoTractor.INI (impostazione di default 800)
+build 7:
+ - bugfix Mancava il salvataggio di targa e cliente nei file DYN, ora sono salvati
+ - Aggiunta compatibilità consumi con versioni precedenti, i consumi nel file DYN fino alla versione 1.1.0b5 venivano salvati in g/KWh, successivamente a questa in l/h, ho permesso il riconoscimento di file vecchio tipo per applicare la giusta unità di misura
+build 8:
+ - Effettuate correzioni sul corretto aggiornamento dell'unità di misura consumi nel pannello di destra
+ - Inserita la possibilità di selezionare il grafico consumi in l/h, l/min, l, g/kWh, opzionando nella finestra unità di misura e nella finestra opzioni grafico (radiobox in riga consumi)
+ - Inserite 1 o 2 colonne nei dati delle prove (tabelle generate a ogni prova) contenenti i dati dei consumi nell'unità di misura selezionata, e comunque anche in g/kWh
+ - Inserito il pannello Temperatura ambiente, sul lato destro (ultima riga) opzionabile da finestra Strumenti.
+
+ DynoTractor 1.1.1
+ 
+ - Filtraggio veloce x calcolo coppia istantanea visualizzata nel pannello destro (filtro benza da 13 a 3)
+ - BugFix Ottimizzazione calcolo delle prestazioni in F5 (test decelerativi) eliminato limite dei 500 campioni
+ - BugFix Sistemazione tabelle create durante il test F5
+ - BugFix Gestione di tutte le grandezze anche in tabelle F5 (non gestite)
+ - BugFix Export file txt in tutti i tipi di prove
+ - BugFix Correzione altezza righe tabelle nella Stampa tabelle
+ - BugFix Correzione intestazione g/KWh nella visualizzazione tabelle
+ - BugFix Abilitazione del pulsante OK nella maschera Start, a volte non veniva riabilitato
+ - BugFix Correzione nella modalità di caricamento logo
+ - BugFIx inserita auto scale nelle grandezze grafiche TK, T oil, Turbo
+ DynoTractor 2.0
+ - Bugfix stampa grafici versione corrente del software da indicare correttamente in intestazione
+ - Corretta gestione del freno al termine delle prove a step (tolto comando freno dannoso) in quanto portavano a una frenatura al termine prova quando il freno doveva essere rilasciato.
+ - Cambiata la gestione fine prova a step, invio il PWm freno a 0 in 5 step da 500ms circa.
+
+build 1
+ - Bugfix prove F5 freno manuale al rilascio del freno andava a 0 lentamente
+build 2
+ - Richiesta speciale x test motori, visualizzazione coppia e potenza in pannelli laterali passa da 1 a 2 cifre decimali
+
+Dynotractor 2.0.1 - bugfix conversione in unità di misura lb·ft era scorretta, portata a 7.233 kg·m
+	
+2.0.1 build 1: 
+	bugfix caricamento file,errato caricamento in caso siano stati salvate prove con cancellazioni durante i test
+	uniformato banco tractor con trailer, nel tractor bisogna impostare correttamente il carico massimo a 2000 (file_impo) per ottenere l'inerzia corretta
+2.1 build 0
+	Comunicazione con la scheda Dyra e Dyn3 è stata completamente riscritta, è piu efficiente. Inoltre è stato tolto il controllo freno al primo step nella prova decelerativa a step.
+	Il controllo inizia solo allo start della prova, e mai all'apertura della finestra.
+	BugFix: se Apro le prove a Step, in generale partiva il controllo freno, in caso di partenza da RPM nullo, il firmware impone un freno ad inizio rotazione nonostante non siano raggiunti i giri richiesti,
+	per ovviare a questo problema è stato tolto il controllo al primo step alla pressione di F10, viene imposto solo alla pressione del pulsante OK di inizio prove a step
+	Il software viene adattato all'utilizzo del nuovo firmware T05 ereditato dal banco auto (freno manuale e PWM con risoluzione 12 bit e messaggi di stato a 6 byte, con 2° byte indicatore di stato mentre i protocolli di versione inferiore hanno BB55 come testata di status msg)
+
+2.2 build 0
+	
+1) Grafici prove decelerative: introduzione scala coppia e potenza a partire da 0, opzionabile dal pannello opzioni grafici (Mod. Y scale)
+2) Setup banco: Inseriti contatore ore di funzionamento rulli e numero test effettuati (conteggio totale test a step e decelerativi)
+3) Aggiunto delay prima del campionamento nei test a step (dynotractor.INI tempo_delay=3)
+4) Reintrodotto il controllo a rpm start alla pressione di F10 in prove a step
+5) Impostazione test: inserite combobox costruttore, modello, allestimento, con gestione del database testuale		
+6) Dati del test: introdotta la numerazione e la datazione dei test
+7) Menù contestuale dei test: inseriti 'Carica impostazioni' e 'fattore di correzione', come in altri software auto/moto
+Dynotractor.INI
+Durante i test a step il tempo massimo di attesa intorno allo step è impostato dal parametro tempo_timeout=20 nel file INI
+
+2.2 build 1 
+Logo dei grafici viene ridimensionato mantenendo l'aspect ratio.
+BugFix VisualizZazione Giri senza decimali
+
+2.2 build 2
+Gestione file impo trailer, se il tipo di banco cambia, al successivo riavvio viene caricato il file impo corretto (tract o trailer)
+Corretti i file impo tract/trailer (trailer impulsi=16)
+
+2.2 build 2
+Gestione freno manuale: 
+ -Bugfix Alla perdita della connessione freno, il successivo ripristino non veniva rilevato
+ -Bugfix pulsante ritorno, deve conservare effettivamente l'ultimo valore inviato al freno prima del 'libera'
+ -Alla chiusura della finestra Freno manuale (con freno ancora attivo) deve essere sempre inviato un freno gradualmente discendente a 0, anziche inviare Stop (che non funziona correttamente 
+ in quanto toglie solo il 2% del freno ad ogni secondo, fino a freno inferiore a un valore limite molto basso)
+2.2.0.4
+- Timeout messaggi dalla dyra da 50ms a 100ms
+- Timeout di carattere impostato (da 30ms) a 35ms per tutte le porte seriali
+2.2 build 5
+ -bUGfix, se porte di comunicazione non impostate, continua a comparire finestra manutenzione, impedendo visualizzazione grafici prove caricate
+- bugfix  variabile non inizializzata correttamente (cancel test a step, ferma il test in esecuzione come fosse stato premuto il tasto annulla)
+2.2 build 8
+- Check porte all'avvio applicazione, modificato. Se le schede Dyra e Dyn3 sono sconnesse, si deve aprire il tab Manutenzione
+- Bugfix - durante le prove i grafici real time visualizzavano linea consumi
+- Inseriti in modalità utente 'pidcontrol' la lettura e scrittura delle costanti del PID del freno (caselle in tab destro, sotto l'elenco prove)
+2.2 buid 9
+- Se cambio il tipo di banco, il file impo corretto, viene selezionato dalla successiva apertura dell'applicazione, automaticamente.
+2.2 build 11
+- Bugfix, compatibilità con Firmware T02, il problema era la diversa lunghezza del messaggio di lettura firmware version, nella T02, comportava la continua sconnessione e riconnessione della scheda in quanto veniva rilevato msg scorretto.
+2.2.0.15
+- Nella fase del primo step del test temporizzato, viene inserita regolazione software dell'avvicinamento al target iniziale (se rpm motore molto maggiore del target
+- Bugfix Durante il test a step se annullo il test a volte il sistema rimane frenato. Ripristino condizioni iniziali
+2.2.0.16
+- BugFix Stampa report Grafici,corretta intestazione: data errata e nome file errato (devono essere sempre aggiornati)
+2.3
+- Aggiunta funzionalità in background: archiviazione (in cartelle mensili) file dyno e compattazione automatica, il file dyno di tutti i dati seriali e parametri della prova e del banco sono salvati per ogni prova a STEP temporizzato e ogni prova DECELERATIVA che vengono completate.
+2.3.1
+- Prove F1 step temporizzato, modificato e corretto il limite del tempo di campionamento, fino a 60 secondi
+- Prove in F2 (test a step) e F4 (freno costante) inseriti pulsanti di acquisizione e reset tabella ACQ
+- Prove in F3 a coppia costante permesso inserire step fino a 1 Kgm
+2.3.2
+- Inseriti 2 TAB ACQ (tabelle acquisizioni da pulsante ACQ) nella finestra principale diversificandoli in TAB ACQ F1 F2 e F4 (per i diversi tipi di prove che prevedono pulsanti ACQ)
+- BugFix 'Error Floating Point division by Zero'su avvio applicazione (avveniva solo su alcune macchine).
+- BugFix prove a coppia costante : la coppia era divisa per il fattore ambientale (imponendo di fatto un valore leggermente piu basso)
+- BugFix unità di misura correnti erano riportate a quelle caricate in caso di cambio unità senza salvataggio.
+
+2.3.3
+- Il test a step temporizzato viene modificato nella modalità di avvicinamento al target iniziale, 
+	alla pressione di Avvia, se molto lontani dal target iniziale, si impone legge di avvicinamento graduale, 
+	fino a essere in prossimità del target, a tal punto inizia il test con le sue condizioni standard.
+- Modificati colori dei test nella stampa dei grafici
+2.3.4
+- Inserita gestione del sensore di pressione -1..6 bar
+2.3.4.1
+- BugFix Stampa grafici coppia max & rpm <-- errato rpm visualizzato (quello a potenza massima anzichè coppia massima)
+2.3.5
+- Aggiunta feature _INDUSTRY4 che rende l'applicazione compatibile con lo standard Industry 4.0, essa eredita le caratteristiche richiezste dai banchi Turchia MATES
+2.3.5.4
+- Bug Fix e check valore cella bloccato, con conseguente annullamento di prove in esecuzione.
+	Le condizioni di blocco cella sono: cell>65000 o campioni successivi identici (cella a un valore fisso)
+	Nella applicazione  è necessario riavviare la taratura per resettare errore (permettendo che venga nuovamente mostrato il messaggio di errore)
+2.3.6
+- Gestione CAN bus profilatura prove a coppia/rpm costante tramite file csv. La modifica introdotta permette di inviare particolari comandi CAN al trattore. La modifica è attivabile da file INI ponendo il parametro CAN a 1

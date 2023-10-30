@@ -1,0 +1,465 @@
+
+  9/07/2010  Dimtech s.r.l
+
+  Questo file contiene tutte le stringhe sorgenti del programma DynoTractor 
+
+
+[Versione]
+Str10=Versione di traduzione: 1.3 Ita
+Str20=Versione file impostazioni:
+Str30=Versione eseguibile:
+Str40=Prodotto da:
+Str50=Operatore:
+
+[Comunicazione]
+
+Str10=*** ATTENZIONE!!! ***
+Str20=periferica scollegata o non alimentata
+Str30=controllare la connessione !!!
+Str40=Controllo connessione
+
+[Grafici]
+
+Str10=Potenza Motore
+Str20=Potenza PTO
+Str30=Coppia Motore
+Str40=Coppia PTO
+Str50=Potenza Dissipata
+Str60=DATI RISULTANTI:
+Str70=giri/min
+Str80=Potenza massima al motore:
+Str90=Coppia massima al motore:
+Str100=Potenza alla PTO:
+Str110=Coppia alla PTO:
+Str120=Pressione manifold:
+Str123=Rapporto stechiometrico:
+Str140=Temperatura (Sonda K):
+Str150=Temperatura Olio motore:
+Str160=Ingresso 0-15Vcc:
+Str170=a giri/1':
+Str180=Velocità
+Str190=Regime massimo raggiunto:
+Str200=Massimi valori rilevati:
+Str210=Potenza dissipata:
+Str220=NOTE:
+Str230=PTO
+Str240=Motore
+Str250=Dissipata
+Str260=T.Oil
+Str270=T.K
+Str280=Ora
+Str290=Andamento delle condizione atmosferiche
+Str300=Errore Tachimetro
+Str310=Coppia
+Str320=Potenza
+Str330=Tempo
+Str340=Regime
+Str350=Dati potenza
+Str360=Dati ambientali
+Str370=Dati trattore
+
+
+[Indicatori]
+
+Str10=Temp. Olio
+Str20=Temp. Atm
+Str30=Manif.
+Str40=Apertura acceleratore
+Str50=Indicatori
+Str60=Consumi
+
+[Messaggi]
+
+Str10=File impostazioni non disponibile o danneggiato!
+Str20=File di taratura celle non disponibile o danneggiato! provvedere ad eseguire la taratura oppure importare il file contenente le tarature
+Str30=Si desidera salvare i test appena eseguiti ?
+Str40=Desideri salvare le modifiche al profilo attuale ?
+Str50=La porta Com selezionata non è presente: modificare le impostazioni ?
+Str60=Campionamento in corso...
+Str70=Nuovo nome del test ?
+Str80=Attenzione il test selezionato verrà definitivamente eliminato sei sicuro?
+Str85=Attenzione il profilo selezionato verrà eleminato continuare ?
+Str87=Attenzione modificare definitivamente i dati ?
+Str90=Vuoi realmente cancellare tutte le curve in memoria?
+Str95=L'ultima sessione di lavoro non è stata chiusa correttamente! si desidera recuperare il lavoro ?
+Str100=Vuoi rimuovere il logo ?
+Str110=Attenzione questa operazione sovrascriverà le attuali tarature SEI SICURO ?
+Str120=Scrittura file di taratura non possibile!!!
+Str130=Calibrazione effettuata con successo
+Str140=La porta Com selezionata è già impegnata!!
+Str150=Vuoi rinominare il test ?
+Str160=Inserire il nuovo nome del test senza estensione:
+Str170=DATI MODIFICATI
+Str180=PREMERE LA FRIZIONE!!!
+Str190=Per rendere effettive le impostazioni occorre riavviare il programma
+
+
+
+
+[Impostazioni]
+
+Str10=Regime motore costante
+Str20=Regime motore costante temporizzato
+Str30=Accelerativo a seconda del regime motore
+Str40=Decelerativo a seconda del regime motore
+Str50=Accelerativo a seconda della velocità veicolo
+Str60=Test di controllo scarto tachimetro
+Str70=Frenatura manuale del regime motore
+Str80=Acquisizione dati
+Str85=Test a trazione costante
+Str90=Tipo di test da eseguire:
+Str100=Parametri:
+Str110=Trazione:
+Str120=Calcolo del rapporto
+Str130=Pneumatici
+Str140=Cambio di velocità:
+Str150=Tipo:
+Str160=Marcia di test:
+Str170=Ventilazione
+Str180=Manuale
+Str190=Auto
+Str195=Ragione sociale:
+Str200=Dati cliente:
+Str210=Marca:
+Str220=Modello:
+Str230=Allestimento:
+Str240=Targa:
+Str250=Nome cliente:
+Str270=Misure:
+Str280=Diametro ruota:
+Str290=Regime di inizio test:
+Str300=Regime di fine test:
+Str310=Durata accelerazione:
+Str315=Durata decelerazione:
+Str320=Secondi
+Str330=Velocità di inizio test:
+Str340=Velocità di fine test:
+Str390=Step progressivo:
+Str400=Step d'increm. carico:
+Str410=Asse in uso ANTERIORE
+Str420=Asse in uso POSTERIORE
+Str430=INTEGRALE
+Str440=Inserimento regime di calcolo del rapporto
+Str450=Kit RPM per rilevamento automatico
+Str460=Inserimento manuale del rapporto
+Str470=Regime motore di riferimento
+Str480=per il calcolo del rapporto:
+Str490=N° impulsi giro:
+Str500=Cammes
+Str510=Filtraggio regime:
+Str520=Numero di campioni validi
+Str530=del rapporto calcolato:
+Str540=Regime motore sotto il quale
+Str550=il rapporto non viene calcolato:
+Str560=Calcola
+Str570=Non calcolare
+
+
+
+
+[Dati test]
+
+Str20=Nome del test:
+Str30=Rapporto di trasmissione totale:
+Str40=Temperatura atmosferica:
+Str50=Pressione atmosferica:
+Str60=Umidità relativa:
+Str70=Normativa di correzione:
+Str80=Fattore di correzione:
+Str90=Tipo di test:
+Str100=Tempo di test:
+Str110=Tipo di cambio:
+Str120=Manuale
+Str130=Automatico
+Str140=Variatore Aut
+Str150=Marcia di prova:
+Str160=Pneumatici:
+Str170=NESSUNA
+Str180=Tempo di stazionamento:
+Str190=Tempo sec.:
+Str200=Campioni
+Str210=Consumo specifico
+Str220=Press. Amb. - Temp. olio - Umidità rel.
+Str230=Giri min - max
+
+
+[Layout]
+
+Str10=Sensori
+Str20=Correzioni atmosferiche
+Str30=Dati dei test
+Str40=Correzione Potenza
+Str50=Alimentazione:
+Str60=Tipo di ciclo:
+Str70=Normativa:
+Str80=Condizioni Atmosf.
+Str90=Debug
+Str95=Acquisizione
+Str100=ON
+Str110=OFF
+Str120=Coeff.   fm:
+Str130=Aspirato
+Str140=Turbo
+Str150=Sovralim.
+Str160=Benzina
+Str170=Diesel
+
+Str180=SAE J1995
+Str190=ISO TR 14396 - ECE R120
+Str200=CE 97/68-2000/25/CE
+Str210=ECE R24
+Str220=CEE 80/1269
+Str230=DIN 70020
+Str235=OCDE
+
+Str240=Grafici
+Str250=Tabelle
+Str260=Fattore
+Str270=Elimina definitivamente il test
+Str275=Elimina definitivamente la sessione
+Str280=Rinomina il test
+Str285=Rinomina la sessione
+Str290=Aggiungi/modifica note del test
+Str300=Velocità di riferimento
+Str310=Velocità misurata
+Str320=Tachimetro
+Str330=&File
+Str340=Apri misurazione
+Str350=Esegue nuova sessione di test
+Str360=Salva misurazione come...
+Str370=Salva
+Str380=Stampa...
+Str390=Setup di stampa
+Str395=Salva Tabella acq
+Str400=Esci
+Str410=&Installazioni
+Str420=Configurazioni...
+Str430=Setup del sistema
+Str440=Importa...
+Str450=File di taratura celle
+Str460=Esporta...
+Str470=Unità di misura in uso
+Str480=Impostazioni degli strumenti...
+Str490=Opzioni dei grafici...
+Str500=Selezione e impostazioni del tipo di test....
+Str510=&Utenti
+Str520=Cambia utente
+Str530=Info
+Str540=Informazioni su...
+Str550=Indice
+Str560=Inserisci note del test
+Str570=Opzioni di visualizzazione dei grafici
+Str580=Riferimento
+Str590=Carico del freno
+Str600=Confermare a giri/min:
+Str610=Inserire la marcia di prova !!!
+Str620=Procedura di calcolo rapporto di trasmissione
+Str630=Setup del banco
+Str640=Dati identificativi di stampa
+Str650=Impostazioni generali
+Str660=Lingua in uso
+Str670=Tipo di banco
+Str680=Tractor
+Str690=Tractor Twin
+Str700=-----
+Str702=-----
+Str705=------
+Str710=------
+Str720=Tractor Trailer
+Str730=------
+Str740=Porte di comunicazione
+Str750=Disponibili:
+Str770=Comando freni
+Str780=Diagnosi OBD
+Str790=Com:
+Str795=Ragione sociale:
+Str800=Workshop/tuner:
+Str810=Indirizzo:
+Str820=Tel.:
+Str825=Logo
+Str830=Campionamento in corso...
+Str840=Taratura cella anteriore
+Str850=Taratura cella posteriore
+Str860=Data taratura corrente:
+Str870=Tensione cella:
+Str880=Carico sulla cella:
+Str890=Costante del freno:
+Str900=Calibratura
+Str910=Usa caratteristica della cella
+Str920=Esegui calibratura manuale
+Str930=Avvia procedura
+Str940=1) Applicare la barra senza peso + piatto e confermare ->
+Str950=2) Applicare il peso campione e confermare ->
+Str960=3) Rimuovere barra e peso quindi confermare ->
+Str970=Memorizza taratura
+Str980=Manutenzione
+Str990=Elettronica generale
+Str1000=Stato della comunicazione :
+Str1010=Disconnesso
+Str1020=Connesso
+Str1030=Modulo Posteriore
+Str1040=Modulo Anteriore
+Str1050=Circuito elettrico del rallentatore :
+Str1060=Alimentazione del rallentatore :
+Str1070=Aperto
+Str1080=Chiuso
+Str1090=Presente
+Str1100=Non presente
+Str1110=Inizio test :
+Str1120=Accelerare a fondo !!!
+Str1130=Impostazioni
+Str1140=Offset
+Str1150=Acceleratore
+Str1160=Conferma Minimo
+Str1170=Conferma Massimo
+Str1180=Min:
+Str1190=Max:
+Str1200=Posizionarsi alla velocità di riferimento
+Str1210=e confermare con il tasto OK
+Str1220=Aggiungi nuovo tente
+Str1230=Elimina utente
+Str1240=Utente in uso:
+Str1250=Nome:
+Str1260=Nuovo utente
+Str1270=Versione di traduzione:
+Str1280=Versione file impostazioni:
+Str1290=Pendenza:
+Str1300=Pot. assorb.(Ruote)
+Str1310=Pot. assorb.(Pend.)
+Str1320=Pot. assorb.(Aria)
+Str1330=Pot. assorb.(Totale)
+Str1340=Peso del veicolo:
+Str1350=Coeff. resist.rotolam.:
+Str1360=Superf. frontale:
+Str1370=Calcola massa volumica dell'aria automaticamente
+Str1380=Resistenza:
+Str1390=Barra degli strumenti analogici
+Str1400=Nascondi
+Str1410=Allarmi visivi
+Str1420=Attivi
+Str1421=Indica Max valore a fine test di:
+Str1430=Codice difetto n°:
+Str1440=Ingresso regime rulli:
+Str1450=Connesso
+Str1460=Disconnesso
+Str1470=Presente
+Str1480=Non presente
+Str1490=Aperto
+Str1500=Chiuso
+Str1510=Anteprima dati...
+Str1520=Banca dati veicoli
+Str1530=Accedi...
+Str1540=Utilizza come:
+Str1550=Voltmetro
+Str1560=Custom
+Str1570=Caratterizzazione predefinita:
+Str1580=Caratterizzazioni ingresso analogico
+Str1590=Descrizione:
+Str1600=Indicazione asse X:
+Str1610=Imposta come predefinito
+Str1620=Modifica caratterizzazione
+Str1630=Elimina
+Str1640=Crea nuova caratterizzazione
+Str1650=Calcola e visualizza...
+Str1660=Salva caratterizzazione
+Str1670=Annulla modifiche senza salvare
+Str1680=Valore
+Str1690=Lineare
+Str1700=Regolazione press. ambiente
+Str1710=giri/min motore
+Str1720=giri/min PTO
+Str1730=Rendimento della
+Str1740=trasmissione PTO
+Str1750=Calcolo rapp. di trasm. Motore/PTO
+Str1760=Tipo di test da eseguire
+Str1770=Cancella
+Str1780=Salva dati...
+Str1790=Carica dati...
+Str1800=Tempo di acquisiz. ms:
+Str1810=Tempo tot. acq. min:
+Str1820=giri/min
+Str1830=Giri/Consumi
+Str1840=Giri
+Str1850=Freno
+Str1860=Si desidera salvare il file di acquisizione ?
+Str1870=Attenzione tutti i dati acquisiti verranno cancellati! si desidera continuare?
+Str1880=Si desidera aggiungere delle note ?
+Str1890=Si desidera continuare con la stessa acquisizione ?
+Str1900=Esporta tabelle
+
+
+
+
+
+[Pulsanti]
+
+Str10=Giri/min
+Str50=Turbo
+Str60=Temp_K°
+Str70=Aria/Benz
+Str80=Accel. %
+Str90=T.Olio
+Str100=Annulla
+Str110=Cancella tutto
+Str120=OK
+Str130=Libera
+Str140=Ritorna
+Str150=Conferma
+Str160=Avvia
+Str170=Cancella acquisizioni
+Str180=Arresta ciclo
+Str190=Azzera
+
+[Archivio]
+
+Str10=Percorso:
+Str20=Nome della sessione:
+Str30=Anteprima grafico
+Str50=Test della sessione
+Str60=Caricali tutti
+Str70=Carica singolo
+Str80=Data/ora:
+Str90=Dettagli:
+Str100=Data/ora del file:
+Str110=Tempo di acquisizione:
+Str120=Tempo di campionamento:
+Str130=Rapporto di trasmissione:
+Str140=Rendimento trasmissione:
+Str150=Note:
+Str160=Visualizza...
+Str170=Salva sessione di test
+Str180=Sessione di test
+
+
+
+[Unita]
+
+Str10=Unità di misura
+Str20=Coppia
+Str30=Potenza
+Str40=Temperatura
+Str50=Velocità lineare
+Str60=Pressione
+Str65=Forza/Peso
+Str70=Lambda
+Str80=Newton.metro  (Nm)
+Str90=Kilogrammo forza.metro (Kgm)
+Str100=Pound-force.ft  (Ft.lb)
+Str110=Kilowatt (KW)
+Str120=Cavallo Potenza (CV metric)
+Str130=Horse Power (HP)
+Str140=Gradi Celsius (°C)
+Str150=Fahrenheit (°F)
+Str160=Kilometri per ora (km/h)
+Str170=Miglio per ora (Mph)
+Str180=Metri/secondo (m/s)
+Str190=mbar
+Str200=Psi (lb/in²)
+Str210=600 <-> 1400   -  Benzina  0-1 V
+Str220=9.7 <-> 18.00   -  Benzina  0-1 V
+Str230=N (newton)
+Str240=Kgf (Kiloforza)
+Str250=Lb (libbra)
+Str260=m²
+Str270=ft²
+Str280=Consumi

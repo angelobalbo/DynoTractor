@@ -1,0 +1,19 @@
+DynoTractor 103
+Build:
+//-----------
+9:
+	inserita funzione di rimozione parti di acquisizione prova con rpm decrescenti
+	in caso di risalita degli RPM	
+//-----------
+10:
+	inserito contalitri totale
+//-----------
+11:
+	aggiunte traduzioni
+//----------
+12:
+	aggiunto salvataggio e apertura nell'acquisizione dei consumi
+//----------
+13:
+	fix apertura pacquisizione con consumi
+	add selezione disco per apertura acquisizione
