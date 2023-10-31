@@ -1,9 +1,9 @@
 object frmCan: TfrmCan
-  Left = 551
-  Top = 75
+  Left = 450
+  Top = 139
   BorderStyle = bsDialog
   Caption = 'CAN TRANSMISSION'
-  ClientHeight = 641
+  ClientHeight = 644
   ClientWidth = 742
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,15 +17,15 @@ object frmCan: TfrmCan
   PixelsPerInch = 96
   TextHeight = 13
   object sbCmd: TSpeedButton
-    Left = 576
-    Top = 160
-    Width = 129
-    Height = 73
-    Caption = 'START'
+    Left = 560
+    Top = 136
+    Width = 153
+    Height = 49
+    Caption = 'START TEST'
     Enabled = False
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -21
+    Font.Height = -16
     Font.Name = 'Arial'
     Font.Style = [fsBold]
     Glyph.Data = {
@@ -130,22 +130,9 @@ object frmCan: TfrmCan
     ParentFont = False
     OnClick = sbCmdClick
   end
-  object lblRes: TLabel
-    Left = 368
-    Top = 112
-    Width = 66
-    Height = 24
-    Caption = 'NO OP'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
   object SpeedButton1: TSpeedButton
     Left = 560
-    Top = 80
+    Top = 72
     Width = 153
     Height = 57
     Caption = 'PROFILO TEST'
@@ -754,6 +741,34 @@ object frmCan: TfrmCan
       Stretch = True
       Visible = False
     end
+    object Label2: TLabel
+      Left = 536
+      Top = 28
+      Width = 97
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'COMM. STATUS:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblRes: TLabel
+      Left = 635
+      Top = 27
+      Width = 42
+      Height = 16
+      Caption = 'NO OP'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object meCanRate: TMaskEdit
       Left = 277
       Top = 20
@@ -791,9 +806,9 @@ object frmCan: TfrmCan
   end
   object btnStart: TBitBtn
     Left = 24
-    Top = 160
+    Top = 128
     Width = 121
-    Height = 73
+    Height = 57
     Caption = 'START'
     Default = True
     Enabled = False
@@ -826,9 +841,9 @@ object frmCan: TfrmCan
   end
   object btnStop: TBitBtn
     Left = 152
-    Top = 160
+    Top = 128
     Width = 121
-    Height = 73
+    Height = 57
     Cancel = True
     Caption = 'STOP'
     Enabled = False
@@ -863,7 +878,7 @@ object frmCan: TfrmCan
     Left = 24
     Top = 72
     Width = 249
-    Height = 73
+    Height = 49
     Caption = 'CONNECT CAN'
     Default = True
     Font.Charset = ANSI_CHARSET
@@ -895,9 +910,9 @@ object frmCan: TfrmCan
   end
   object chart: TChart
     Left = 0
-    Top = 256
+    Top = 191
     Width = 742
-    Height = 385
+    Height = 453
     Legend.Alignment = laTop
     Legend.Brush.Color = clWhite
     Legend.ColorWidth = 10
@@ -944,6 +959,7 @@ object frmCan: TfrmCan
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 4
+    Anchors = [akRight, akBottom]
     object srsRpm: TFastLineSeries
       Marks.Callout.Brush.Color = clBlack
       Marks.Visible = False
@@ -1007,15 +1023,15 @@ object frmCan: TfrmCan
     Enabled = False
     Interval = 45
     OnTimer = tmrRateTimer
-    Left = 16
-    Top = 184
+    Left = 280
+    Top = 104
   end
   object tmrCmd: TTimer
     Enabled = False
     Interval = 20
     OnTimer = tmrCmdTimer
-    Left = 16
-    Top = 224
+    Left = 280
+    Top = 72
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '*.csv'
@@ -1028,7 +1044,7 @@ object frmCan: TfrmCan
   object tmrTrq: TTimer
     Enabled = False
     OnTimer = tmrTrqTimer
-    Left = 104
-    Top = 120
+    Left = 312
+    Top = 72
   end
 end

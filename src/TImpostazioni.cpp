@@ -360,7 +360,7 @@ void __fastcall TImpostazioni::FormShow(TObject *Sender)
  NxNumberEdit4->Text=rpmStop;
  NxNumberEdit5->Text=Delta_reg;
  NxNumberEdit6->Text=Tempo_staz;
- NxNumberEdit13->Text=Val_C_cost*fK_convC;
+ NxNumberEdit13->Text=FormatFloat("0.#",Val_C_cost*fK_convC);
 
 
  NxNumberEdit10->Text=rpmStart;

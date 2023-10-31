@@ -38,7 +38,6 @@ __published:	// IDE-managed Components
   TImage *imgStatusErr;
   TImage *imgStatusStart;
   TSpeedButton *sbCmd;
-  TLabel *lblRes;
   TTimer *tmrCmd;
   TOpenDialog *OpenDialog1;
   TSpeedButton *SpeedButton1;
@@ -49,6 +48,8 @@ __published:	// IDE-managed Components
   TColorBandTool *ChartTool1;
   TFastLineSeries *srsRpmRt;
   TFastLineSeries *srsTrqRt;
+  TLabel *Label2;
+  TLabel *lblRes;
   void __fastcall meCanIdChange(TObject *Sender);
   void __fastcall meCanRateChange(TObject *Sender);
   void __fastcall BitBtn1Click(TObject *Sender);

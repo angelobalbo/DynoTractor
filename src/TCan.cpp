@@ -19,9 +19,8 @@
 #pragma resource "*.dfm"
 TfrmCan *frmCan;
 extern bool OK_N_cost;
-
 extern char g_cFileLog[MAX_PATH];
-
+extern unsigned int selPto;
 extern bool IO_ref;
 extern float  Val_potenza_m1,
               fK_convP,
@@ -196,6 +195,12 @@ void __fastcall TfrmCan::btnStopClick(TObject *Sender)
 
 void __fastcall TfrmCan::FormClose(TObject *Sender, TCloseAction &Action)
 {
+  if(tmrRate->Enabled==true)
+    btnStopClick(this);
+  Sleep(100);
+  if(sbCmd->Caption=="STOP TEST")
+    sbCmdClick(this);
+  Sleep(200);
   if(statusCan!=EDisc)
     closeCan();
 }
@@ -223,7 +228,7 @@ void __fastcall TfrmCan::FormShow(TObject *Sender)
 void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
 {
 //
-  if(sbCmd->Caption=="START")
+  if(sbCmd->Caption=="START TEST")
   {
     srsRpm->Clear();
     srsTrq->Clear();
@@ -244,19 +249,20 @@ void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
     trq=trq0;
     tmrCmd->Enabled=true;
     tmrTrq->Enabled=true;
-    sbCmd->Caption="STOP";
+    sbCmd->Caption="STOP TEST";
     Valore_Cop=0;
     OK_N_cost=true;
-
+    SpeedButton1->Enabled=false;
   }
   else
   {
     tmrCmd->Enabled=false;
     tmrTrq->Enabled=false;
-    sbCmd->Caption="START";
+    sbCmd->Caption="START TEST";
     Main->EndTest();
     Valore_Cop=0;
     OK_N_cost=false;
+    SpeedButton1->Enabled=true;
   }
 
 }
@@ -509,11 +515,17 @@ void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
   {
     srsTrq->AddXY(timingTrq/1000, trq);
     srsTrqRt->AddXY(timingTrq/1000,Val_coppia_m1 * fK_convC*fFact);
-    Valore_Cop=(trq/9.81)/fFact;
+    if(selPto == 0)
+      Valore_Cop=(trq*Rap_tot1/9.81)/fFact;
+    else
+      Valore_Cop=(trq/9.81)/fFact;
     IO_ref=true;
     // Inserire comando coppia costante dyn3
     tmrTrq->Enabled=true;
   }
 }
 //---------------------------------------------------------------------------
+
+
+
 

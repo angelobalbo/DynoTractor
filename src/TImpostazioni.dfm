@@ -1,6 +1,6 @@
 object Impostazioni: TImpostazioni
-  Left = 801
-  Top = 156
+  Left = 1120
+  Top = 127
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   BorderWidth = 2
@@ -39,7 +39,7 @@ object Impostazioni: TImpostazioni
       Top = 26
       Width = 341
       Height = 196
-      ActivePage = TabSheet3
+      ActivePage = TabSheet11
       Align = alBottom
       Anchors = [akRight, akBottom]
       MultiLine = True
