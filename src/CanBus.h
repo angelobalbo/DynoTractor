@@ -12,24 +12,36 @@
 
 typedef enum EStatus
 {
-	EDisc,/**<OBD non connessa>*/
+  ENoCmd,
+	EDisc,/**<CAN non connessa>*/
 	EOpen,/**<apertura della comunicazione>*/
-	EConnOBD,/**<OBD connessa>*/
 	EConnCAN,/**<CAN diretta connessa>*/
-	ETerm,/**<OBD terminata*/
-	EClrDTC,/**<Comando clear DTC*/
-	EReadyOBD, /**<Comunicazione OBD attiva*/ 
-	EReadyCAN, /**<Comunicazione CAN diretto attiva*/ 
-	EChangeId, /**< azione di cambio scelta Id centralina rispondente*/
+	ETerm,/**<CAN terminata*/
+	EStartTrasm, /**<Comunicazione CAN diretto attiva*/
+  EReadyCAN, /** Posso trasmettere con continuità */
+  EStopTrasm,
   EErrCAN
 } ECanStatus;
 
 
+extern char g_cCanLog[MAX_PATH];
+
+extern int hChannel;
+#if 0
+extern int  bufIdx1,
+            bufIdx2,
+            bufIdxRpmTrac; // Indice che identifica il buffer invio automatico messaggi
+extern unsigned char msg1[8]; // Messaggio da inviare al CAN
+extern unsigned char msg2[8]; // Messaggio da inviare al CAN
+extern unsigned char msgRpmTrac[8]; // Messaggio da inviare al CAN
+#endif
+
 bool openCan();
 void closeCan();
-bool connectCAN(long idReq,long time,int rateIndex);
+bool connectCAN(long,long,long,long,int);
 bool txCan(long id,unsigned char data[]);
-
+bool CreateCan(TCHAR* cLog);
+void DestroyCan();
 extern long lIdReqCan,lTimeRateCan, lTimestamp;
 extern ECanStatus statusCan;
 

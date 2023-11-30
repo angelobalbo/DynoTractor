@@ -1,10 +1,10 @@
 object frmCan: TfrmCan
-  Left = 450
-  Top = 139
+  Left = 319
+  Top = 93
   BorderStyle = bsDialog
   Caption = 'CAN TRANSMISSION'
-  ClientHeight = 644
-  ClientWidth = 742
+  ClientHeight = 558
+  ClientWidth = 827
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,12 +12,13 @@ object frmCan: TfrmCan
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDefault
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object sbCmd: TSpeedButton
-    Left = 560
+    Left = 616
     Top = 136
     Width = 153
     Height = 49
@@ -131,7 +132,7 @@ object frmCan: TfrmCan
     OnClick = sbCmdClick
   end
   object SpeedButton1: TSpeedButton
-    Left = 560
+    Left = 616
     Top = 72
     Width = 153
     Height = 57
@@ -154,10 +155,37 @@ object frmCan: TfrmCan
     ParentFont = False
     OnClick = SpeedButton1Click
   end
+  object Label5: TLabel
+    Left = 747
+    Top = 35
+    Width = 42
+    Height = 16
+    Caption = 'NO OP'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 456
+    Top = 144
+    Width = 153
+    Height = 24
+    Alignment = taRightJustify
+    AutoSize = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object gbCanBus: TGroupBox
     Left = 0
     Top = 0
-    Width = 742
+    Width = 827
     Height = 65
     Align = alTop
     Caption = 'CAN PARAMETERS'
@@ -169,22 +197,22 @@ object frmCan: TfrmCan
     ParentFont = False
     TabOrder = 0
     object Label24: TLabel
-      Left = 208
-      Top = 23
-      Width = 65
-      Height = 26
+      Left = 488
+      Top = 26
+      Width = 48
+      Height = 27
       Alignment = taRightJustify
       AutoSize = False
       Caption = 'Tx rate'
     end
     object Label26: TLabel
-      Left = 74
+      Left = 58
       Top = 28
       Width = 41
       Height = 13
       Alignment = taRightJustify
       AutoSize = False
-      Caption = 'ID ext.'
+      Caption = 'ID ext 1'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -193,8 +221,8 @@ object frmCan: TfrmCan
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 314
-      Top = 23
+      Left = 570
+      Top = 28
       Width = 65
       Height = 18
       Alignment = taRightJustify
@@ -202,7 +230,7 @@ object frmCan: TfrmCan
       Caption = 'Can rate'
     end
     object imgStatus: TImage
-      Left = 21
+      Left = 13
       Top = 21
       Width = 36
       Height = 36
@@ -337,7 +365,7 @@ object frmCan: TfrmCan
       Visible = False
     end
     object imgStatusStop: TImage
-      Left = 21
+      Left = 13
       Top = 21
       Width = 36
       Height = 36
@@ -472,7 +500,7 @@ object frmCan: TfrmCan
       Visible = False
     end
     object imgStatusErr: TImage
-      Left = 21
+      Left = 13
       Top = 21
       Width = 36
       Height = 36
@@ -607,7 +635,7 @@ object frmCan: TfrmCan
       Visible = False
     end
     object imgStatusStart: TImage
-      Left = 21
+      Left = 13
       Top = 21
       Width = 36
       Height = 36
@@ -742,8 +770,8 @@ object frmCan: TfrmCan
       Visible = False
     end
     object Label2: TLabel
-      Left = 536
-      Top = 28
+      Left = 720
+      Top = 12
       Width = 97
       Height = 13
       Alignment = taRightJustify
@@ -757,9 +785,9 @@ object frmCan: TfrmCan
       ParentFont = False
     end
     object lblRes: TLabel
-      Left = 635
-      Top = 27
-      Width = 42
+      Left = 736
+      Top = 35
+      Width = 45
       Height = 16
       Caption = 'NO OP'
       Font.Charset = ANSI_CHARSET
@@ -769,9 +797,39 @@ object frmCan: TfrmCan
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label3: TLabel
+      Left = 194
+      Top = 28
+      Width = 41
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'ID ext 2'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 328
+      Top = 27
+      Width = 71
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'ID RPM trac'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
     object meCanRate: TMaskEdit
-      Left = 277
-      Top = 20
+      Left = 540
+      Top = 24
       Width = 33
       Height = 24
       TabOrder = 0
@@ -779,7 +837,7 @@ object frmCan: TfrmCan
       OnChange = meCanRateChange
     end
     object meCanId: TMaskEdit
-      Left = 120
+      Left = 104
       Top = 24
       Width = 80
       Height = 24
@@ -790,8 +848,8 @@ object frmCan: TfrmCan
       OnChange = meCanIdChange
     end
     object cbCanRate: TComboBox
-      Left = 383
-      Top = 20
+      Left = 639
+      Top = 25
       Width = 81
       Height = 24
       ItemHeight = 16
@@ -803,9 +861,37 @@ object frmCan: TfrmCan
         '250 kb/s'
         '125 kb/s')
     end
+    object MaskEdit1: TMaskEdit
+      Left = 240
+      Top = 23
+      Width = 79
+      Height = 24
+      EditMask = 'cccccccc;1;_'
+      MaxLength = 8
+      TabOrder = 3
+      Text = '18FFBEBB'
+      OnChange = MaskEdit1Change
+    end
+    object MaskEdit2: TMaskEdit
+      Left = 400
+      Top = 24
+      Width = 81
+      Height = 24
+      EditMask = 'cccccccc;1;_'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      MaxLength = 8
+      ParentFont = False
+      TabOrder = 4
+      Text = '0C000027'
+      OnChange = MaskEdit2Change
+    end
   end
   object btnStart: TBitBtn
-    Left = 24
+    Left = 56
     Top = 128
     Width = 121
     Height = 57
@@ -840,7 +926,7 @@ object frmCan: TfrmCan
     NumGlyphs = 2
   end
   object btnStop: TBitBtn
-    Left = 152
+    Left = 184
     Top = 128
     Width = 121
     Height = 57
@@ -875,7 +961,7 @@ object frmCan: TfrmCan
     NumGlyphs = 2
   end
   object BitBtn3: TBitBtn
-    Left = 24
+    Left = 56
     Top = 72
     Width = 249
     Height = 49
@@ -910,9 +996,9 @@ object frmCan: TfrmCan
   end
   object chart: TChart
     Left = 0
-    Top = 191
-    Width = 742
-    Height = 453
+    Top = 192
+    Width = 827
+    Height = 366
     Legend.Alignment = laTop
     Legend.Brush.Color = clWhite
     Legend.ColorWidth = 10
@@ -925,6 +1011,10 @@ object frmCan: TfrmCan
     Legend.Top = 15
     Legend.TopPos = -37
     MarginTop = 5
+    SubTitle.Font.Height = -13
+    SubTitle.Font.Style = [fsBold]
+    SubTitle.Text.Strings = (
+      'Test profile')
     Title.Alignment = taRightJustify
     Title.Font.Color = clNavy
     Title.Font.Height = -16
@@ -963,8 +1053,9 @@ object frmCan: TfrmCan
     object srsRpm: TFastLineSeries
       Marks.Callout.Brush.Color = clBlack
       Marks.Visible = False
+      SeriesColor = 3972607
       Title = 'Rpm'
-      LinePen.Color = clRed
+      LinePen.Color = 3972607
       LinePen.Width = 2
       XValues.Name = 'X'
       XValues.Order = loAscending
@@ -974,9 +1065,10 @@ object frmCan: TfrmCan
     object srsTrq: TFastLineSeries
       Marks.Callout.Brush.Color = clBlack
       Marks.Visible = False
+      SeriesColor = clLime
       Title = 'TRQ[Nm]'
       VertAxis = aRightAxis
-      LinePen.Color = clGreen
+      LinePen.Color = clLime
       LinePen.Width = 2
       XValues.Name = 'X'
       XValues.Order = loAscending
@@ -986,10 +1078,10 @@ object frmCan: TfrmCan
     object srsRpmRt: TFastLineSeries
       Marks.Callout.Brush.Color = clBlack
       Marks.Visible = False
+      SeriesColor = 202
       Title = 'Rpm Real Time'
-      LinePen.Color = clRed
-      LinePen.Style = psDot
-      LinePen.Width = 2
+      LinePen.Color = 202
+      LinePen.Width = 3
       XValues.Name = 'X'
       XValues.Order = loAscending
       YValues.Name = 'Y'
@@ -1001,8 +1093,7 @@ object frmCan: TfrmCan
       Title = 'TRQ Real time'
       VertAxis = aRightAxis
       LinePen.Color = clGreen
-      LinePen.Style = psDot
-      LinePen.Width = 2
+      LinePen.Width = 3
       XValues.Name = 'X'
       XValues.Order = loAscending
       YValues.Name = 'Y'
@@ -1023,15 +1114,15 @@ object frmCan: TfrmCan
     Enabled = False
     Interval = 45
     OnTimer = tmrRateTimer
-    Left = 280
-    Top = 104
+    Left = 24
+    Top = 128
   end
   object tmrCmd: TTimer
     Enabled = False
     Interval = 20
     OnTimer = tmrCmdTimer
-    Left = 280
-    Top = 72
+    Left = 568
+    Top = 128
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '*.csv'
@@ -1039,12 +1130,12 @@ object frmCan: TfrmCan
     Filter = 'CSV test profile|*.csv'
     InitialDir = 'c:\'
     Left = 24
-    Top = 144
+    Top = 72
   end
   object tmrTrq: TTimer
     Enabled = False
     OnTimer = tmrTrqTimer
-    Left = 312
-    Top = 72
+    Left = 568
+    Top = 160
   end
 end

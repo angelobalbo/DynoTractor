@@ -45,6 +45,9 @@
   extern long lRpm;
   bool bAvvioPressed=false;
   extern String Str0;
+
+  int iTarget=0; // USato per test a step temporizzato solo in avvicinamento al valore target
+  int targetStep=0;
  //---------------------------------------------------------------------------
 __fastcall TStep_test::TStep_test(TComponent* Owner)
         : TForm(Owner)
@@ -132,6 +135,7 @@ void __fastcall TStep_test::FormShow(TObject *Sender)
       //Width=CGauge1->Left+CGauge1->Width+BitBtn4->Left;
       //Label2->Width=110;
       //Label3->Width=95;
+      targetStep=0;
     break;
     case TEST_STEP:
       Label4->Visible=false;
@@ -149,6 +153,7 @@ void __fastcall TStep_test::FormShow(TObject *Sender)
       //PrintStep->Visible=false;
       //ResetTabStep->Visible=false;
       // comando d'impostazione...
+      targetStep=Reg_Stp;
       m_usEncoder=MIN2USEC/((Reg_Stp/Rap_tot1)*dynoPrm.bench.nImpulsiEncoder);
      // comando step rpm
       if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStep(m_usEncoder,CDyn3::EFrontAxle);
@@ -198,6 +203,7 @@ void __fastcall TStep_test::BitBtn1Click(TObject *Sender)
     if(Reg_Stp > rpmStart) Reg_Stp = rpmStart;
   }
   Label2->Caption=IntToStr(Reg_Stp)+" "+Str0; // aggiorna valore visualizzato
+  targetStep=Reg_Stp;
   m_usEncoder=MIN2USEC/((Reg_Stp/Rap_tot1)*dynoPrm.bench.nImpulsiEncoder);
   if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStep(m_usEncoder,CDyn3::EFrontAxle);
   if(bFileTrace)
@@ -224,6 +230,7 @@ void __fastcall TStep_test::BitBtn2Click(TObject *Sender)
   }
   Label2->Caption=IntToStr(Reg_Stp)+" "+Str0; // aggiorna valore visualizzato
   // comando step rpm
+  targetStep=Reg_Stp;
   m_usEncoder=MIN2USEC/((Reg_Stp/Rap_tot1)*dynoPrm.bench.nImpulsiEncoder);
   if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStep(m_usEncoder,CDyn3::EFrontAxle);
   if(bFileTrace)
@@ -322,12 +329,13 @@ void __fastcall TStep_test::FormClose(TObject *Sender,
   if(tipoRapp==RAP_RPMFIX)
     Main->SpeedButton1->Enabled=true;
   Main->SpeedButton2->Enabled=true;
+  targetStep=0;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TStep_test::tmrStepTimer(TObject *Sender)
 {
-  static int iTarget=0;
+
   tmrStep->Enabled=false;
 
 
@@ -336,6 +344,7 @@ void __fastcall TStep_test::tmrStepTimer(TObject *Sender)
     if(iTarget==0 || abs((int)(lRpm*Rap_tot1)-iTarget)<15)
     {
       iTarget=(int)(lRpm*Rap_tot1-iMaxStepDistance);
+      targetStep=iTarget;
       m_usEncoder=MIN2USEC/(((lRpm*Rap_tot1-iMaxStepDistance)/Rap_tot1)*dynoPrm.bench.nImpulsiEncoder);
       if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStep(m_usEncoder,CDyn3::EFrontAxle);
       if(bFileTrace)
@@ -348,6 +357,7 @@ void __fastcall TStep_test::tmrStepTimer(TObject *Sender)
   }
   else if(!gbStepTestCancel && bAvvioPressed)
   {
+    targetStep=Reg_Stp;
     m_usEncoder=MIN2USEC/((Reg_Stp/Rap_tot1)*dynoPrm.bench.nImpulsiEncoder);
     if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStep(m_usEncoder,CDyn3::EFrontAxle);
     if(bFileTrace)
@@ -361,9 +371,10 @@ void __fastcall TStep_test::tmrStepTimer(TObject *Sender)
   }
   else
   {
+    targetStep=0;
     if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStop();
     iTarget=0;
-    if(bFileTrace)            
+    if(bFileTrace)
     {
       LogError(g_cDyn3Log,LOG_INFO,"Cmd Stop");
     }

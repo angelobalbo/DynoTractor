@@ -46,7 +46,7 @@
     <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
     <RELEASELIBPATH value="$(BCB)\lib\release"/>
     <LINKER value="ilink32"/>
-    <USERDEFINES value="_DYNOTRACTOR;CAN_BUS"/>
+    <USERDEFINES value="_DYNOTRACTOR;CAN_BUS;_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="DynoTractor.cpp"/>
     <INCLUDEPATH value="C:\Sviluppo\DYNO_V3\src;C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;&quot;C:\Program Files\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;&quot;C:\Programmi\ZylTimer\zyltimer\CBuilder 6&quot;;..\..\..\tms;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Addons&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Grid&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources&quot;;&quot;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race&quot;;$(BCB)\Imports;C:\APRO;..;&quot;Dyno Race II&quot;;$(BCB)\include;$(BCB)\include\vcl;&quot;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include&quot;;C:\Programmi\TWS;C:\Sviluppo\DynoCanLib\DynoCanLib;C:\Programmi\Kvaser\Canlib\INC"/>
@@ -55,12 +55,12 @@
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -VF -X- -a8 -6 -b- -k- -vi -c -tW 
-      -tWM"/>
-    <PFLAGS value="-N2..\obj -N0..\obj -$Y- -$L- -$D- -$A8 -v -JPHNE -M"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -VF -X- -r- -a8 -6 -b- -k -y -v 
+      -vi- -c -tW -tWM"/>
+    <PFLAGS value="-N2..\obj -N0..\obj -$Y+ -$W -$O- -$A8 -v -JPHNE -M"/>
     <RFLAGS value=""/>
-    <AFLAGS value="/mx /w2 /zn"/>
-    <LFLAGS value="-l..\app -I..\obj -D&quot;&quot; -aa -Tpe -x -Gn -w"/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-l..\app -I..\obj -D&quot;&quot; -aa -Tpe -x -Gn -w -v"/>
     <OTHERFILES value=""/>
   </OPTIONS>
   <LINKER>
@@ -124,7 +124,7 @@ AutoIncBuild=0
 MajorVer=2
 MinorVer=3
 Release=6
-Build=2
+Build=8
 Debug=0
 PreRelease=0
 Special=0
@@ -136,7 +136,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Dimsport s.r.l.
 FileDescription=Dynamometer
-FileVersion=2.3.6.2
+FileVersion=2.3.6.8
 InternalName=Dyno Tractor
 LegalCopyright=Dimsport 2008-2023
 LegalTrademarks=
@@ -204,8 +204,8 @@ Item0=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
 Count=8
-Item0=_DYNOTRACTOR;CAN_BUS
-Item1=_DYNOTRACTOR;CAN_BUS;_DEBUG
+Item0=_DYNOTRACTOR;CAN_BUS;_DEBUG
+Item1=_DYNOTRACTOR;CAN_BUS
 Item2=_DYNOTRACTOR;_DEBUG
 Item3=_DYNOTRACTOR
 Item4=_DYNOTRACTOR;;_DEBUG

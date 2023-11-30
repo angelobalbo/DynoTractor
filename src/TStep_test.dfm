@@ -1,6 +1,6 @@
 object Step_test: TStep_test
-  Left = 37
-  Top = 179
+  Left = 13
+  Top = 89
   BorderIcons = []
   BorderStyle = bsDialog
   BorderWidth = 1

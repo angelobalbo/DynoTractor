@@ -17,7 +17,15 @@
 #pragma package(smart_init)
 #pragma link "TeeTools"
 #pragma resource "*.dfm"
+
+
+#define REDUNDANCY 4
+
 TfrmCan *frmCan;
+
+extern int targetStep,Tipo_test;
+extern bool bAvvioPressed;
+
 extern bool OK_N_cost;
 extern char g_cFileLog[MAX_PATH];
 extern unsigned int selPto;
@@ -38,11 +46,18 @@ extern float Valore_Cop;
 static long timing=0,t=0,timingTrq=0;
 static long clockPrec,clockPrecTrq;
 static int  step=0,stepTrq=0;
-static float rpm1=0,rpm0,rpm;
-static float trq1=0,trq0,trq;
+static float rpm1=0,rpm0;
+float rpm;
+static float trq1=0,trq0,trq=0;
 long tmrInterval,trqInterval;
 
+bool bRpmTracStarted=false;
+bool bRTDataStarted=false;
+unsigned char cCanRpmData[8];
+bool bCanRpmErr=false;
+long lId1,lId2;
 #define MAX_TAB_STEP 50
+
 typedef struct
 {
   float time [MAX_TAB_STEP];
@@ -57,6 +72,7 @@ TAB_STEP_CAN tabStep;
 __fastcall TfrmCan::TfrmCan(TComponent* Owner)
   : TForm(Owner)
 {
+
 }
 //---------------------------------------------------------------------------
 
@@ -73,9 +89,11 @@ void __fastcall TfrmCan::meCanRateChange(TObject *Sender)
 void __fastcall TfrmCan::BitBtn1Click(TObject *Sender)
 {
 
+  canStatus canStat;
   lTimeRateCan=StrToIntDef(meCanRate->Text, 50);
   sscanf(meCanId->Text.c_str(), "%x", &lIdReqCan);
   tmrRate->Interval=lTimeRateCan;
+
   if(statusCan==EDisc)
     if(openCan()==false)
     {
@@ -87,7 +105,7 @@ void __fastcall TfrmCan::BitBtn1Click(TObject *Sender)
   String s;
 
 
-  if(connectCAN(lIdReqCan,lTimeRateCan,cbCanRate->ItemIndex))
+  if(connectCAN(lIdReqCan,lId1,lId2,lTimeRateCan,cbCanRate->ItemIndex))
   {
     s="Connessione Can bus Kvaser";
     LogError(g_cFileLog,LOG_INFO,s.c_str());
@@ -96,6 +114,9 @@ void __fastcall TfrmCan::BitBtn1Click(TObject *Sender)
     imgStatusStop->Visible=false;
     imgStatusErr->Visible=false;
     tmrRate->Enabled=false;
+
+    //bTimerRateStarted=false;
+    //bTimerRpmStarted=false;
     btnStart->Enabled=true;
     btnStop->Enabled=false;
     BitBtn3->Enabled=false;
@@ -118,6 +139,11 @@ void __fastcall TfrmCan::btnStartClick(TObject *Sender)
 {
   if(statusCan==EConnCAN)
   {
+    bRTDataStarted=true;
+    //
+//    bTimerRateStarted=false;
+    sscanf(meCanId->Text.c_str(), "%x", &lIdReqCan);
+    sscanf(MaskEdit1->Text.c_str(), "%x", &lId1);
     imgStatus->Visible=false;
     imgStatusStart->Visible=true;
     imgStatusStop->Visible=false;
@@ -134,10 +160,13 @@ void __fastcall TfrmCan::tmrRateTimer(TObject *Sender)
   //
   static long rpm, torque, power,temp;
   static unsigned char cCanData[8];
+  static bool res;
+//  static canStatus canStat;
   tmrRate->Enabled=false;
   if(btnStop->Tag==1)
   {
     statusCan=EConnCAN;
+    bRTDataStarted=true;
     btnStop->Tag=0;
     imgStatusStop->Visible=true;
     imgStatusStart->Visible=false;
@@ -145,10 +174,16 @@ void __fastcall TfrmCan::tmrRateTimer(TObject *Sender)
     btnStart->Enabled=true;
     btnStop->Enabled=false;
     BitBtn3->Enabled=false;
+//    bTimerRateStarted=false;
+//    canStat=canObjBufDisable(hChannel,bufIdx1);
+//    canStat=canObjBufDisable(hChannel,bufIdx2);
     return;
   }
-  if(statusCan==EConnCAN || statusCan==EReadyCAN)
+  if(statusCan!=EDisc)// || statusCan==EReadyCAN)
   {
+
+
+
     // RPM motore giri/min
     rpm=(long)((float)lRpm*Rap_tot1);
 
@@ -169,18 +204,48 @@ void __fastcall TfrmCan::tmrRateTimer(TObject *Sender)
     cCanData[4]=(power)>>8;
     cCanData[5]=(power)&0xFF;
     cCanData[6]=(temp)&0xFF;
-
+    //if(OK_N_cost) // invia
+//    memcpy(msg1,cCanData,sizeof(msg1));
     if(txCan(lIdReqCan,cCanData))
-      tmrRate->Enabled=true;
-    else if(statusCan==EErrCAN)
+    {
+      if(selPto==0)
+        torque=(long)(trq*Rap_tot1);
+      else
+        torque=(long)trq;
+        rpm=(long)targetStep;
+        cCanData[0]=torque>>8;
+        cCanData[1]=(torque)&0xFF;
+        if((Tipo_test==TEST_STEP_TIMED && bAvvioPressed) || (Tipo_test==TEST_STEP))
+        {
+          cCanData[2]=(rpm)>>8;
+          cCanData[3]=(rpm)&0xFF;
+        }
+        else
+        {
+          cCanData[2]=0;
+          cCanData[3]=0;
+        }
+        cCanData[4]=0xFF;
+        cCanData[5]=0xFF;
+        cCanData[6]=0xFF;
+        cCanData[7]=0xFF;
+        //memcpy(msg2,cCanData,sizeof(msg2));
+        res=txCan(lId1,cCanData);
+
+
+    }
+
+    if(res==false && statusCan==EErrCAN)
     {
        imgStatusStart->Visible=false;
        imgStatusErr->Visible=true;
+       lblRes->Caption="ERROR CAN";
        btnStart->Enabled=false;
        btnStop->Enabled=false;
        BitBtn3->Enabled=true;
     }
 
+    tmrRate->Enabled=true;
   }
 
 }
@@ -189,7 +254,7 @@ void __fastcall TfrmCan::tmrRateTimer(TObject *Sender)
 void __fastcall TfrmCan::btnStopClick(TObject *Sender)
 {
   btnStop->Tag=1;
-
+  //DestroyCan();
 }
 //---------------------------------------------------------------------------
 
@@ -202,7 +267,10 @@ void __fastcall TfrmCan::FormClose(TObject *Sender, TCloseAction &Action)
     sbCmdClick(this);
   Sleep(200);
   if(statusCan!=EDisc)
+  {
+
     closeCan();
+  }
 }
 //---------------------------------------------------------------------------
 
@@ -218,6 +286,8 @@ void __fastcall TfrmCan::FormShow(TObject *Sender)
     imgStatusStart->Visible=false;
     imgStatusErr->Visible=false;
     imgStatus->Visible=false;
+    bRTDataStarted=false;
+    bRpmTracStarted=false;
   }
   tmrCmd->Interval=tmrInterval;
   tmrTrq->Interval=trqInterval;
@@ -227,11 +297,12 @@ void __fastcall TfrmCan::FormShow(TObject *Sender)
 
 void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
 {
+  canStatus canStat;
 //
-  if(sbCmd->Caption=="START TEST")
+  if(bRpmTracStarted==false)//sbCmd->Caption=="START TEST")
   {
-    srsRpm->Clear();
-    srsTrq->Clear();
+//    srsRpm->Clear();
+//    srsTrq->Clear();
     srsRpmRt->Clear();
     srsTrqRt->Clear();
     t=0;
@@ -247,22 +318,30 @@ void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
     trq1=tabStep.trq[1];
     rpm=rpm0;
     trq=trq0;
+    sscanf(MaskEdit2->Text.c_str(), "%x", &lId2);
     tmrCmd->Enabled=true;
     tmrTrq->Enabled=true;
     sbCmd->Caption="STOP TEST";
+    bRpmTracStarted=true;
+    CreateCan(g_cCanLog);
     Valore_Cop=0;
     OK_N_cost=true;
     SpeedButton1->Enabled=false;
   }
-  else
+  else // STOP INVIO DATI AL TRACTOR
   {
     tmrCmd->Enabled=false;
     tmrTrq->Enabled=false;
     sbCmd->Caption="START TEST";
+    bRpmTracStarted=false;
+    DestroyCan();
     Main->EndTest();
     Valore_Cop=0;
+    trq=0;
     OK_N_cost=false;
     SpeedButton1->Enabled=true;
+//    canStat=canObjBufDisable(hChannel,bufIdxRpmTrac);
+//    if(canStat!=canOK) LogError(g_cFileLog,LOG_ERR,"canObjBufDisable IdRpmTrac");
   }
 
 }
@@ -272,11 +351,11 @@ void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
 void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
 {
 
-  static long id;
   static unsigned char cCanData[8];
   static float deltaRpm;
 
   static float interval;
+//  static canStatus canStat;
 
   tmrCmd->Enabled=false;
 
@@ -303,7 +382,11 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
     }
     else // condizione di fine prova
     {
-      sbCmd->Caption="START";
+      sbCmd->Caption="START TEST";
+      bRpmTracStarted=false;
+      DestroyCan();
+      SpeedButton1->Enabled=true;
+      #if 0
       if(OK_N_cost==true)
       {
         OK_N_cost=false;
@@ -311,6 +394,7 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
         Valore_Cop=0;
         tmrTrq->Enabled=false;
       }
+      #endif
     }
 
   }
@@ -335,15 +419,22 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
      //clockPrec=clock();
   }
 
-  if(sbCmd->Caption=="STOP")
+  if(bRpmTracStarted==true)//sbCmd->Caption=="STOP TEST")
   {
-    srsRpm->AddXY(timing/1000, rpm);
-    srsRpmRt->AddXY(timing/1000,(lRpm*Rap_tot1));
-    chart->BottomAxis->Title->Caption="T = "+FormatFloat("#.##",(float)timing/1000)+"s";
-    if(statusCan==EConnCAN || statusCan==EReadyCAN)
-    {
-      id=0x0C000027;
 
+    if(statusCan!=EDisc)// || statusCan==EReadyCAN)
+    {
+      //      id=0x0C000027;
+      if(bCanRpmErr==true)
+      {
+        Label6->Font->Color=clRed;
+        Label6->Caption="Tractor CAN FAILED";
+      }
+      else
+      {
+        Label6->Font->Color=clBlack;
+        Label6->Caption="Tractor CAN OK";
+      }
       if(rpm>0)
       {
         cCanData[0]=0x01;
@@ -354,13 +445,18 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
         cCanData[5]=0xFF;
         cCanData[6]=0xFF;
         cCanData[7]=0xFF;
-        if(txCan(id,cCanData)==false)
+        memcpy(cCanRpmData,cCanData,sizeof(cCanRpmData));
+
+        #if 0
+        if(txCan(lId2,cCanRpmData)==false)
           lblRes->Caption="KO";
         else
           lblRes->Caption="OK";
+        #endif
       }
-      //tmrCmd->Enabled=true;
     }
+    srsRpmRt->AddXY(timing/1000,(lRpm*Rap_tot1));
+    chart->BottomAxis->Title->Caption="T = "+FormatFloat("#.00",(float)timing/1000)+"s";
     tmrCmd->Enabled=true;
   }
 }
@@ -396,17 +492,20 @@ void __fastcall TfrmCan::SpeedButton1Click(TObject *Sender)
   if (f)
     dir=cPerc;
 
-  memset (&tabStep,0,sizeof(TAB_STEP_CAN));
+
   OpenDialog1->InitialDir=dir+"\\StepTest";
   OpenDialog1->DefaultExt="*.csv";
   if(OpenDialog1->Execute())
   {
     sTmpFileName=OpenDialog1->FileName;
+
     if((sTmpFileName.SubString(sTmpFileName.Length()-3,4).UpperCase()==".CSV"))
     {
       ifstream infile(sTmpFileName.c_str(), ios::binary);
       if(infile.is_open())
       {
+        memset (&tabStep,0,sizeof(TAB_STEP_CAN));
+        chart->SubTitle->Caption=ExtractFileName(sTmpFileName);
         infile.seekg (0, ios::beg);
         /// Aggiornamento dati di interstazione
         infile.getline(sBuffer,sizeof(sBuffer));
@@ -450,6 +549,14 @@ void __fastcall TfrmCan::SpeedButton1Click(TObject *Sender)
           }
         } // while
         infile.close();
+        // Grafico valori tabulati
+        srsRpm->Clear();
+        srsTrq->Clear();
+        for (i=0;i<tabStep.rows;i++)
+        {
+          srsRpm->AddXY(tabStep.time[i],tabStep.rpm[i]);
+          srsTrq->AddXY(tabStep.time[i],tabStep.trq[i]);
+        }
         if((col<3 && col >0) || i==0)
           MessageBox(NULL,"Table is not correct!","ERROR",MB_OK | MB_ICONERROR);
         else
@@ -466,7 +573,7 @@ void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
 {
   static float deltaTrq;
   static long interval;
-
+//  static canStatus canStat;
   tmrTrq->Enabled=false;
 
   interval=(1000*(clock()-clockPrecTrq)/CLK_TCK);
@@ -475,7 +582,6 @@ void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
 
 
   // Condizione di avanzamento step, o step iniziale
-  if(sbCmd->Caption=="START") return;
   if(((trq0==trq1) && (timingTrq>=(tabStep.time[stepTrq])*1000)) ||
      (trq1>trq0 && trq>=trq1) ||
      (trq1<trq0 && trq<=trq1))
@@ -487,13 +593,7 @@ void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
       trq1=tabStep.trq[stepTrq];    // trq finale
       trq=trq0;
     }
-    else // condizione di fine prova
-    {
-      sbCmd->Caption="START";
-      Main->EndTest();
-      OK_N_cost=false;
-      Valore_Cop=0;
-    }
+
 
   }
   else
@@ -511,21 +611,50 @@ void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
      }
   }
 
-  if(sbCmd->Caption=="STOP")
+  if(stepTrq<tabStep.rows)//sbCmd->Caption=="STOP TEST")
   {
-    srsTrq->AddXY(timingTrq/1000, trq);
-    srsTrqRt->AddXY(timingTrq/1000,Val_coppia_m1 * fK_convC*fFact);
+//    srsTrq->AddXY(timingTrq/1000, trq);
+
+    //LogError(g_cFileLog,LOG_ERR,FormatFloat("trq 0.#",trq).c_str());
     if(selPto == 0)
       Valore_Cop=(trq*Rap_tot1/9.81)/fFact;
     else
       Valore_Cop=(trq/9.81)/fFact;
+
     IO_ref=true;
+    srsTrqRt->AddXY(timingTrq/1000,Val_coppia_m1 * fK_convC*fFact);
     // Inserire comando coppia costante dyn3
     tmrTrq->Enabled=true;
   }
+  else // condizione di fine prova
+      bRpmTracStarted=false;
+
+  // Risposta a termine prova, sgancio prova a coppia costante e ripristino bottone 
+  if(bRpmTracStarted==false)
+  {
+      sbCmd->Caption="START TEST";
+      Main->EndTest();
+      OK_N_cost=false;
+      Valore_Cop=0;
+      SpeedButton1->Enabled=true;
+  }
+
+
 }
 //---------------------------------------------------------------------------
 
 
 
+
+void __fastcall TfrmCan::MaskEdit1Change(TObject *Sender)
+{
+  sscanf(MaskEdit1->Text.c_str(), "%x", &lId1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmCan::MaskEdit2Change(TObject *Sender)
+{
+  sscanf(MaskEdit2->Text.c_str(), "%x", &lId2);
+}
+//---------------------------------------------------------------------------
 

@@ -1120,7 +1120,7 @@ void DestroyDyn3()
     g_brakeControl.Terminate();
     WaitForSingleObject(g_hThreadDyn3,400);
     CloseHandle(g_hThreadDyn3);
-    g_hThreadDyn3=0;
+    g_hThreadDyn3=NULL;
   }
 }
 

@@ -5,8 +5,10 @@
 #include <time.h>
 #include "CanLib.h"
 #include "CanBus.h"
+#include "log.h"
 
 int hChannel=-1;
+
 unsigned char conType;
 canStatus gCanStatus;
 bool bMonitorCANMode=false;
@@ -24,10 +26,26 @@ unsigned int uiNoSamp;
 unsigned int uiSyncMode;
 unsigned long ulTimeout;
 
+
+
+
+
 long lIdReq,lTime;
+
+extern char g_cFileLog[MAX_PATH];
+
+extern bool bRpmTracStarted;
+extern bool bRTDataStarted;
+extern unsigned char cCanRpmData[8];
+extern long lId2;
+extern float rpm;
+extern bool bCanRpmErr;
 
 ECanStatus actionCan,statusCan=EDisc;
 
+HANDLE g_hThreadCan=0;
+
+char g_cCanLog[MAX_PATH];
 
 const struct CanParams
 {
@@ -122,7 +140,7 @@ bool openCan() // OpenBus
 	  canUnloadLibrary();
     statusCan=EDisc;
   }
-
+//  int bufIndex = canObjBufAllocate(hChannel, canOBJBUF_TYPE_PERIODIC_TX);
 //	m_status=(gCanStatus==canOK)?EOpen:EDisc;
 	return (gCanStatus==canOK);
 }
@@ -130,7 +148,11 @@ bool openCan() // OpenBus
 void closeCan()
 {
 	bMonitorCANMode=false;;
-
+#if 0
+  canObjBufFree(hChannel,bufIdx1);
+  canObjBufFree(hChannel,bufIdx2);
+  canObjBufFree(hChannel,bufIdxRpmTrac);
+#endif
   canBusOff(hChannel);
   canClose(hChannel);
   canUnloadLibrary();
@@ -155,8 +177,7 @@ bool setCanBitRate(int iRateIndex)
                             canPrms[iRateIndex].uiSjw,
                             canPrms[iRateIndex].uiNoSamp,
                             canPrms[iRateIndex].uiSyncMode );
-      if(gCanStatus==canOK)
-        gCanStatus=canBusOn(hChannel);
+
   }
   if(gCanStatus==canOK)
     statusCan=EConnCAN;
@@ -170,7 +191,7 @@ bool txCan(long id,unsigned char data[])
   if(hChannel>=0)
   {
     lTimestamp=clock();
-    
+
     gCanStatus=canWriteWait(hChannel,id,data,8,canMSG_EXT,80);
     if (gCanStatus != 0)
     {
@@ -187,17 +208,94 @@ bool txCan(long id,unsigned char data[])
   return false;
 }
 
-bool connectCAN(long idReq,long time,int rateIndex)
+bool connectCAN(long idReq1,long idReq2,long idReqRpmTrac,long time,int rateIndex)
 {
   bool res;
+//  if(!g_hThreadCan) return false;
   iRateIndex=rateIndex;
-  lIdReqCan=idReq;
+//  lIdReqCan=idReq;
   lTimeRateCan=time;
   res=setCanBitRate(rateIndex);
+  if(res)
+  {
+     gCanStatus=canBusOn(hChannel);
+  }
   actionCan=EConnCAN;
   return res;
 }
 
+char s[100];
+bool runStateMachine()
+{
+  static long time=0;
+  if(bRpmTracStarted && rpm>0)
+  {
+    if(txCan(lId2,cCanRpmData)==false)
+      bCanRpmErr=true;//lblRes->Caption="KO";
+    else
+      bCanRpmErr=false;
+/*
+    if(clock()-time>20)
+    {
+      sprintf(s,"retarded signal %dms",clock()-time);
+      LogError(g_cCanLog,LOG_INFO,s);
+    }
+*/
+  }
+  time=clock();
+  Sleep(15);
+  if(actionCan==ETerm)
+    return false;
+
+  return true;
+}
+
+DWORD WINAPI ThreadCan(LPVOID lpParam)
+{
+
+  //libera la memoria heap al termine del thread
+  //FreeOnTerminate = false;
+  while(runStateMachine());
+  return 0;
+}
+
+//---------------------------------------------------------------------------
+
+bool CreateCan(TCHAR* cLog)
+{
+  strcpy(g_cCanLog,cLog);
+  LogError(g_cCanLog,LOG_INFO,"Avvio thread Can");
+  if(!g_hThreadCan)
+  {
+    actionCan=ENoCmd;
+    g_hThreadCan=CreateThread( NULL,0,ThreadCan, NULL, 0, NULL);
+    if(g_hThreadCan)
+    {
+      if(SetThreadPriority(g_hThreadCan,THREAD_PRIORITY_HIGHEST))
+        return true;
+
+    }
+  }
+  return false;
+}
+
+void DisconnectCan()
+{
+  actionCan=EDisc;//g_dyraControl.Disconnect();
+  LogError(g_cCanLog,LOG_INFO,"Sconnessione CAN");
+}
+
+void DestroyCan()
+{
+  if (g_hThreadCan!=NULL)
+  {
+    actionCan=ETerm;
+    //g_dyraControl.Terminate();
+    WaitForSingleObject(g_hThreadCan,100);
+    CloseHandle(g_hThreadCan);
+    g_hThreadCan=NULL;
+  }
+}
 
 //---------------------------------------------------------------------------
 

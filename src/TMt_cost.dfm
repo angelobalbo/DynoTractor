@@ -1,6 +1,6 @@
 object Mt_cost: TMt_cost
-  Left = 893
-  Top = 247
+  Left = 299
+  Top = 122
   BorderIcons = []
   BorderStyle = bsDialog
   BorderWidth = 1

@@ -31,7 +31,7 @@ bool LogError (char* cFileLog, int iLevel, const char* cText)
   time ( &rawtime );
   timeinfo = localtime ( &rawtime );
   strftime (d,11,"%d/%m/%Y",timeinfo);
-  strftime (t,9,"%H.%M.%S",timeinfo);
+  strftime (t,9,"%H.%M.%S.%MS",timeinfo);
 
   // apre il file in modalità append
   ifstream inFile(cFileLog);

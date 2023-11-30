@@ -1,6 +1,6 @@
 object Termo: TTermo
-  Left = 387
-  Top = 216
+  Left = 325
+  Top = 182
   Width = 313
   Height = 257
   BorderIcons = []

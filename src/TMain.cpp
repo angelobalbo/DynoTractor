@@ -1941,25 +1941,17 @@ void __fastcall TMain::FormShow(TObject *Sender)
   sComDyn3=ini->ReadString( "Porta seriale", "Dyn3", "");
   statusRelaisConfig=0x10;
   delete ini;
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 1");
-#endif
+
   /// **** APERTURA PORTA DYN3 ****
   CreateDyn3(&bNotifyDyn3,g_cDyn3Log);
 
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 2");
-#endif
+
   /// **** APERTURA PORTA DYRA ****
   CreateDyra(notifyDyra,g_cDyraLog);
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 3");
-#endif
+
   hEvDataReady=CreateEvent(NULL,true,false,NULL);
   SetEvent(hEvDataReady);
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 4");
-#endif
+
   brakeStatus.b.bBrakeAnteDisconnected=0;
   brakeStatus.b.bBrakeAnteNotPowered=0;
   g_brakeControl.SetAxis(CDyn3::EFrontAxle);
@@ -1976,9 +1968,7 @@ void __fastcall TMain::FormShow(TObject *Sender)
   }
   else
     g_brakeControl.Connect(sComDyn3.c_str());
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 5");
-#endif
+
   Sleep(200);
   if(g_brakeControl.isOn())
   {
@@ -2000,9 +1990,7 @@ void __fastcall TMain::FormShow(TObject *Sender)
   }
   else
     g_dyraControl.Connect(sComDyra.c_str());
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 6");
-#endif
+
   /// Invio comandi alla Dyra: STOP invio dati + rele consumi + START invio dati
   if(g_dyraControl.isOn())
   {
@@ -2011,31 +1999,21 @@ void __fastcall TMain::FormShow(TObject *Sender)
     g_dyraControl.CmdRele(statusRelaisConfig);
     g_dyraControl.CmdStart();
   }
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 7");
-#endif
+
   g_dyraControl.ActiveLog(bFileTrace);
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 8");
-#endif
+
   g_brakeControl.ActiveLog(bFileTrace);
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormCreate 9");
-#endif
+
   ChartTool9->Visible=false;
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormShow");
-#endif
+
   PageControl1->ActivePage=TabSheet1;
   SHGetFolderPath(NULL, CSIDL_PERSONAL,NULL,NULL,cDocPath);
-
+  sprintf(g_cCanLog,"%s\\%s\\CAN.log",cDocPath,DYNO_TEST_PATH);
   sprintf(g_cDyraLog,"%s\\%s\\dyra.log",cDocPath,DYNO_TEST_PATH);
   sprintf(g_cDyn3Log,"%s\\%s\\dyn3.log",cDocPath,DYNO_TEST_PATH);
 
   DecimalSeparator='.';
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormShow 1");
-#endif
+
   n = GetFileVersionInfoSize(Application->ExeName.c_str(), &n);
   if (n > 0)
   {
@@ -2045,14 +2023,10 @@ void __fastcall TMain::FormShow(TObject *Sender)
     sprintf (swNbr, "%u.%u.%u.%u",pBuf[58],pBuf[56], pBuf[54],pBuf[60]);
     delete [] pBuf;
   }
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormShow 2");
-#endif
+
   // carica il logo iniziale....
   DecimalSeparator='.';
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"TMain::FormShow 3");
-#endif
+
   m_minV_T=50;
   Splash = new TSplash(Application);
   Splash->ShowModal();
@@ -2063,16 +2037,12 @@ void __fastcall TMain::FormShow(TObject *Sender)
   {
     CreateDirectory(utils.GetProgramDataPath("DB").c_str(),NULL);
   }
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"Carico impostazioni");
-#endif
+
   carica_imp(); // richiama funzione di lettura ini file e idioma
   caricaBanco();
 #if 0
   String nomefile;
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"Caricate impostazioni");
-#endif
+
   if(tipoBanco==2)//Trailer
     nomefile="File_impo_trailer.dmt";
   else
@@ -2083,9 +2053,7 @@ void __fastcall TMain::FormShow(TObject *Sender)
     infile.read((unsigned char*)&dynoPrm,sizeof (dynoPrm));
     infile.close();
     okProcessData = 1;
-#ifdef _DEBUG
-  LogError(g_cFileLog,LOG_INFO,"Caricato il file_impo");
-#endif
+
   }
   else
   {
@@ -8604,7 +8572,7 @@ void __fastcall TMain::Out1Click(TObject *Sender)
 void __fastcall TMain::btnCanClick(TObject *Sender)
 {
   Tipo_test=TEST_COST_TRQ;
-  frmCan->Show();  
+  frmCan->ShowModal();  
 }
 //---------------------------------------------------------------------------
 
