@@ -192,7 +192,7 @@ bool txCan(long id,unsigned char data[])
   {
     lTimestamp=clock();
 
-    gCanStatus=canWriteWait(hChannel,id,data,8,canMSG_EXT,80);
+    gCanStatus=canWrite(hChannel,id,data,8,canMSG_EXT);
     if (gCanStatus != 0)
     {
 /*        if (m_bActiveLog)
@@ -228,7 +228,7 @@ char s[100];
 bool runStateMachine()
 {
   static long time=0;
-  if(bRpmTracStarted && rpm>0)
+  if(bRpmTracStarted && rpm>0 && cCanRpmData[0])
   {
     if(txCan(lId2,cCanRpmData)==false)
       bCanRpmErr=true;//lblRes->Caption="KO";
@@ -243,7 +243,7 @@ bool runStateMachine()
 */
   }
   time=clock();
-  Sleep(15);
+  Sleep(5);
   if(actionCan==ETerm)
     return false;
 

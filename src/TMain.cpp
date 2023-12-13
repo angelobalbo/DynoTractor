@@ -933,7 +933,7 @@ void __fastcall TMain::carica_imp()
   Lingua=ini->ReadInteger ( "Lingua in uso"+Profilo, "Codice", 0 );
   iMaxStepDistance=ini->ReadInteger( "Impostazioni test"+Profilo, "Massima distanza step",50);
   tmrInterval=ini->ReadInteger( "Impostazioni test"+Profilo, "Intervallo test comando rpm",50);
-  trqInterval=ini->ReadInteger( "Impostazioni test"+Profilo, "Intervallo test comando trq",1000);
+  trqInterval=ini->ReadInteger( "Impostazioni test"+Profilo, "Intervallo test comando trq",350);
   fAccMax=ini->ReadFloat( "Impostazioni test"+Profilo, "Max Accelerazione",1);
   Reg_iniz_acc=ini->ReadInteger( "Impostazioni test"+Profilo, "Reg_iniz_acc",1500);
   Reg_fine_acc=ini->ReadInteger( "Impostazioni test"+Profilo, "Reg_fine_acc",5000);
@@ -8572,7 +8572,7 @@ void __fastcall TMain::Out1Click(TObject *Sender)
 void __fastcall TMain::btnCanClick(TObject *Sender)
 {
   Tipo_test=TEST_COST_TRQ;
-  frmCan->ShowModal();  
+  frmCan->Show();
 }
 //---------------------------------------------------------------------------
 

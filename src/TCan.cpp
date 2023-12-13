@@ -56,7 +56,7 @@ bool bRTDataStarted=false;
 unsigned char cCanRpmData[8];
 bool bCanRpmErr=false;
 long lId1,lId2;
-#define MAX_TAB_STEP 50
+#define MAX_TAB_STEP 10000
 
 typedef struct
 {
@@ -206,13 +206,13 @@ void __fastcall TfrmCan::tmrRateTimer(TObject *Sender)
     cCanData[6]=(temp)&0xFF;
     //if(OK_N_cost) // invia
 //    memcpy(msg1,cCanData,sizeof(msg1));
-    if(txCan(lIdReqCan,cCanData))
+    /*if(*/txCan(lIdReqCan,cCanData);//)
     {
       if(selPto==0)
         torque=(long)(trq*Rap_tot1);
       else
         torque=(long)trq;
-        rpm=(long)targetStep;
+      rpm=(long)targetStep;
         cCanData[0]=torque>>8;
         cCanData[1]=(torque)&0xFF;
         if((Tipo_test==TEST_STEP_TIMED && bAvvioPressed) || (Tipo_test==TEST_STEP))
@@ -319,6 +319,7 @@ void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
     rpm=rpm0;
     trq=trq0;
     sscanf(MaskEdit2->Text.c_str(), "%x", &lId2);
+    memset(cCanRpmData,0,sizeof(cCanRpmData));
     tmrCmd->Enabled=true;
     tmrTrq->Enabled=true;
     sbCmd->Caption="STOP TEST";
@@ -455,7 +456,7 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
         #endif
       }
     }
-    srsRpmRt->AddXY(timing/1000,(lRpm*Rap_tot1));
+    srsRpmRt->AddXY((float)timing/1000,(lRpm*Rap_tot1));
     chart->BottomAxis->Title->Caption="T = "+FormatFloat("#.00",(float)timing/1000)+"s";
     tmrCmd->Enabled=true;
   }
@@ -552,10 +553,12 @@ void __fastcall TfrmCan::SpeedButton1Click(TObject *Sender)
         // Grafico valori tabulati
         srsRpm->Clear();
         srsTrq->Clear();
+        srsTrqRt->Clear();
+        srsRpmRt->Clear();
         for (i=0;i<tabStep.rows;i++)
         {
-          srsRpm->AddXY(tabStep.time[i],tabStep.rpm[i]);
-          srsTrq->AddXY(tabStep.time[i],tabStep.trq[i]);
+          srsRpm->AddXY((float)tabStep.time[i],tabStep.rpm[i]);
+          srsTrq->AddXY((float)tabStep.time[i],tabStep.trq[i]);
         }
         if((col<3 && col >0) || i==0)
           MessageBox(NULL,"Table is not correct!","ERROR",MB_OK | MB_ICONERROR);
@@ -572,7 +575,7 @@ void __fastcall TfrmCan::SpeedButton1Click(TObject *Sender)
 void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
 {
   static float deltaTrq;
-  static long interval;
+  static float interval;
 //  static canStatus canStat;
   tmrTrq->Enabled=false;
 
@@ -622,7 +625,9 @@ void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
       Valore_Cop=(trq/9.81)/fFact;
 
     IO_ref=true;
-    srsTrqRt->AddXY(timingTrq/1000,Val_coppia_m1 * fK_convC*fFact);
+    srsTrqRt->AddXY((float)timingTrq/1000,Val_coppia_m1 * fK_convC*fFact);
+    //srsTrqRt->AddXY((float)timingTrq/1000,trq*fK_convC/9.81);
+
     // Inserire comando coppia costante dyn3
     tmrTrq->Enabled=true;
   }

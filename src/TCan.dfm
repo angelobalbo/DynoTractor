@@ -1,10 +1,10 @@
 object frmCan: TfrmCan
-  Left = 319
-  Top = 93
+  Left = 4
+  Top = 0
   BorderStyle = bsDialog
   Caption = 'CAN TRANSMISSION'
-  ClientHeight = 558
-  ClientWidth = 827
+  ClientHeight = 281
+  ClientWidth = 630
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -169,9 +169,9 @@ object frmCan: TfrmCan
     ParentFont = False
   end
   object Label6: TLabel
-    Left = 456
+    Left = 408
     Top = 144
-    Width = 153
+    Width = 201
     Height = 24
     Alignment = taRightJustify
     AutoSize = False
@@ -185,7 +185,7 @@ object frmCan: TfrmCan
   object gbCanBus: TGroupBox
     Left = 0
     Top = 0
-    Width = 827
+    Width = 630
     Height = 65
     Align = alTop
     Caption = 'CAN PARAMETERS'
@@ -787,7 +787,7 @@ object frmCan: TfrmCan
     object lblRes: TLabel
       Left = 736
       Top = 35
-      Width = 45
+      Width = 42
       Height = 16
       Caption = 'NO OP'
       Font.Charset = ANSI_CHARSET
@@ -996,9 +996,9 @@ object frmCan: TfrmCan
   end
   object chart: TChart
     Left = 0
-    Top = 192
-    Width = 827
-    Height = 366
+    Top = -95
+    Width = 630
+    Height = 376
     Legend.Alignment = laTop
     Legend.Brush.Color = clWhite
     Legend.ColorWidth = 10
@@ -1039,6 +1039,7 @@ object frmCan: TfrmCan
     RightAxis.AutomaticMinimum = False
     RightAxis.Axis.Color = clGray
     RightAxis.Grid.Color = clSilver
+    RightAxis.Minimum = 5
     RightAxis.EndPosition = 49
     RightAxis.Title.Caption = 'Nm'
     RightAxis.Title.Font.Height = -13
