@@ -2,6 +2,7 @@
 
 
 #pragma hdrstop
+#include <vcl.h>
 #include <time.h>
 #include "CanLib.h"
 #include "CanBus.h"
@@ -244,6 +245,7 @@ bool runStateMachine()
   }
   time=clock();
   Sleep(5);
+  Application->ProcessMessages();
   if(actionCan==ETerm)
     return false;
 

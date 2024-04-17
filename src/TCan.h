@@ -44,7 +44,6 @@ __published:	// IDE-managed Components
   TChart *chart;
   TFastLineSeries *srsRpm;
   TFastLineSeries *srsTrq;
-  TTimer *tmrTrq;
   TColorBandTool *ChartTool1;
   TFastLineSeries *srsRpmRt;
   TFastLineSeries *srsTrqRt;
@@ -56,6 +55,9 @@ __published:	// IDE-managed Components
   TMaskEdit *MaskEdit2;
   TLabel *Label5;
   TLabel *Label6;
+  TEdit *edRepeat;
+  TLabel *Label7;
+  TSpeedButton *butSaltaStep;
   void __fastcall meCanIdChange(TObject *Sender);
   void __fastcall meCanRateChange(TObject *Sender);
   void __fastcall BitBtn1Click(TObject *Sender);
@@ -67,9 +69,10 @@ __published:	// IDE-managed Components
   void __fastcall sbCmdClick(TObject *Sender);
   void __fastcall tmrCmdTimer(TObject *Sender);
   void __fastcall SpeedButton1Click(TObject *Sender);
-  void __fastcall tmrTrqTimer(TObject *Sender);
   void __fastcall MaskEdit1Change(TObject *Sender);
   void __fastcall MaskEdit2Change(TObject *Sender);
+  void __fastcall edRepeatChange(TObject *Sender);
+  void __fastcall butSaltaStepClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
   __fastcall TfrmCan(TComponent* Owner);

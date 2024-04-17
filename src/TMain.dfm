@@ -1,7 +1,7 @@
 object Main: TMain
-  Left = 0
-  Top = 0
-  Width = 120
+  Left = 238
+  Top = 202
+  Width = 1362
   Height = 315
   Align = alClient
   Caption = 'DynoTractor'
@@ -24,13 +24,13 @@ object Main: TMain
     Left = 681
     Top = 105
     Width = 5
-    Height = 120
+    Height = 156
     Cursor = crHSplit
   end
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 686
+    Width = 1354
     Height = 55
     AutoSize = True
     BorderWidth = 1
@@ -1402,14 +1402,14 @@ object Main: TMain
     Left = 0
     Top = 105
     Width = 681
-    Height = 120
+    Height = 156
     Align = alLeft
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 1
       Top = 1
       Width = 679
-      Height = 118
+      Height = 154
       ActivePage = TabSheet1
       Align = alClient
       HotTrack = True
@@ -1426,7 +1426,7 @@ object Main: TMain
           Left = 122
           Top = 0
           Width = 4
-          Height = 63
+          Height = 99
           Cursor = crHSplit
           Color = clWhite
           ParentColor = False
@@ -1435,7 +1435,7 @@ object Main: TMain
           Left = 0
           Top = 0
           Width = 122
-          Height = 63
+          Height = 99
           Align = alLeft
           BevelInner = bvRaised
           Color = clSilver
@@ -1452,7 +1452,7 @@ object Main: TMain
             Left = 2
             Top = 2
             Width = 118
-            Height = 59
+            Height = 95
             StartColor = clWhite
             EndColor = clWhite
             Align = alClient
@@ -1825,7 +1825,7 @@ object Main: TMain
         end
         object ToolBar3: TToolBar
           Left = 0
-          Top = 63
+          Top = 99
           Width = 671
           Height = 26
           Align = alBottom
@@ -2121,7 +2121,7 @@ object Main: TMain
           Left = 126
           Top = 0
           Width = 545
-          Height = 63
+          Height = 99
           AllowPanning = pmNone
           BackImage.Mode = pbmCustom
           BackImageMode = pbmCustom
@@ -2312,7 +2312,7 @@ object Main: TMain
           TabStop = True
           DesignSize = (
             545
-            63)
+            99)
           PrintMargins = (
             15
             3
@@ -2320,7 +2320,7 @@ object Main: TMain
             3)
           object StringGrid1: TStringGrid
             Left = 8
-            Top = 2
+            Top = 6
             Width = 10
             Height = 10
             TabStop = False
@@ -3099,7 +3099,7 @@ object Main: TMain
           Left = 0
           Top = 0
           Width = 671
-          Height = 89
+          Height = 125
           ActivePage = Tabella_test_8
           Align = alClient
           TabIndex = 7
@@ -3111,7 +3111,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -3326,7 +3326,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -3539,7 +3539,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -3752,7 +3752,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -3965,7 +3965,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -4178,7 +4178,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -4391,7 +4391,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -4604,7 +4604,7 @@ object Main: TMain
               Left = 0
               Top = 0
               Width = 663
-              Height = 60
+              Height = 96
               Align = alClient
               Options = [goGrid, goHeader]
               RowSize = 20
@@ -15031,7 +15031,7 @@ object Main: TMain
         TabVisible = False
         object Chart3: TChart
           Left = 0
-          Top = -301
+          Top = -265
           Width = 671
           Height = 390
           BackWall.Gradient.EndColor = 11118482
@@ -15245,7 +15245,7 @@ object Main: TMain
         end
         object ToolBar2: TToolBar
           Left = 0
-          Top = -331
+          Top = -295
           Width = 671
           Height = 30
           Align = alBottom
@@ -15287,12 +15287,12 @@ object Main: TMain
         TabVisible = False
         DesignSize = (
           671
-          89)
+          125)
         object NextGrid9: TNextGrid
           Left = 0
           Top = 0
           Width = 671
-          Height = 89
+          Height = 125
           Align = alClient
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -15414,7 +15414,7 @@ object Main: TMain
         end
         object NextGrid10: TNextGrid
           Left = 0
-          Top = -3784
+          Top = -1775
           Width = 7438
           Height = 17500
           Anchors = []
@@ -15446,7 +15446,7 @@ object Main: TMain
           Left = 0
           Top = 0
           Width = 671
-          Height = 89
+          Height = 125
           Align = alClient
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -15575,7 +15575,7 @@ object Main: TMain
           Left = 0
           Top = 0
           Width = 671
-          Height = 89
+          Height = 125
           Align = alClient
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -15701,15 +15701,15 @@ object Main: TMain
   object Panel3: TPanel
     Left = 686
     Top = 105
-    Width = 0
-    Height = 120
+    Width = 668
+    Height = 156
     Align = alClient
     TabOrder = 2
     object PageControl2: TPageControl
       Left = 1
       Top = 1
-      Width = 729
-      Height = 99
+      Width = 666
+      Height = 135
       ActivePage = TabSheet2
       Align = alClient
       Font.Charset = ANSI_CHARSET
@@ -15730,8 +15730,8 @@ object Main: TMain
         object VrGradient1: TVrGradient
           Left = 0
           Top = 481
-          Width = 721
-          Height = 243
+          Width = 658
+          Height = 240
           StartColor = clGray
           EndColor = clSilver
           Align = alClient
@@ -15740,7 +15740,7 @@ object Main: TMain
         object Splitter3: TSplitter
           Left = 0
           Top = 121
-          Width = 721
+          Width = 658
           Height = 3
           Cursor = crVSplit
           Align = alTop
@@ -15750,7 +15750,7 @@ object Main: TMain
         object Splitter7: TSplitter
           Left = 0
           Top = 233
-          Width = 721
+          Width = 658
           Height = 3
           Cursor = crVSplit
           Align = alTop
@@ -15760,7 +15760,7 @@ object Main: TMain
         object Splitter8: TSplitter
           Left = 0
           Top = 348
-          Width = 721
+          Width = 658
           Height = 3
           Cursor = crVSplit
           Align = alTop
@@ -15770,7 +15770,7 @@ object Main: TMain
         object Splitter10: TSplitter
           Left = 0
           Top = 478
-          Width = 721
+          Width = 658
           Height = 3
           Cursor = crVSplit
           Align = alTop
@@ -15780,14 +15780,14 @@ object Main: TMain
         object Panel34: TPanel
           Left = 0
           Top = 0
-          Width = 721
+          Width = 658
           Height = 121
           Align = alTop
           TabOrder = 0
           object Panel4: TPanel
             Left = 1
             Top = 1
-            Width = 719
+            Width = 656
             Height = 119
             Align = alClient
             BevelInner = bvLowered
@@ -15799,7 +15799,7 @@ object Main: TMain
             object GiriLabel: TVrLabel
               Left = 6
               Top = 28
-              Width = 707
+              Width = 644
               Height = 85
               Align = alClient
               Color = clWhite
@@ -15815,7 +15815,7 @@ object Main: TMain
             object Panel5: TPanel
               Left = 6
               Top = 6
-              Width = 707
+              Width = 644
               Height = 22
               Align = alTop
               BevelInner = bvRaised
@@ -15836,14 +15836,14 @@ object Main: TMain
         object Panel43: TPanel
           Left = 0
           Top = 124
-          Width = 721
+          Width = 658
           Height = 109
           Align = alTop
           TabOrder = 1
           object Panel8: TPanel
             Left = 1
             Top = 1
-            Width = 719
+            Width = 656
             Height = 107
             Align = alClient
             BevelInner = bvLowered
@@ -15856,7 +15856,7 @@ object Main: TMain
             object CopLabel: TVrLabel
               Left = 6
               Top = 28
-              Width = 707
+              Width = 644
               Height = 73
               Align = alClient
               Color = clWhite
@@ -15872,7 +15872,7 @@ object Main: TMain
             object Panel9: TPanel
               Left = 6
               Top = 6
-              Width = 707
+              Width = 644
               Height = 22
               Align = alTop
               BevelInner = bvRaised
@@ -15893,14 +15893,14 @@ object Main: TMain
         object Panel44: TPanel
           Left = 0
           Top = 236
-          Width = 721
+          Width = 658
           Height = 112
           Align = alTop
           TabOrder = 2
           object Panel10: TPanel
             Left = 1
             Top = 1
-            Width = 719
+            Width = 656
             Height = 110
             Align = alClient
             BevelInner = bvLowered
@@ -15913,7 +15913,7 @@ object Main: TMain
             object PotLabel: TVrLabel
               Left = 6
               Top = 28
-              Width = 707
+              Width = 644
               Height = 76
               Align = alClient
               Color = clWhite
@@ -15929,7 +15929,7 @@ object Main: TMain
             object Panel11: TPanel
               Left = 6
               Top = 6
-              Width = 707
+              Width = 644
               Height = 22
               Align = alTop
               BevelInner = bvRaised
@@ -15950,7 +15950,7 @@ object Main: TMain
         object Panel45: TPanel
           Left = 0
           Top = 351
-          Width = 721
+          Width = 658
           Height = 127
           Align = alTop
           BevelInner = bvLowered
@@ -16017,7 +16017,7 @@ object Main: TMain
           object Panel24: TPanel
             Left = 189
             Top = 2
-            Width = 530
+            Width = 467
             Height = 123
             Align = alClient
             BevelInner = bvLowered
@@ -16029,7 +16029,7 @@ object Main: TMain
             object VccLabel: TVrLabel
               Left = 6
               Top = 28
-              Width = 518
+              Width = 455
               Height = 89
               Align = alClient
               Color = clWhite
@@ -16045,7 +16045,7 @@ object Main: TMain
             object Panel25: TPanel
               Left = 6
               Top = 6
-              Width = 518
+              Width = 455
               Height = 22
               Align = alTop
               BevelInner = bvRaised
@@ -16065,7 +16065,7 @@ object Main: TMain
           object Panel6: TPanel
             Left = 189
             Top = 2
-            Width = 530
+            Width = 467
             Height = 123
             Align = alClient
             BevelInner = bvLowered
@@ -16094,7 +16094,7 @@ object Main: TMain
             object ConsLabel2: TVrLabel
               Left = 105
               Top = 28
-              Width = 419
+              Width = 356
               Height = 89
               Align = alClient
               Color = clWhite
@@ -16119,7 +16119,7 @@ object Main: TMain
             object Panel7: TPanel
               Left = 6
               Top = 6
-              Width = 518
+              Width = 455
               Height = 22
               Align = alTop
               BevelInner = bvRaised
@@ -16140,8 +16140,8 @@ object Main: TMain
         object Panel46: TPanel
           Left = 0
           Top = 481
-          Width = 721
-          Height = 243
+          Width = 658
+          Height = 240
           Align = alClient
           BevelOuter = bvLowered
           TabOrder = 4
@@ -16149,7 +16149,7 @@ object Main: TMain
             Left = 190
             Top = 1
             Width = 3
-            Height = 241
+            Height = 238
             Cursor = crHSplit
             Beveled = True
           end
@@ -16157,14 +16157,14 @@ object Main: TMain
             Left = 382
             Top = 1
             Width = 3
-            Height = 241
+            Height = 238
             Cursor = crHSplit
           end
           object Panel18: TPanel
             Left = 385
             Top = 1
-            Width = 335
-            Height = 241
+            Width = 272
+            Height = 238
             Align = alClient
             BevelInner = bvLowered
             BevelOuter = bvLowered
@@ -16175,8 +16175,8 @@ object Main: TMain
             object OilLabel: TVrLabel
               Left = 6
               Top = 28
-              Width = 323
-              Height = 207
+              Width = 260
+              Height = 204
               Align = alClient
               Color = clWhite
               Caption = '0'
@@ -16192,7 +16192,7 @@ object Main: TMain
             object Panel19: TPanel
               Left = 6
               Top = 6
-              Width = 323
+              Width = 260
               Height = 22
               Align = alTop
               BevelInner = bvRaised
@@ -16213,7 +16213,7 @@ object Main: TMain
             Left = 1
             Top = 1
             Width = 189
-            Height = 241
+            Height = 238
             Align = alLeft
             BevelInner = bvLowered
             BevelOuter = bvLowered
@@ -16225,7 +16225,7 @@ object Main: TMain
               Left = 6
               Top = 28
               Width = 177
-              Height = 207
+              Height = 204
               Align = alClient
               Color = clWhite
               Caption = '0'
@@ -16262,7 +16262,7 @@ object Main: TMain
             Left = 193
             Top = 1
             Width = 189
-            Height = 241
+            Height = 238
             Align = alLeft
             BevelInner = bvLowered
             BevelOuter = bvLowered
@@ -16274,7 +16274,7 @@ object Main: TMain
               Left = 6
               Top = 28
               Width = 177
-              Height = 207
+              Height = 204
               Align = alClient
               Color = clWhite
               Caption = '0'
@@ -16315,8 +16315,8 @@ object Main: TMain
         object Chart2: TChart
           Left = 0
           Top = 0
-          Width = 721
-          Height = 64
+          Width = 658
+          Height = 552
           BackWall.Gradient.EndColor = 11118482
           Border.Color = clNavy
           Border.Visible = True
@@ -16475,8 +16475,8 @@ object Main: TMain
         end
         object Panel30: TPanel
           Left = 0
-          Top = -99
-          Width = 721
+          Top = -63
+          Width = 658
           Height = 169
           Align = alBottom
           BevelInner = bvLowered
@@ -16749,7 +16749,7 @@ object Main: TMain
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = []
-            ItemHeight = 13
+            ItemHeight = 0
             MaxLength = 1
             ParentFont = False
             TabOrder = 4
@@ -16781,8 +16781,8 @@ object Main: TMain
         object RichEdit1: TRichEdit
           Left = 0
           Top = 0
-          Width = 721
-          Height = 70
+          Width = 658
+          Height = 106
           TabStop = False
           Align = alClient
           Font.Charset = ANSI_CHARSET
@@ -16799,8 +16799,8 @@ object Main: TMain
     end
     object StatusBar1: TStatusBar
       Left = 1
-      Top = 100
-      Width = 729
+      Top = 136
+      Width = 666
       Height = 19
       Panels = <
         item
@@ -16819,7 +16819,7 @@ object Main: TMain
   object ToolBar5: TToolBar
     Left = 0
     Top = 55
-    Width = 686
+    Width = 1354
     Height = 50
     ButtonHeight = 44
     Caption = 'ToolBar5'

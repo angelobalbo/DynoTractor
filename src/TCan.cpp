@@ -43,21 +43,21 @@ extern float  Val_potenza_m1,
               Rap_tot1;
 extern long lRpm;
 extern float Valore_Cop;
-static long timing=0,t=0,timingTrq=0;
+static long timing=0,t=0;//,timingTrq=0;
 static long clockPrec,clockPrecTrq;
 static int  step=0,stepTrq=0;
 static float rpm1=0,rpm0;
 float rpm;
 static float trq1=0,trq0,trq=0;
-long tmrInterval,trqInterval;
-
+long tmrInterval,trqInterval,kInterval=0;
+bool jumpStep=false;
 bool bRpmTracStarted=false;
 bool bRTDataStarted=false;
 unsigned char cCanRpmData[8];
 bool bCanRpmErr=false;
 long lId1,lId2;
 #define MAX_TAB_STEP 10000
-
+int nCycle=1;
 typedef struct
 {
   float time [MAX_TAB_STEP];
@@ -290,7 +290,7 @@ void __fastcall TfrmCan::FormShow(TObject *Sender)
     bRpmTracStarted=false;
   }
   tmrCmd->Interval=tmrInterval;
-  tmrTrq->Interval=trqInterval;
+
 
 }
 //---------------------------------------------------------------------------
@@ -301,13 +301,16 @@ void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
 //
   if(bRpmTracStarted==false)//sbCmd->Caption=="START TEST")
   {
-//    srsRpm->Clear();
-//    srsTrq->Clear();
+    // ** START TEST **
+    Tipo_test=TEST_COST_TRQ;
     srsRpmRt->Clear();
     srsTrqRt->Clear();
     t=0;
+    kInterval=0;
+    jumpStep=false;
+    butSaltaStep->Enabled=true;
     timing=tabStep.time[0]*1000;
-    timingTrq=tabStep.time[0]*1000;
+//    timingTrq=tabStep.time[0]*1000;
     step=1;
     stepTrq=1;
     clockPrec=clock();
@@ -320,19 +323,18 @@ void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
     trq=trq0;
     sscanf(MaskEdit2->Text.c_str(), "%x", &lId2);
     memset(cCanRpmData,0,sizeof(cCanRpmData));
-    tmrCmd->Enabled=true;
-    tmrTrq->Enabled=true;
+
     sbCmd->Caption="STOP TEST";
     bRpmTracStarted=true;
     CreateCan(g_cCanLog);
     Valore_Cop=0;
     OK_N_cost=true;
     SpeedButton1->Enabled=false;
+    tmrCmd->Enabled=true;
   }
   else // STOP INVIO DATI AL TRACTOR
   {
     tmrCmd->Enabled=false;
-    tmrTrq->Enabled=false;
     sbCmd->Caption="START TEST";
     bRpmTracStarted=false;
     DestroyCan();
@@ -341,6 +343,8 @@ void __fastcall TfrmCan::sbCmdClick(TObject *Sender)
     trq=0;
     OK_N_cost=false;
     SpeedButton1->Enabled=true;
+    butSaltaStep->Enabled=false;
+    jumpStep=false;
 //    canStat=canObjBufDisable(hChannel,bufIdxRpmTrac);
 //    if(canStat!=canOK) LogError(g_cFileLog,LOG_ERR,"canObjBufDisable IdRpmTrac");
   }
@@ -354,6 +358,7 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
 
   static unsigned char cCanData[8];
   static float deltaRpm;
+  static float deltaTrq;
 
   static float interval;
 //  static canStatus canStat;
@@ -366,19 +371,29 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
   interval=(1000*(clock()-clockPrec)/CLK_TCK);
   timing+=interval;
   clockPrec=clock();
-  if(((rpm0==rpm1) && (timing>=(tabStep.time[step])*1000)) ||
+
+  if((/*(rpm0==rpm1) &&*/ (timing>=(tabStep.time[step])*1000) || jumpStep) /*||
      (rpm1>rpm0 && rpm>=rpm1) ||
-     (rpm1<rpm0 && rpm<=rpm1))
+     (rpm1<rpm0 && rpm<=rpm1)*/)
   {
     rpm0=tabStep.rpm[step];    // rpm iniziale
-    //timing=tabStep.time[step]*1000; // tempo iniziale ms
+    trq0=tabStep.trq[step];
+         if(jumpStep)
+      {
+        jumpStep=false;
+        kInterval=(1000*tabStep.time[step])-timing;
+        timing+=kInterval;
+      }
 
+    //timing=tabStep.time[step]*1000; // tempo iniziale ms
 
     step++;
     if(step<tabStep.rows)
     {
       rpm1=tabStep.rpm[step];    // rpm finale
+      trq1=tabStep.trq[step];
       rpm=rpm0; // Valore attuale da imporre risulta il valore iniziale
+      trq=trq0;
       //clockPrec=clock();
     }
     else // condizione di fine prova
@@ -387,21 +402,22 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
       bRpmTracStarted=false;
       DestroyCan();
       SpeedButton1->Enabled=true;
-      #if 0
-      if(OK_N_cost==true)
+      Main->EndTest();
+      OK_N_cost=false;
+      Valore_Cop=0;
+      if(nCycle > 1)
       {
-        OK_N_cost=false;
-        Main->EndTest();
-        Valore_Cop=0;
-        tmrTrq->Enabled=false;
+        nCycle--;
+        edRepeat->Text=nCycle;
+        sbCmdClick(this);
       }
-      #endif
+
     }
 
   }
   else
   {
-    //interval=(1000*(clock()-clockPrec)/CLK_TCK);
+
      //CASO 1: mantenimento rpm1=rpm0, tengo il tempo
      if(rpm1==rpm0)
       rpm=rpm1;
@@ -414,7 +430,22 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
         if      (rpm1>rpm0 && rpm>rpm1) rpm=rpm1;
         else if (rpm1<rpm0 && rpm<rpm1) rpm=rpm1;
      }
+     //CASO 1: mantenimento trq1=trq0, tengo il tempo
+     if(trq1==trq0)
+     {
+      trq=trq1;
 
+     }
+     //CASO 2: rampa in salita o discesa
+     else
+     {
+        deltaTrq=(trq1-trq)/((float)(tabStep.time[step]*1000-timing+interval)/(float)interval);
+        trq+=deltaTrq;
+        if      (trq1>trq0 && trq>trq1) trq=trq1;
+        else if (trq1>trq0 && trq<trq0) trq=trq0;
+        else if (trq1<trq0 && trq<trq1) trq=trq1;
+        else if (trq1<trq0 && trq>trq0) trq=trq0;
+     }
      //timing=timing+interval;
 
      //clockPrec=clock();
@@ -456,8 +487,22 @@ void __fastcall TfrmCan::tmrCmdTimer(TObject *Sender)
         #endif
       }
     }
+
     srsRpmRt->AddXY((float)timing/1000,(lRpm*Rap_tot1));
+//    srsRpmRt->AddXY((float)timing/1000,(rpm));
     chart->BottomAxis->Title->Caption="T = "+FormatFloat("#.00",(float)timing/1000)+"s";
+    if((1000*(clock()-clockPrecTrq)/CLK_TCK)>trqInterval)
+    {
+      clockPrecTrq=clock();
+      if(selPto == 0)
+        Valore_Cop=(trq*Rap_tot1/9.81)/fFact;
+      else
+        Valore_Cop=(trq/9.81)/fFact;
+
+      IO_ref=true;
+      srsTrqRt->AddXY((float)timing/1000,Val_coppia_m1 * fK_convC*fFact);
+      //srsTrqRt->AddXY((float)timing/*Trq*//1000,trq*fK_convC/9.81);
+    }
     tmrCmd->Enabled=true;
   }
 }
@@ -572,84 +617,6 @@ void __fastcall TfrmCan::SpeedButton1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TfrmCan::tmrTrqTimer(TObject *Sender)
-{
-  static float deltaTrq;
-  static float interval;
-//  static canStatus canStat;
-  tmrTrq->Enabled=false;
-
-  interval=(1000*(clock()-clockPrecTrq)/CLK_TCK);
-  timingTrq+=interval;
-  clockPrecTrq=clock();
-
-
-  // Condizione di avanzamento step, o step iniziale
-  if(((trq0==trq1) && (timingTrq>=(tabStep.time[stepTrq])*1000)) ||
-     (trq1>trq0 && trq>=trq1) ||
-     (trq1<trq0 && trq<=trq1))
-  {
-    trq0=tabStep.trq[stepTrq];    // trq iniziale
-    stepTrq++;
-    if(stepTrq<tabStep.rows)
-    {
-      trq1=tabStep.trq[stepTrq];    // trq finale
-      trq=trq0;
-    }
-
-
-  }
-  else
-  {
-     //CASO 1: mantenimento trq1=trq0, tengo il tempo
-     if(trq1==trq0)
-      trq=trq1;
-     //CASO 2: rampa in salita o discesa
-     else
-     {
-        deltaTrq=(trq1-trq)/((float)(tabStep.time[stepTrq]*1000-timingTrq+interval)/(float)interval);
-        trq+=deltaTrq;
-        if      (trq1>trq0 && trq>trq1) trq=trq1;
-        else if (trq1<trq0 && trq<trq1) trq=trq1;
-     }
-  }
-
-  if(stepTrq<tabStep.rows)//sbCmd->Caption=="STOP TEST")
-  {
-//    srsTrq->AddXY(timingTrq/1000, trq);
-
-    //LogError(g_cFileLog,LOG_ERR,FormatFloat("trq 0.#",trq).c_str());
-    if(selPto == 0)
-      Valore_Cop=(trq*Rap_tot1/9.81)/fFact;
-    else
-      Valore_Cop=(trq/9.81)/fFact;
-
-    IO_ref=true;
-    srsTrqRt->AddXY((float)timingTrq/1000,Val_coppia_m1 * fK_convC*fFact);
-    //srsTrqRt->AddXY((float)timingTrq/1000,trq*fK_convC/9.81);
-
-    // Inserire comando coppia costante dyn3
-    tmrTrq->Enabled=true;
-  }
-  else // condizione di fine prova
-      bRpmTracStarted=false;
-
-  // Risposta a termine prova, sgancio prova a coppia costante e ripristino bottone 
-  if(bRpmTracStarted==false)
-  {
-      sbCmd->Caption="START TEST";
-      Main->EndTest();
-      OK_N_cost=false;
-      Valore_Cop=0;
-      SpeedButton1->Enabled=true;
-  }
-
-
-}
-//---------------------------------------------------------------------------
-
-
-
 
 void __fastcall TfrmCan::MaskEdit1Change(TObject *Sender)
 {
@@ -660,6 +627,20 @@ void __fastcall TfrmCan::MaskEdit1Change(TObject *Sender)
 void __fastcall TfrmCan::MaskEdit2Change(TObject *Sender)
 {
   sscanf(MaskEdit2->Text.c_str(), "%x", &lId2);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TfrmCan::edRepeatChange(TObject *Sender)
+{
+  nCycle=StrToIntDef(edRepeat->Text,1);
+  edRepeat->Text=nCycle;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmCan::butSaltaStepClick(TObject *Sender)
+{
+  jumpStep=true;  
 }
 //---------------------------------------------------------------------------
 

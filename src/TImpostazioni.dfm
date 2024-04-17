@@ -1,6 +1,6 @@
 object Impostazioni: TImpostazioni
-  Left = 1120
-  Top = 127
+  Left = 497
+  Top = 134
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   BorderWidth = 2

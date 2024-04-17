@@ -419,6 +419,7 @@ void SetRealTimeData()
     Val_cella_m1=Val_cella_1/dynoPrm.filt.nCampMediatiCella;
     Val_cella_1=0;
     cellValueTot=cellValue/dynoPrm.filt.nCampMediatiCella;
+    /*
     if((cellValue==cellValueTot || cellValue>65000) && cellError==false)
     {
       if(Start_acq==true)
@@ -429,7 +430,7 @@ void SetRealTimeData()
       MessageBox(NULL,"Cell broken or Wrong value!","ERROR",MB_OK | MB_ICONERROR);
       LogError(g_cFileLog,LOG_ERR,"Errore di lettura cella (>65000 o bloccata)!");
       cellError=true;
-    }
+    }*/
     cellValue=0;
     num_val_cel=1;
     if(Val_cella_m1<0) Val_cella_m1=0;
@@ -2802,7 +2803,15 @@ void TMain::ProcessData()
         Fcel=(Valore_Cop/dynoPrm.bench.braccioReazCellaAnte);
         N_cost =((Fcel+cellPrm.readFase3A)*65535)/dynoPrm.bench.caricoMaxCellaAnte;
         // invia valore al freno
-        g_brakeControl.CmdPwm(N_cost,Ki_integ,Ki_prop);
+        if(g_brakeControl.CmdPwm(N_cost,Ki_integ,Ki_prop)==false)
+          LogError(g_cDyn3Log,LOG_ERR,"CmdPwm failed!");
+        else if(abs((int)(Valore_Cop-Val_coppia_m1))>5)
+        {
+          String sTmp;
+          sTmp="Differenza Coppia Target - Coppia reale > 5Kg·m  ("+FloatToStr(Valore_Cop-Val_coppia_m1)+")";
+
+          LogError(g_cFileLog,LOG_ERR,sTmp.c_str());
+        }
       }
       // Se sono sotto soglia RPM devo fermare il controllo freno
       if(lRpm<Soglia_min && (!IO_ref))
@@ -7607,10 +7616,10 @@ void TMain::EndTest()
   if(!TimerStopPwm->Enabled)
   {
     if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStop();
-    if(bFileTrace)
-    {
-      LogError(g_cDyn3Log,LOG_INFO,"Cmd STOP");
-    }
+//    if(bFileTrace)
+    //{
+      LogError(g_cDyn3Log,LOG_INFO,"Cmd STOP test");
+    //}
     usPwmWrite=usPwmAvg;
     TimerStopPwm->Tag=usPwm;
     TimerStopPwm->Enabled=true;
@@ -8571,7 +8580,7 @@ void __fastcall TMain::Out1Click(TObject *Sender)
 
 void __fastcall TMain::btnCanClick(TObject *Sender)
 {
-  Tipo_test=TEST_COST_TRQ;
+  //Tipo_test=TEST_COST_TRQ;
   frmCan->Show();
 }
 //---------------------------------------------------------------------------

@@ -124,7 +124,7 @@ AutoIncBuild=0
 MajorVer=2
 MinorVer=3
 Release=6
-Build=9
+Build=15
 Debug=0
 PreRelease=0
 Special=0
@@ -136,9 +136,9 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Dimsport s.r.l.
 FileDescription=Dynamometer
-FileVersion=2.3.6.9
+FileVersion=2.3.6.15
 InternalName=Dyno Tractor
-LegalCopyright=Dimsport 2008-2023
+LegalCopyright=Dimsport 2008-2024
 LegalTrademarks=
 OriginalFilename=DynoTractor
 ProductName=Dyno Tractor
@@ -146,8 +146,8 @@ ProductVersion=2.3.6
 Comments=Software di controllo banchi prova DynoTractor
 
 [Excluded Packages]
-C:\Programmi\Borland\CBuilder6\Bin\dclbde60.bpl=Borland BDE DB Components
 C:\Programmi\Borland\CBuilder6\Bin\dbx60.bpl=Borland SQL Explorer UI Package
+C:\Programmi\Borland\CBuilder6\Bin\dclbde60.bpl=Borland BDE DB Components
 c:\programmi\borland\cbuilder6\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
 c:\programmi\borland\cbuilder6\Projects\Bpl\Ccomrbike.bpl=CComrBike
 c:\programmi\borland\cbuilder6\Projects\Bpl\CComrbyke1.bpl=CComrbyke1
