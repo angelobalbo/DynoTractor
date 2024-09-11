@@ -171,6 +171,3 @@ Gestione freno manuale:
 - BugFix Stampa grafici coppia max & rpm <-- errato rpm visualizzato (quello a potenza massima anzichè coppia massima)
 2.3.5
 - Aggiunta feature _INDUSTRY4 che rende l'applicazione compatibile con lo standard InDUSTRY 4.0, essa eredita le caratteristiche richiezste dai banchi Turchia MATES
-2.3.5.4
-- Bug Fix e check valore cella bloccato, con conseguente annullamento di prove in esecuzione.
-	Le condizioni di blocco cella sono: cell>65000 o campioni successivi identici (cella a un valore fisso)

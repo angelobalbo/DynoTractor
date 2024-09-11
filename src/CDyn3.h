@@ -67,7 +67,7 @@ public:
       unsigned char bBrakeNoPower:1;
     } b;
   };
-
+#if 0
   union EDyn3DebugInfo
   {
     unsigned char cData[14];
@@ -88,7 +88,33 @@ public:
       unsigned char CRC;
     } b;
   };
-
+#endif
+  union EDyn3DebugInfo
+  {
+    unsigned char cData[20];
+    struct
+    {
+      unsigned char header[2];  // byte 0-1
+      unsigned char pH1;        // byte 2
+      unsigned char pH2;        // byte 3
+      unsigned char pL1;        // byte 4
+      unsigned char pL2;        // byte 5
+      unsigned char targetH;    // byte 6
+      unsigned char targetL;    // byte 7
+      unsigned char iH1;        // byte 8
+      unsigned char iH2;        // byte 9
+      unsigned char iL1;        // byte 10
+      unsigned char iL2;        // byte 11
+      unsigned char currentH;   // byte 12
+      unsigned char currentL;   // byte 13
+      unsigned char nul14;      // byte 14
+      unsigned char nul15;      // byte 15
+      unsigned char pwmH;       // byte 16
+      unsigned char pwmL;
+      unsigned char null18;
+      unsigned char CRC;        // byte 19
+    } b;
+  };
 
   /** Enumera Stati della comunicazione con scheda Dyn3 */
 protected:

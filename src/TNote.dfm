@@ -1,31 +1,31 @@
 object Note: TNote
-  Left = 379
-  Top = 180
+  Left = 170
+  Top = 130
   BorderIcons = []
   BorderStyle = bsDialog
   BorderWidth = 1
   Caption = 'Inserisci note del test'
-  ClientHeight = 316
-  ClientWidth = 499
+  ClientHeight = 266
+  ClientWidth = 420
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -16
+  Font.Height = -13
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   OnShow = FormShow
-  PixelsPerInch = 120
-  TextHeight = 19
+  PixelsPerInch = 96
+  TextHeight = 16
   object Memo1: TMemo
-    Left = 13
-    Top = 18
-    Width = 475
-    Height = 239
+    Left = 11
+    Top = 15
+    Width = 400
+    Height = 201
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -17
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     MaxLength = 499
@@ -34,19 +34,19 @@ object Note: TNote
     TabOrder = 0
   end
   object BitBtn1: TBitBtn
-    Left = 399
-    Top = 276
-    Width = 89
-    Height = 29
+    Left = 336
+    Top = 232
+    Width = 75
+    Height = 25
     TabOrder = 1
     OnClick = BitBtn1Click
     Kind = bkOK
   end
   object BitBtn2: TBitBtn
-    Left = 19
-    Top = 276
-    Width = 156
-    Height = 29
+    Left = 16
+    Top = 232
+    Width = 131
+    Height = 25
     Caption = 'Cancella tutto'
     TabOrder = 2
     OnClick = BitBtn2Click
@@ -66,10 +66,10 @@ object Note: TNote
     NumGlyphs = 2
   end
   object BitBtn3: TBitBtn
-    Left = 257
-    Top = 276
-    Width = 89
-    Height = 29
+    Left = 216
+    Top = 232
+    Width = 75
+    Height = 25
     Caption = 'Annulla'
     TabOrder = 3
     Kind = bkCancel

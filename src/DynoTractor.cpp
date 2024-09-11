@@ -31,6 +31,7 @@ USEFORM("TOil_Temp.cpp", Oil_Temp);
 USEFORM("TFattCorr.cpp", FattCorr);
 USEFORM("TFileList.cpp", frmFileList);
 USEFORM("TCan.cpp", frmCan);
+USEFORM("TDebugMode.cpp", frmDebugMode);
 //---------------------------------------------------------------------------
 extern char g_cFileLog[MAX_PATH];
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -71,6 +72,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
      Application->CreateForm(__classid(TFattCorr), &FattCorr);
      Application->CreateForm(__classid(TfrmFileList), &frmFileList);
      Application->CreateForm(__classid(TfrmCan), &frmCan);
+     Application->CreateForm(__classid(TfrmDebugMode), &frmDebugMode);
      #ifdef _DEBUG
       LogError(g_cFileLog,LOG_INFO,"Termine CreateForm");
      #endif

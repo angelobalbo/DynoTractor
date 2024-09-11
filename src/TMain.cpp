@@ -48,6 +48,7 @@
 #include "TFattCorr.h"
 #include "autoSave.h"
 #include "TFileList.h"
+#include "TDebugMode.h"
 #ifdef CAN_BUS
 #include "CanBus.h"
 #include "TCan.h"
@@ -223,7 +224,13 @@
   extern TDateTime dataFile;
   int    vTestEseguiti[8];//Indici dei test effettivamente eseguiti e non caricati da file
   int    iTestEseguiti=0; // Numero dei test effettivamente eseguiti
-  
+
+  bool edPCh=false;
+  bool edICh=false;
+  bool edDCh=false;
+
+  CDyn3::EDyn3DebugInfo g_debugInfo;
+
 void TMain::addSerialDat(CDyra::DataIn1* row)
 {
   if(row && g_dynoTest.testPrms.nPunti<MAX_SERIAL && statusDat==SAMPLING_DAT)
@@ -473,19 +480,7 @@ void SetRealTimeData()
     {
       // test a step decelerativo, condizioni di decremento step
       // 1) Oscillazione eccessiva impone di saltare lo step...passo al successivo
-#if 0 // Sezione esclusa
-      if((fabs(Val_ACC)>0.05/*fAccMax*/) && rpmStart>rpmStop && Reg_Stp>=rpmStop)
-      {
-        Reg_Stp -= Delta_reg; // decrementa i giri
-        if(Reg_Stp >= rpmStop)
-        {
-          usEncoder=MIN2USEC/((Reg_Stp/Rap_tot1)*dynoPrm.bench.nImpulsiEncoder);
-          if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStep(usEncoder,CDyn3::EFrontAxle);
-        }
-      }
-      // Nell'intorno dello step con accelerazione bassa, posso iniziare l'acquisizione
-      else
-#endif
+
       if((fabs(Val_ACC)<=Acc_ref) &&
          (lRpm*Rap_tot1>=Reg_Stp-KTempo) &&
          (lRpm*Rap_tot1<=Reg_Stp+KTempo))
@@ -512,6 +507,8 @@ void SetRealTimeData()
         {
           OK_ACQ_TEST_STEP=false;
           // CALCOLO MEDIA GRANDEZZE A GIRI COSTANTI
+          if(Tstep==0)
+            Tstep=1;
           Val_cop_medio/=Tstep;
           Val_reg_medio/=Tstep;
           Val_oil_medio/=Tstep;
@@ -1626,8 +1623,8 @@ void __fastcall TMain::FormClose(TObject *Sender, TCloseAction &Action)
   ini->WriteFloat("Counters","nCountMinTotRpmRulli",nCountMinTotRpmRulli);
   ini->WriteFloat("Counters","nLanciTotali",nLanciTotali);
   ini->WriteBool( "Stato_Chiusura", "OK",Avvio_OK);
-  delete ini;  
-  
+  delete ini;
+
   if(Start_acq)// stoppa acquisizione se attiva
     Start_acq=false;
   Timer1->Enabled=false;  // disattiva timer calcolo correzion
@@ -1644,7 +1641,9 @@ void __fastcall TMain::FormClose(TObject *Sender, TCloseAction &Action)
   }
 
   g_dyraControl.CmdStop();
-  Sleep(50);
+  if(g_brakeControl.GetDebugMode()==true)
+    g_brakeControl.CmdDebug(false);
+  Sleep(500);
   DestroyDyra();
   DestroyDyn3();
 
@@ -2596,6 +2595,7 @@ void TMain::ProcessData()
     {
       Step_test->CGauge1->Progress=Tstep;
       Step_test->Label2->Caption=IntToStr(Reg_Stp)+" "+Str0;
+      // Condizione di uscita dal test a step
       if(((rpmStart > rpmStop) && (Reg_Stp < rpmStop)) ||
           ((rpmStart < rpmStop) && (Reg_Stp > rpmStop)) ||
           gbStepTestCancel)
@@ -3674,7 +3674,8 @@ void __fastcall TMain::Nuovasessioneditest1Click(TObject *Sender)
       CheckBox8->Visible=false;
       CheckBox8->Checked=true; 
       CheckBox8->Caption="Test8";
-      Panel33->Visible=false;
+      if(bPidControl==false)
+        Panel33->Visible=false;
 
       // oscura tabelle
       Main->TabSheet5->TabVisible=false;      
@@ -7444,8 +7445,11 @@ void __fastcall TMain::Panel12Resize(TObject *Sender)
 void __fastcall TMain::tmrProcessDataTimer(TObject *Sender)
 {
   #define PWM_AVG_SAMPLES 13 // Circa 2 secondi (il dato pwm è notificato ogni 150ms)
-  static unsigned short usPwmSum=0, i=0;
+  static unsigned short usPwmSum=0, i=0,debugInfoPwm;
   static bool bConnected=true;
+  static  char sDebugInfo [200];
+  static long debugInfoP,debugInfoI;
+  static unsigned long debugInfoTarget,debugInfoCurrent;
   tmrProcessData->Enabled=false;
   switch (getStatusDat())
   {
@@ -7479,6 +7483,73 @@ void __fastcall TMain::tmrProcessDataTimer(TObject *Sender)
   /// Notifica le informazioni rilevate dalla Dyn3 all'applicazione
   if(bNotifyDyn3)
   {
+    // In DEBUG MODE prelevo il dato contenuto nel messaggio da 18 byte
+    if(g_brakeControl.GetDebugMode())
+    {
+      memset(&g_debugInfo,0,sizeof(g_debugInfo));
+      memset(sDebugInfo,0,sizeof(sDebugInfo));
+      g_brakeControl.GetDebugInfo(&g_debugInfo);
+      sprintf(sDebugInfo,"%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n",
+        g_debugInfo.cData[0],
+        g_debugInfo.cData[1],
+        g_debugInfo.cData[2],
+        g_debugInfo.cData[3],
+        g_debugInfo.cData[4],
+        g_debugInfo.cData[5],
+        g_debugInfo.cData[6],
+        g_debugInfo.cData[7],
+        g_debugInfo.cData[8],
+        g_debugInfo.cData[9],
+        g_debugInfo.cData[10],
+        g_debugInfo.cData[11],
+        g_debugInfo.cData[12],
+        g_debugInfo.cData[13],
+        g_debugInfo.cData[14],
+        g_debugInfo.cData[15],
+        g_debugInfo.cData[16],
+        g_debugInfo.cData[17],
+        g_debugInfo.cData[18],
+        g_debugInfo.cData[19]);
+        debugInfoP= (long)((unsigned long)g_debugInfo.b.pL2+
+                    ((unsigned long)g_debugInfo.b.pL1<<8)+
+                    ((unsigned long)g_debugInfo.b.pH2<<16)+
+                    ((unsigned long)g_debugInfo.b.pH1<<24));
+        debugInfoI= (long)((unsigned long)g_debugInfo.b.iL2+
+                    (unsigned long)(g_debugInfo.b.iL1<<8)+
+                    (unsigned long)(g_debugInfo.b.iH2<<16)+
+                    (unsigned long)(g_debugInfo.b.iH1<<24));
+        debugInfoTarget = (unsigned short)g_debugInfo.b.targetL+
+                          (unsigned short)(g_debugInfo.b.targetH<<8);
+        debugInfoCurrent= (unsigned short)g_debugInfo.b.currentL+
+                          (unsigned short)(g_debugInfo.b.currentH<<8);
+        debugInfoPwm=(unsigned short)(g_debugInfo.b.pwmL)+(unsigned short)(g_debugInfo.b.pwmH<<8);
+        if(frmDebugMode->cbRefresh->Checked)
+        {
+
+          if(frmDebugMode->sbMaxPoints->Max<frmDebugMode->chDebug->BottomAxis->Maximum-10)
+          {
+            frmDebugMode->sbMaxPoints->Max=frmDebugMode->chDebug->BottomAxis->Maximum;
+            frmDebugMode->Label3->Caption=IntToStr(frmDebugMode->sbMaxPoints->Max);
+          }//frmDebugMode->sbMaxPoints->Position=frmDebugMode->chDebug->BottomAxis->Maximum;
+          if(frmDebugMode->chDebug->BottomAxis->Maximum>frmDebugMode->sbMaxPoints->Position+frmDebugMode->chDebug->BottomAxis->Minimum)
+          {
+           frmDebugMode->chDebug->BottomAxis->Scroll(1,true);
+           frmDebugMode->chDebug->BottomAxis->Minimum=frmDebugMode->chDebug->BottomAxis->Minimum+1;
+          }
+          frmDebugMode->chDebug->SubTitle->Caption=sDebugInfo;
+          frmDebugMode->srsP->Add(debugInfoP);
+          frmDebugMode->srsI->Add(debugInfoI);
+          frmDebugMode->srsTarget->Add(debugInfoTarget);
+          frmDebugMode->srsCurrent->Add(debugInfoCurrent);
+          frmDebugMode->srsPwm->Add((int)((float)debugInfoPwm/4096*100));
+          frmDebugMode->srsP->Title="P "+IntToStr(debugInfoP);
+          frmDebugMode->srsI->Title="I "+IntToStr(debugInfoI);
+          frmDebugMode->srsTarget->Title="Trg "+IntToStr(debugInfoTarget);
+          frmDebugMode->srsCurrent->Title="Cur "+IntToStr(debugInfoCurrent);
+          frmDebugMode->srsPwm->Title="pwm "+IntToStr((int)((float)debugInfoPwm/4096*100))+"%";
+
+        }
+    }
     bNotifyDyn3=false;
     /// PWM freno
     usPwm=g_brakeControl.GetPwmAnte();
@@ -7593,7 +7664,12 @@ void __fastcall TMain::tmrProcessDataTimer(TObject *Sender)
   {
     Main->VrLabel10->Font->Color=clGreen;
     Main->VrLabel10->Caption=Text79;
+    if(Connect_Dypt==false)
+      if(bPidControl) // Solo per utenza pidcontrol, leggo i parametri del pid
+        btnRfrClick(this);
     Connect_Dypt=true;
+
+
   }
   /// Semaforo per gestire processamento dati applicazione
   /// Serve a garantire che non ci siano chiamate annidate della funzione ProcessData()
@@ -8068,9 +8144,33 @@ void __fastcall TMain::Fattoredicorrezione8Click(TObject *Sender)
 
 void __fastcall TMain::btnPIDClick(TObject *Sender)
 {
-  sPidKp=tbProp->Position;
-  sPidKi=tbInte->Position;
-  sPidKd=tbDeri->Position;
+  int iNewValue;
+
+  iNewValue=StrToIntDef(edP->Text,sPidKp);
+  if(iNewValue<1 || iNewValue > 65535)
+  {
+    edP->Text=sPidKp;
+  }
+  else
+    sPidKp=iNewValue;
+
+  iNewValue=StrToIntDef(edI->Text,sPidKi);
+  if(iNewValue<0 || iNewValue > 5000)
+  {
+    edI->Text=sPidKi;
+  }
+  else
+    sPidKi=iNewValue;
+
+  iNewValue=StrToIntDef(edD->Text,sPidKd);
+  if(iNewValue<0 || iNewValue > 5000)
+  {
+    edD->Text=sPidKd;
+  }
+  else
+    sPidKd=iNewValue;
+
+
   g_brakeControl.CmdWritePID(sPidKp,sPidKi,sPidKd);
   do
     Application->ProcessMessages();
@@ -8080,46 +8180,56 @@ void __fastcall TMain::btnPIDClick(TObject *Sender)
     Application->ProcessMessages();
   while(g_brakeControl.IsCmdInProgress());
   g_brakeControl.GetPID(&sPidKp,&sPidKi,&sPidKd);
-  tbProp->Position=sPidKp;
-  tbInte->Position=sPidKi;
-  tbDeri->Position=sPidKd;
-  lblP->Caption=sPidKp;
-  lblI->Caption=sPidKi;
-  lblD->Caption=sPidKd;
+
+  edP->Text=sPidKp;
+  edI->Text=sPidKi;
+  edD->Text=sPidKd;
+  TIniFile *ini;
+
+  ini = new TIniFile(utils.GetProgramDataName(".ini"));
+  ini->WriteInteger ("PID control", "K proporzionale",sPidKp);
+  ini->WriteInteger ("PID control", "K integrale",sPidKi);
+  ini->WriteInteger ("PID control", "K derivativo",sPidKd);
+  delete ini;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMain::tbPropChange(TObject *Sender)
-{
-  lblP->Caption=tbProp->Position;  
-}
-//---------------------------------------------------------------------------
 
-void __fastcall TMain::tbInteChange(TObject *Sender)
-{
-  lblI->Caption=tbInte->Position;
-}
-//---------------------------------------------------------------------------
 
-void __fastcall TMain::tbDeriChange(TObject *Sender)
-{
-  lblD->Caption=tbDeri->Position;
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TMain::btnRfrClick(TObject *Sender)
 {
+  unsigned short sNewKp,sNewKi,sNewKd;
+
   g_brakeControl.CmdReadPID();
   do
     Application->ProcessMessages();
   while(g_brakeControl.IsCmdInProgress());
   g_brakeControl.GetPID(&sPidKp,&sPidKi,&sPidKd);
-  tbProp->Position=sPidKp;
-  tbInte->Position=sPidKi;
-  tbDeri->Position=sPidKd;
-  lblP->Caption=sPidKp;
-  lblI->Caption=sPidKi;
-  lblD->Caption=sPidKd;
+  TIniFile *ini;
+  ini = new TIniFile(utils.GetProgramDataName(".ini"));
+  sNewKp=ini->ReadInteger ("PID control", "K proporzionale",3500);
+  sNewKi=ini->ReadInteger ("PID control", "K integrale",50);
+  sNewKd=ini->ReadInteger ("PID control", "K derivativo",0);
+  delete ini;
+
+  String strPID;
+  strPID=+" P="+IntToStr(sNewKp)+" I="+IntToStr(sNewKi)+" D="+IntToStr(sNewKd);
+  if( sNewKp!=sPidKp ||
+      sNewKi!=sPidKi ||
+      sNewKd!=sPidKd)
+    if(MessageDlg("aggiornare il PID sulla scheda con le ultime costanti memorizzate?("+strPID+")",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
+    {
+      sPidKp=sNewKp;
+      sPidKi=sNewKi;
+      sPidKd=sNewKd;
+      g_brakeControl.CmdWritePID(sPidKp,sPidKi,sPidKd);
+    }
+
+
+  edP->Text=sPidKp;
+  edI->Text=sPidKi;
+  edD->Text=sPidKd;
 }
 //---------------------------------------------------------------------------
 
@@ -8518,7 +8628,7 @@ void __fastcall TMain::t3Click(TObject *Sender)
 
 void __fastcall TMain::t4Click(TObject *Sender)
 {
-  saveTest(vTestEseguiti[3]);  
+  saveTest(vTestEseguiti[3]);
 }
 //---------------------------------------------------------------------------
 
@@ -8582,6 +8692,31 @@ void __fastcall TMain::btnCanClick(TObject *Sender)
 {
   //Tipo_test=TEST_COST_TRQ;
   frmCan->Show();
+}
+//---------------------------------------------------------------------------
+
+
+
+
+void __fastcall TMain::mnuDebugModeClick(TObject *Sender)
+{
+  if(g_brakeControl.GetDebugMode())
+  {
+     if(MessageDlg("Stop DEBUG mode?",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
+     {
+       if(g_brakeControl.CmdDebug(false))
+        frmDebugMode->Visible=false;
+     }
+  }
+  else
+    if(MessageDlg("DEBUG mode activation, confirm?",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
+    {
+      if(g_brakeControl.CmdDebug(true))
+      {
+          frmDebugMode->Visible=true;
+
+      }
+    }
 }
 //---------------------------------------------------------------------------
 

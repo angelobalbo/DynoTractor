@@ -525,13 +525,7 @@ __published:	// IDE-managed Components
   TMenuItem *Fattoredicorrezione2;
   TMenuItem *CaricaImpostazioni1;
   TMenuItem *Fattoredicorrezione1;
-  TTrackBar *tbProp;
-  TTrackBar *tbInte;
-  TTrackBar *tbDeri;
   TLabel *lblPID;
-  TLabel *lblP;
-  TLabel *lblI;
-  TLabel *lblD;
   TButton *btnPID;
   TButton *btnRfr;
   TMenuItem *ApriDatSeriale;
@@ -571,6 +565,13 @@ __published:	// IDE-managed Components
   TNxButton *sbDataOut;
   TNxButton *SpeedButton2;
   TBitBtn *btnCan;
+  TEdit *edP;
+  TEdit *edI;
+  TEdit *edD;
+  TLabel *lblP;
+  TLabel *lblI;
+  TLabel *lblD;
+  TMenuItem *mnuDebugMode;
   
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 
@@ -761,9 +762,6 @@ __published:	// IDE-managed Components
   void __fastcall Fattoredicorrezione7Click(TObject *Sender);
   void __fastcall Fattoredicorrezione8Click(TObject *Sender);
   void __fastcall btnPIDClick(TObject *Sender);
-  void __fastcall tbPropChange(TObject *Sender);
-  void __fastcall tbInteChange(TObject *Sender);
-  void __fastcall tbDeriChange(TObject *Sender);
   void __fastcall btnRfrClick(TObject *Sender);
   void __fastcall ApriDatSerialeClick(TObject *Sender);
   void __fastcall bAssistanceClick(TObject *Sender);
@@ -780,6 +778,7 @@ __published:	// IDE-managed Components
   void __fastcall In1Click(TObject *Sender);
   void __fastcall Out1Click(TObject *Sender);
   void __fastcall btnCanClick(TObject *Sender);
+  void __fastcall mnuDebugModeClick(TObject *Sender);
 
 
 

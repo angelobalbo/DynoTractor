@@ -25,6 +25,7 @@ TUtenti *Utenti;
   extern short  Prof_strum,
                 Vis_Air_Fuel;
   extern bool bFileTrace;
+  extern bool Connect_Dypt;
   extern bool bPidControl;  
   extern String Profilo,Str10,Text64,Text65,Text66,Text67;
   extern char Buffer[100];
@@ -91,9 +92,12 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
   else if(InputString=="pidcontrol")
   {
     bPidControl=true;
+    if(Connect_Dypt)
+      Main->btnRfrClick(this);
   }
   else
   {
+    Profilo=InputString;
     bPidControl=false;
     ListBox1->Items->Add(InputString);
     // conteggia e predispone la visualizzazione dell'ultimo utente inserito
@@ -105,10 +109,10 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
       ini->WriteString( "Profili", ListBox1->ItemIndex, ListBox1->Items->Strings[i] );
     }
     delete ini;
-          Vis_P_M = 1;
-          Vis_P_R = 0;
-          Vis_C_M = 1;
-          Vis_C_R = 0;
+          Vis_P_M = 0;
+          Vis_P_R = 1;
+          Vis_C_M = 0;
+          Vis_C_R = 1;
           Vis_P_D = 0;
           Vis_Pmap = 0;
           Vis_R_AB = 0;
@@ -132,11 +136,12 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
 
   if(bPidControl)
   {
-    Main->Panel33->Visible=true;  
-    Main->tbProp->Visible=true;
-    Main->tbInte->Visible=true;
-    Main->tbDeri->Visible=true;
+    Main->Panel33->Visible=true;
+
     Main->lblPID->Visible=true;
+    Main->edP->Visible=true;
+    Main->edI->Visible=true;
+    Main->edD->Visible=true;
     Main->lblP->Visible=true;
     Main->lblI->Visible=true;
     Main->lblD->Visible=true;
@@ -150,15 +155,16 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
   }
   else
   {
-    Main->tbProp->Visible=false;
-    Main->tbProp->Visible=false;
-    Main->tbProp->Visible=false;
+
     Main->lblPID->Visible=false;
+    Main->edP->Visible=false;
+    Main->edI->Visible=false;
+    Main->edD->Visible=false;
     Main->lblP->Visible=false;
     Main->lblI->Visible=false;
     Main->lblD->Visible=false;
     Main->btnPID->Visible=false;
-    Main->btnRfr->Visible=false;    
+    Main->btnRfr->Visible=false;
   }
 
 
@@ -166,7 +172,7 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
 
 
   // Salva su disco nuovo profilo standard con nome scelto da utente...
-  Profilo=InputString;
+
 
 }
 //---------------------------------------------------------------------------

@@ -14,7 +14,7 @@
       ..\obj\TNote.obj ..\obj\TMt_cost.obj ..\obj\TOil_Temp.obj ..\obj\CPort.obj 
       ..\obj\CDyra.obj ..\obj\CDyn3.obj ..\obj\CUtils.obj ..\obj\Log.obj 
       ..\obj\TFattCorr.obj ..\obj\autoSave.obj ..\obj\TFileList.obj 
-      ..\obj\CanBus.obj ..\obj\TCan.obj"/>
+      ..\obj\CanBus.obj ..\obj\TCan.obj ..\obj\TDebugMode.obj"/>
     <RESFILES value="DynoTractor.res Immage.res elevatepriv.res"/>
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) TMain.dfm TGiri_Mot.dfm TCoppia.dfm TPotenza.dfm TMap.dfm 
@@ -22,7 +22,7 @@
       TUtenti.dfm TRapporto.dfm TStart.dfm TAcc.dfm TOpzioni_grafici.dfm 
       TSetup.dfm TStep_test.dfm TPilot_Freno.dfm TCarica_File.dfm 
       TConnessione.dfm TSplash.dfm TNote.dfm TMt_cost.dfm TOil_Temp.dfm 
-      TFattCorr.dfm TFileList.dfm TCan.dfm"/>
+      TFattCorr.dfm TFileList.dfm TCan.dfm TDebugMode.dfm"/>
     <LIBFILES value="C:\Programmi\Kvaser\Canlib\Lib\Borland\canlib32.lib"/>
     <LIBRARIES value="Precision.lib NxThirdpartyRun.lib NxCollectionRun.lib NxGridRun.lib 
       NxCommonRun.lib ZylTimerPack.lib TeeUI7C6.lib TeePro7C6.lib bcbsmp.lib 
@@ -113,6 +113,7 @@
       <FILE FILENAME="CanBus.cpp" FORMNAME="" UNITNAME="CanBus" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="C:\Programmi\Kvaser\Canlib\INC\canlib.h" FORMNAME="" UNITNAME="canlib.h" CONTAINERID="" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="TCan.cpp" FORMNAME="frmCan" UNITNAME="TCan" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TDebugMode.cpp" FORMNAME="frmDebugMode" UNITNAME="TDebugMode" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
@@ -123,8 +124,8 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=2
 MinorVer=3
-Release=6
-Build=15
+Release=7
+Build=0
 Debug=0
 PreRelease=0
 Special=0
@@ -136,7 +137,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Dimsport s.r.l.
 FileDescription=Dynamometer
-FileVersion=2.3.6.15
+FileVersion=2.3.7.0
 InternalName=Dyno Tractor
 LegalCopyright=Dimsport 2008-2024
 LegalTrademarks=

@@ -112,7 +112,7 @@ void CDyn3::Connect(int iPortIndex)
 
 bool CDyn3::ReceiveStatus()
 {
-  #define LEN_DEBUG_MSG 14
+  #define LEN_DEBUG_MSG 20
   static bool bResult;
   static int iRxCursor=0;
   bResult=false;
@@ -299,7 +299,7 @@ bool CDyn3::GetAck()
     else
     {
       m_errorStatus.b.bRx=1;
-      LogError(g_cDyn3Log,LOG_ERR,"ACK: Errore ricezione comando");
+      //LogError(g_cDyn3Log,LOG_ERR,"ACK: Errore ricezione comando");
     }
   }
   else

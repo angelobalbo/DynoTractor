@@ -365,3 +365,4 @@ void __fastcall TOpzioni_grafici::cbCZeroScaleClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+

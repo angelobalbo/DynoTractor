@@ -177,3 +177,8 @@ Gestione freno manuale:
 	Nella applicazione  è necessario riavviare la taratura per resettare errore (permettendo che venga nuovamente mostrato il messaggio di errore)
 2.3.6
 - Gestione CAN bus profilatura prove a coppia/rpm costante tramite file csv. La modifica introdotta permette di inviare particolari comandi CAN al trattore. La modifica è attivabile da file INI ponendo il parametro CAN a 1
+2.3.7
+- Gestione debug mode con nuovo firmware DynT18 e messaggio debug da 20 byte.
+- Grafico debug mode con costanti del PID tracciate (termine P e I),valori corrente e target del controllo e percentuale di pwm freno.
+- rinnovata gestione con utenza pidcontrol, vengono preservate le nuove costanti del PID  scritte e proposte all'avvio in caso la scheda ne avesse di diverse.
+- Il software può eseguire le prove a step anche in modalità pidcontrol, cambiando le costanti del pid durante il test e tracciandone l'andamento grafico del controllo in modalità debug.
