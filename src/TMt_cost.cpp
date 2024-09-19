@@ -5,6 +5,9 @@
 
 #include "TMt_cost.h"
 #include "TMain.h"
+#ifdef _DYNOENGINE
+#include "TDebugMode.h"
+#endif
 #include "CDyn3.h"
 #include "Structs.h"
 #include<fstream.h>
@@ -13,7 +16,8 @@
 #pragma resource "*.dfm"
 TMt_cost *Mt_cost;
 
-    extern short sIndice, Ki_prop,Ki_integ;
+    extern short sIndice;
+    extern unsigned short Ki_prop,Ki_integ;
     extern unsigned short N_cost;
     extern float Val_C_cost,fK_convPes,fK_convC;
     extern float Valore_Cop;
@@ -54,6 +58,7 @@ void __fastcall TMt_cost::BitBtn1Click(TObject *Sender)
   if(tipoRapp==RAP_RPMFIX)
     Main->SpeedButton1->Enabled=true;
   Main->SpeedButton2->Enabled=true;
+  Close();
   //Main->Brake_control(0,0,1); // disattiva il freno
 }
 //---------------------------------------------------------------------------
@@ -97,6 +102,9 @@ void __fastcall TMt_cost::FormClose(TObject *Sender, TCloseAction &Action)
   if(tipoRapp==RAP_RPMFIX)
     Main->SpeedButton1->Enabled=true;
   Main->SpeedButton2->Enabled=true;
+#ifdef _DYNOENGINE
+  frmDebugMode->btnWritePid->Enabled=false;
+#endif
 }
 //---------------------------------------------------------------------------
 void __fastcall TMt_cost::FormKeyDown(TObject *Sender, WORD &Key,

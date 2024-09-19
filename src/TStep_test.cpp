@@ -4,6 +4,9 @@
 #include "TStep_test.h"
 #include "TImpostazioni.h"
 #include "TMain.h"
+#ifdef _DYNOENGINE
+#include "TDebugMode.h"
+#endif
 #include "CDyn3.h"
 #include "Log.h"
 #include "Structs.h"
@@ -156,7 +159,8 @@ void __fastcall TStep_test::FormShow(TObject *Sender)
       targetStep=Reg_Stp;
       m_usEncoder=MIN2USEC/((Reg_Stp/Rap_tot1)*dynoPrm.bench.nImpulsiEncoder);
      // comando step rpm
-      if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT)) g_brakeControl.CmdStep(m_usEncoder,CDyn3::EFrontAxle);
+      if(!(Main->getStatusDat()==START_SIMUL_DAT || Main->getStatusDat()==RUN_SIMUL_DAT))
+        g_brakeControl.CmdStep(m_usEncoder,CDyn3::EFrontAxle);
       Caption=Impostazioni->ComboBox1->Items->Strings[1];
       if(bFileTrace)
       {
@@ -330,6 +334,9 @@ void __fastcall TStep_test::FormClose(TObject *Sender,
     Main->SpeedButton1->Enabled=true;
   Main->SpeedButton2->Enabled=true;
   targetStep=0;
+#ifdef _DYNOENGINE
+  frmDebugMode->btnWritePid->Enabled=false;
+#endif
 }
 //---------------------------------------------------------------------------
 

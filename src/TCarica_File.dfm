@@ -1,6 +1,6 @@
 object Carica_File: TCarica_File
   Left = 207
-  Top = 74
+  Top = 78
   ActiveControl = DirectoryListBox1
   BorderStyle = bsDialog
   BorderWidth = 1

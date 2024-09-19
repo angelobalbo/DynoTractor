@@ -30,8 +30,8 @@ __published:
         TLabel *Label9;
         TTimer *Timer1;
         TLabel *Label10;
-  TImage *Image2;
   TLabel *lblFw;
+  TImage *Image2;
         void __fastcall Label4Click(TObject *Sender);
         void __fastcall FormShow(TObject *Sender);
 private:

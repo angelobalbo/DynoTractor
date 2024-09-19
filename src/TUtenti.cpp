@@ -29,9 +29,7 @@ TUtenti *Utenti;
   extern bool bPidControl;  
   extern String Profilo,Str10,Text64,Text65,Text66,Text67;
   extern char Buffer[100];
-  extern unsigned short sPidKp; // 0..FFFF x 10
-  extern unsigned short sPidKi; // 0..FFFF
-  extern unsigned short sPidKd; // 0..FFFF x 10000
+
 
 
 
@@ -92,8 +90,8 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
   else if(InputString=="pidcontrol")
   {
     bPidControl=true;
-    if(Connect_Dypt)
-      Main->btnRfrClick(this);
+//    if(Connect_Dypt)
+//      Main->btnRfrClick(this);
   }
   else
   {
@@ -136,8 +134,8 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
 
   if(bPidControl)
   {
-    Main->Panel33->Visible=true;
-
+//    Main->Panel33->Visible=true;
+/*
     Main->lblPID->Visible=true;
     Main->edP->Visible=true;
     Main->edI->Visible=true;
@@ -147,11 +145,7 @@ void __fastcall TUtenti::Aggiungiutente1Click(TObject *Sender)
     Main->lblD->Visible=true;
     Main->btnPID->Visible=true;
     Main->btnRfr->Visible=true;
-    g_brakeControl.CmdReadPID();
-    do
-      Application->ProcessMessages();
-    while(g_brakeControl.IsCmdInProgress());
-    g_brakeControl.GetPID(&sPidKp,&sPidKi,&sPidKd);
+*/
   }
   else
   {

@@ -26,7 +26,11 @@
 #ifdef _DYNOTRACTOR
 #define FILE_FORMAT_TYPE    "DSDB"
 #define FILE_FORMAT_VERS10  "10"
+#ifdef _DYNOENGINE
+#define DYNO_TEST_PATH      "DynoEngineTest"
+#else
 #define DYNO_TEST_PATH      "DynoTractorTest"
+#endif
 #define FILE_FORMAT_DAT     {'D','S','D','R','1','0','\2','\1'}
 #define FILE_FORMAT_DYN     {'D','S','D','R','1','0','\2','\0'}
 #define FILE_IMPO           "file_impo_trac.dmt"
@@ -49,9 +53,7 @@
 #else
 #define PROGRAMDATA_DYNORACE  "\\Dimtech\\Dynorace\\"
 #endif
-#define PROGRAMDATA_DYNOTRACTOR  "\\Dimtech\\Dynotractor\\"
-#define PROGRAMDATA_DYNOBIKE  "\\Dimtech\\Dynobike\\"
-#define PROGRAMDATA_DYNOTRUCK  "\\Dimtech\\Dynotruck\\"
+
 #ifdef _VAMAG
 #define PROGRAMDATA  "Vamag"
 #else

@@ -34,13 +34,28 @@ __published:	// IDE-managed Components
   TLabel *Label1;
   TLabel *Label2;
   TLabel *Label3;
+  TPanel *Panel1;
+  TGroupBox *GroupBox1;
+  TGroupBox *GroupBox2;
+  TLabeledEdit *lePstep;
+  TLabeledEdit *leIstep;
+  TLabeledEdit *leDstep;
+  TLabeledEdit *lePtrq;
+  TLabeledEdit *leItrq;
+  TLabeledEdit *leDtrq;
+  TBitBtn *btnReadPid;
+  TBitBtn *btnWritePid;
   void __fastcall Button1Click(TObject *Sender);
   void __fastcall Button2Click(TObject *Sender);
   void __fastcall BitBtn1Click(TObject *Sender);
   void __fastcall sbMaxPointsChange(TObject *Sender);
+  void __fastcall btnWritePidClick(TObject *Sender);
+  void __fastcall btnReadPidClick(TObject *Sender);
+  void __fastcall FormShow(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
   __fastcall TfrmDebugMode(TComponent* Owner);
+  bool checkPID();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmDebugMode *frmDebugMode;

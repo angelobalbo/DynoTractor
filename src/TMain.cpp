@@ -123,7 +123,7 @@
 #define CALC_P_ATM(x) (((((((x*0.01953)+0.067)/5)+0.095)/0.009)*10)-20)+iOffset_temp;
 
 // Modifiche per Industry 4.0 equivalenti a modifiche Dynotruck 2.4.6.3 (Dynorace Turchia+assistenza)
-#define _INDUSTRY4
+
 
 
 // MACRO
@@ -131,7 +131,7 @@
   TMain *Main;
 
 
-#ifdef _CAN_BUS
+#ifdef CAN_BUS
   canStatus status;
 
 #endif
@@ -163,9 +163,12 @@
   bool bPrimaEsec=true;
   bool bPidControl;
   bool bMapType=false;
-  unsigned short sPidKp; // 0..FFFF x 10
-  unsigned short sPidKi; // 0..FFFF
-  unsigned short sPidKd; // 0..FFFF x 10000
+  extern unsigned short sPidKp_step; // 0..FFFF x 10
+  extern unsigned short sPidKi_step; // 0..FFFF
+  extern unsigned short sPidKd_step; // 0..FFFF x 10000
+  extern unsigned short sPidKp_trq; // 0..FFFF x 10
+  extern unsigned short sPidKi_trq; // 0..FFFF
+  extern unsigned short sPidKd_trq; // 0..FFFF x 10000
   float fAccMax;
   int iDyraError=0; /// Numero pacchetti errati dyra
   int iMaxStepDistance=50;
@@ -184,8 +187,8 @@
        bot9,tot9;
 
   long p_term = 0, i_term = 0;
-  short Ki_prop=3000,
-        Ki_integ=350;//3500
+  unsigned short  Ki_prop=3000,
+                  Ki_integ=350;
 
   float C_Time=0.5,Facc=0,Fcel=0,velKm = 0;
 
@@ -968,7 +971,11 @@ void __fastcall TMain::carica_imp()
   if(sInPath=="")
   {
     SHGetFolderPath(NULL, CSIDL_PERSONAL,NULL,NULL,cDocPath);
-    strcat(cDocPath,"\\DynoTractorTest\\In");
+    strcat(cDocPath,"\\");
+    strcat(cDocPath,DYNO_TEST_PATH);
+    strcat(cDocPath,"\\In");
+//    DynoTractorTest\\In");
+
     sInPath=(String)cDocPath;//cArchivePath;
     if(!DirectoryExists(cDocPath))
       CreateDirectory(cDocPath,NULL);
@@ -978,7 +985,9 @@ void __fastcall TMain::carica_imp()
   if(sOutPath=="")
   {
     SHGetFolderPath(NULL, CSIDL_PERSONAL,NULL,NULL,cDocPath);
-    strcat(cDocPath,"\\DynoTractorTest\\Out");
+    strcat(cDocPath,"\\");
+    strcat(cDocPath,DYNO_TEST_PATH);
+    strcat(cDocPath,"\\Out");
     sOutPath=(String)cDocPath;//cArchivePath;
     if(!DirectoryExists(cDocPath))
       CreateDirectory(cDocPath,NULL);
@@ -1769,7 +1778,7 @@ void __fastcall TMain::SpeedButton2Click(TObject *Sender)
   dynoPrm.count.nLanciAvv++;      //lanci totali avviati
   dynoPrm.count.nLanciAvvPar++;      //lanci parziali avviati
   sommaContaore();
-  
+
  if(rpmStart < rpmStop )
         Reg_Stp=rpmStart;
  else
@@ -1779,14 +1788,24 @@ void __fastcall TMain::SpeedButton2Click(TObject *Sender)
   case TEST_STEP_TIMED:
     PageControl1->ActivePage=TabSheet1;
     SpeedButton4->Enabled=false;
+    if(g_brakeControl.GetDebugMode())
+    {
+      frmDebugMode->checkPID();
+      frmDebugMode->btnWritePid->Enabled=true;
+    }
     Step_test->Show();//Modal();  // avvia finestra di conf. inizio test
   break;
   case TEST_STEP:
     SpeedButton8->Enabled=false;
+    if(g_brakeControl.GetDebugMode())
+    {
+      frmDebugMode->checkPID();
+      frmDebugMode->btnWritePid->Enabled=true;
+    }
     Step_test->Show();//Modal();  // avvia finestra di conf. inizio test
   break;
   case TEST_DECEL:
-    PageControl1->ActivePage=TabSheet1;  
+    PageControl1->ActivePage=TabSheet1;
     SpeedButton15->Enabled=false;
     Start->Show/*Modal*/();  // avvia finestra di conferma inizio test
   break;
@@ -1795,13 +1814,18 @@ void __fastcall TMain::SpeedButton2Click(TObject *Sender)
     Pilot_Freno->Show();
   break;
   case TEST_COST_TRQ:
+    if(g_brakeControl.GetDebugMode())
+    {
+      frmDebugMode->checkPID();
+      frmDebugMode->btnWritePid->Enabled=true;
+    }
     SpeedButton21->Enabled=false;
-    Mt_cost->ShowModal();//
+    Mt_cost->Show();//
   break;
  }
 
-  
-  
+
+
 }
 //---------------------------------------------------------------------------
 
@@ -7526,7 +7550,7 @@ void __fastcall TMain::tmrProcessDataTimer(TObject *Sender)
         if(frmDebugMode->cbRefresh->Checked)
         {
 
-          if(frmDebugMode->sbMaxPoints->Max<frmDebugMode->chDebug->BottomAxis->Maximum-10)
+          if(frmDebugMode->sbMaxPoints->Max<frmDebugMode->chDebug->BottomAxis->Maximum-20)
           {
             frmDebugMode->sbMaxPoints->Max=frmDebugMode->chDebug->BottomAxis->Maximum;
             frmDebugMode->Label3->Caption=IntToStr(frmDebugMode->sbMaxPoints->Max);
@@ -7553,6 +7577,7 @@ void __fastcall TMain::tmrProcessDataTimer(TObject *Sender)
     bNotifyDyn3=false;
     /// PWM freno
     usPwm=g_brakeControl.GetPwmAnte();
+
     usPwmSum+usPwm;
     i++;
     if(i>=PWM_AVG_SAMPLES)
@@ -7664,11 +7689,6 @@ void __fastcall TMain::tmrProcessDataTimer(TObject *Sender)
   {
     Main->VrLabel10->Font->Color=clGreen;
     Main->VrLabel10->Caption=Text79;
-    if(Connect_Dypt==false)
-      if(bPidControl) // Solo per utenza pidcontrol, leggo i parametri del pid
-        btnRfrClick(this);
-    Connect_Dypt=true;
-
 
   }
   /// Semaforo per gestire processamento dati applicazione
@@ -8142,96 +8162,10 @@ void __fastcall TMain::Fattoredicorrezione8Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMain::btnPIDClick(TObject *Sender)
-{
-  int iNewValue;
-
-  iNewValue=StrToIntDef(edP->Text,sPidKp);
-  if(iNewValue<1 || iNewValue > 65535)
-  {
-    edP->Text=sPidKp;
-  }
-  else
-    sPidKp=iNewValue;
-
-  iNewValue=StrToIntDef(edI->Text,sPidKi);
-  if(iNewValue<0 || iNewValue > 5000)
-  {
-    edI->Text=sPidKi;
-  }
-  else
-    sPidKi=iNewValue;
-
-  iNewValue=StrToIntDef(edD->Text,sPidKd);
-  if(iNewValue<0 || iNewValue > 5000)
-  {
-    edD->Text=sPidKd;
-  }
-  else
-    sPidKd=iNewValue;
-
-
-  g_brakeControl.CmdWritePID(sPidKp,sPidKi,sPidKd);
-  do
-    Application->ProcessMessages();
-  while(g_brakeControl.IsCmdInProgress());
-  g_brakeControl.CmdReadPID();
-  do
-    Application->ProcessMessages();
-  while(g_brakeControl.IsCmdInProgress());
-  g_brakeControl.GetPID(&sPidKp,&sPidKi,&sPidKd);
-
-  edP->Text=sPidKp;
-  edI->Text=sPidKi;
-  edD->Text=sPidKd;
-  TIniFile *ini;
-
-  ini = new TIniFile(utils.GetProgramDataName(".ini"));
-  ini->WriteInteger ("PID control", "K proporzionale",sPidKp);
-  ini->WriteInteger ("PID control", "K integrale",sPidKi);
-  ini->WriteInteger ("PID control", "K derivativo",sPidKd);
-  delete ini;
-}
-//---------------------------------------------------------------------------
 
 
 
 
-void __fastcall TMain::btnRfrClick(TObject *Sender)
-{
-  unsigned short sNewKp,sNewKi,sNewKd;
-
-  g_brakeControl.CmdReadPID();
-  do
-    Application->ProcessMessages();
-  while(g_brakeControl.IsCmdInProgress());
-  g_brakeControl.GetPID(&sPidKp,&sPidKi,&sPidKd);
-  TIniFile *ini;
-  ini = new TIniFile(utils.GetProgramDataName(".ini"));
-  sNewKp=ini->ReadInteger ("PID control", "K proporzionale",3500);
-  sNewKi=ini->ReadInteger ("PID control", "K integrale",50);
-  sNewKd=ini->ReadInteger ("PID control", "K derivativo",0);
-  delete ini;
-
-  String strPID;
-  strPID=+" P="+IntToStr(sNewKp)+" I="+IntToStr(sNewKi)+" D="+IntToStr(sNewKd);
-  if( sNewKp!=sPidKp ||
-      sNewKi!=sPidKi ||
-      sNewKd!=sPidKd)
-    if(MessageDlg("aggiornare il PID sulla scheda con le ultime costanti memorizzate?("+strPID+")",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
-    {
-      sPidKp=sNewKp;
-      sPidKi=sNewKi;
-      sPidKd=sNewKd;
-      g_brakeControl.CmdWritePID(sPidKp,sPidKi,sPidKd);
-    }
-
-
-  edP->Text=sPidKp;
-  edI->Text=sPidKi;
-  edD->Text=sPidKd;
-}
-//---------------------------------------------------------------------------
 
 
 void __fastcall TMain::ApriDatSerialeClick(TObject *Sender)
@@ -8678,7 +8612,10 @@ void __fastcall TMain::Out1Click(TObject *Sender)
   if(sOutPath=="")
   {
     SHGetFolderPath(NULL, CSIDL_PERSONAL,NULL,NULL,cDocPath);
-    strcat(cDocPath,"\\DynoTractorTest\\Out");
+    strcat(cDocPath,"\\");
+    strcat(cDocPath,DYNO_TEST_PATH);
+    strcat(cDocPath,"\\Out");
+//    DynoTractorTest\\Out");
     sOutPath=(String)cDocPath;//cArchivePath;
     if(!DirectoryExists(cDocPath))
       CreateDirectory(cDocPath,NULL);
@@ -8700,23 +8637,40 @@ void __fastcall TMain::btnCanClick(TObject *Sender)
 
 void __fastcall TMain::mnuDebugModeClick(TObject *Sender)
 {
-  if(g_brakeControl.GetDebugMode())
+  if(ucFwType=='T' && ucFwVer>0x12)
   {
-     if(MessageDlg("Stop DEBUG mode?",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
-     {
-       if(g_brakeControl.CmdDebug(false))
-        frmDebugMode->Visible=false;
-     }
-  }
-  else
-    if(MessageDlg("DEBUG mode activation, confirm?",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
+    if(g_brakeControl.GetDebugMode())
     {
-      if(g_brakeControl.CmdDebug(true))
-      {
-          frmDebugMode->Visible=true;
-
-      }
+       if(MessageDlg("Stop DEBUG mode?",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
+       {
+         if(g_brakeControl.CmdDebug(false))
+         {
+          do
+          {
+            Sleep(100);
+            Application->ProcessMessages();
+          }
+          while(g_brakeControl.IsCmdInProgress());
+          frmDebugMode->Visible=false;
+         }
+       }
     }
+    else
+      if(MessageDlg("DEBUG mode activation, confirm?",mtConfirmation,TMsgDlgButtons() << mbYes << mbNo,0) == mrYes)
+        if(g_brakeControl.CmdDebug(true))
+        {
+          do
+          {
+            Sleep(100);
+            Application->ProcessMessages();
+          }
+          while(g_brakeControl.IsCmdInProgress());
+          frmDebugMode->Visible=true;
+        }
+  }
 }
 //---------------------------------------------------------------------------
+
+
+
 

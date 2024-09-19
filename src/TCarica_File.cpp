@@ -349,7 +349,7 @@ void __fastcall TCarica_File::FormShow(TObject *Sender)
   SHGetFolderPath(NULL, CSIDL_PERSONAL,NULL,NULL,cDocPath);
 
   DirectoryListBox1->Drive=cDocPath[0];
-  sprintf(p,"%s\\DynoTractorTest",cDocPath);
+  sprintf(p,"%s\\%s",cDocPath,DYNO_TEST_PATH);
   DirectoryListBox1->Directory= p;
   FileListBox1->Update();
   delete [] p;

@@ -1,6 +1,6 @@
 object Mt_cost: TMt_cost
-  Left = 299
-  Top = 122
+  Left = 588
+  Top = 168
   BorderIcons = []
   BorderStyle = bsDialog
   BorderWidth = 1
@@ -93,7 +93,6 @@ object Mt_cost: TMt_cost
     Top = 132
     Width = 257
     Height = 53
-    Caption = 'Annulla'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -21
@@ -102,6 +101,6 @@ object Mt_cost: TMt_cost
     ParentFont = False
     TabOrder = 0
     OnClick = BitBtn1Click
-    Kind = bkAbort
+    Kind = bkCancel
   end
 end

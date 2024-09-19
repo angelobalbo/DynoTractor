@@ -46,7 +46,7 @@
     <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
     <RELEASELIBPATH value="$(BCB)\lib\release"/>
     <LINKER value="ilink32"/>
-    <USERDEFINES value="_DYNOTRACTOR;CAN_BUS"/>
+    <USERDEFINES value="_DYNOTRACTOR;CAN_BUS;_INDUSTRY4"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="DynoTractor.cpp"/>
     <INCLUDEPATH value="C:\Sviluppo\DYNO_V3\src;C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;&quot;C:\Program Files\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;&quot;C:\Programmi\ZylTimer\zyltimer\CBuilder 6&quot;;..\..\..\tms;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Addons&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Grid&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources&quot;;&quot;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race&quot;;$(BCB)\Imports;C:\APRO;..;&quot;Dyno Race II&quot;;$(BCB)\include;$(BCB)\include\vcl;&quot;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include&quot;;C:\Programmi\TWS;C:\Sviluppo\DynoCanLib\DynoCanLib;C:\Programmi\Kvaser\Canlib\INC"/>
@@ -124,7 +124,7 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=2
 MinorVer=3
-Release=7
+Release=8
 Build=0
 Debug=0
 PreRelease=0
@@ -137,7 +137,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Dimsport s.r.l.
 FileDescription=Dynamometer
-FileVersion=2.3.7.0
+FileVersion=2.3.8.0
 InternalName=Dyno Tractor
 LegalCopyright=Dimsport 2008-2024
 LegalTrademarks=
@@ -204,15 +204,16 @@ Count=1
 Item0=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
-Count=8
-Item0=_DYNOTRACTOR;CAN_BUS
-Item1=_DYNOTRACTOR;CAN_BUS;_DEBUG
-Item2=_DYNOTRACTOR;_DEBUG
-Item3=_DYNOTRACTOR
-Item4=_DYNOTRACTOR;;_DEBUG
-Item5=_DYNOTRACTOR;
-Item6=_DYNOTRACTOR;_VAMAG
-Item7=_DEBUG
+Count=9
+Item0=_DYNOTRACTOR;CAN_BUS;_INDUSTRY4
+Item1=_DYNOTRACTOR;CAN_BUS
+Item2=_DYNOTRACTOR
+Item3=_DYNOTRACTOR;CAN_BUS;_DEBUG
+Item4=_DYNOTRACTOR;_DEBUG
+Item5=_DYNOTRACTOR;;_DEBUG
+Item6=_DYNOTRACTOR;
+Item7=_DYNOTRACTOR;_VAMAG
+Item8=_DEBUG
 
 [HistoryLists\hlIntOutputDir]
 Count=1

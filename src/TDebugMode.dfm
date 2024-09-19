@@ -1,8 +1,8 @@
 object frmDebugMode: TfrmDebugMode
-  Left = 868
-  Top = 51
-  Width = 709
-  Height = 472
+  Left = 533
+  Top = 65
+  Width = 732
+  Height = 605
   Caption = 'DEBUG MODE'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,13 +13,14 @@ object frmDebugMode: TfrmDebugMode
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object chDebug: TChart
     Left = 0
-    Top = 0
-    Width = 701
-    Height = 438
+    Top = 49
+    Width = 724
+    Height = 522
     AllowPanning = pmNone
     LeftWall.Visible = False
     Legend.Bevel = bvLowered
@@ -132,8 +133,8 @@ object frmDebugMode: TfrmDebugMode
     Color = clWhite
     TabOrder = 0
     DesignSize = (
-      701
-      438)
+      724
+      522)
     PrintMargins = (
       0
       0
@@ -141,7 +142,7 @@ object frmDebugMode: TfrmDebugMode
       0)
     object Label1: TLabel
       Left = 40
-      Top = 400
+      Top = 484
       Width = 176
       Height = 16
       Anchors = [akLeft, akBottom]
@@ -155,7 +156,7 @@ object frmDebugMode: TfrmDebugMode
     end
     object Label2: TLabel
       Left = 5
-      Top = 400
+      Top = 484
       Width = 17
       Height = 16
       Anchors = [akLeft, akBottom]
@@ -168,8 +169,8 @@ object frmDebugMode: TfrmDebugMode
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 664
-      Top = 399
+      Left = 687
+      Top = 483
       Width = 25
       Height = 16
       Alignment = taRightJustify
@@ -183,8 +184,8 @@ object frmDebugMode: TfrmDebugMode
       ParentFont = False
     end
     object Button1: TButton
-      Left = 487
-      Top = 16
+      Left = 510
+      Top = 8
       Width = 89
       Height = 25
       Anchors = [akTop, akRight]
@@ -199,8 +200,8 @@ object frmDebugMode: TfrmDebugMode
       OnClick = Button1Click
     end
     object cbRefresh: TCheckBox
-      Left = 16
-      Top = 8
+      Left = 280
+      Top = 11
       Width = 97
       Height = 17
       Caption = 'REFRESH'
@@ -209,9 +210,9 @@ object frmDebugMode: TfrmDebugMode
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 375
-      Top = 15
-      Width = 105
+      Left = 386
+      Top = 7
+      Width = 117
       Height = 26
       Anchors = [akTop, akRight]
       Caption = 'STOP DEBUG'
@@ -225,8 +226,8 @@ object frmDebugMode: TfrmDebugMode
       OnClick = Button2Click
     end
     object BitBtn1: TBitBtn
-      Left = 584
-      Top = 12
+      Left = 607
+      Top = 4
       Width = 105
       Height = 28
       Anchors = [akTop, akRight]
@@ -244,8 +245,8 @@ object frmDebugMode: TfrmDebugMode
     end
     object sbMaxPoints: TScrollBar
       Left = 1
-      Top = 420
-      Width = 699
+      Top = 504
+      Width = 722
       Height = 17
       Align = alBottom
       Min = 10
@@ -255,6 +256,27 @@ object frmDebugMode: TfrmDebugMode
       ShowHint = True
       TabOrder = 4
       OnChange = sbMaxPointsChange
+    end
+    object btnReadPid: TBitBtn
+      Left = 8
+      Top = 8
+      Width = 89
+      Height = 25
+      Caption = 'READ PID'
+      TabOrder = 5
+      OnClick = btnReadPidClick
+      Kind = bkRetry
+    end
+    object btnWritePid: TBitBtn
+      Left = 112
+      Top = 8
+      Width = 89
+      Height = 25
+      Caption = 'WRITE PID'
+      Enabled = False
+      TabOrder = 6
+      OnClick = btnWritePidClick
+      Kind = bkAll
     end
     object srsP: TFastLineSeries
       Marks.Callout.Brush.Color = clBlack
@@ -326,6 +348,116 @@ object frmDebugMode: TfrmDebugMode
       Callout.Brush.Color = clBlack
       Callout.Arrow.Visible = False
       Text = 'Page %d of %d'
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 724
+    Height = 49
+    Align = alTop
+    TabOrder = 1
+    object GroupBox1: TGroupBox
+      Left = 1
+      Top = 1
+      Width = 350
+      Height = 47
+      Align = alLeft
+      Caption = 'STEP RPM'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      object lePstep: TLabeledEdit
+        Left = 16
+        Top = 17
+        Width = 100
+        Height = 21
+        EditLabel.Width = 9
+        EditLabel.Height = 13
+        EditLabel.Caption = 'P'
+        LabelPosition = lpLeft
+        LabelSpacing = 3
+        TabOrder = 0
+      end
+      object leIstep: TLabeledEdit
+        Left = 136
+        Top = 17
+        Width = 97
+        Height = 21
+        EditLabel.Width = 5
+        EditLabel.Height = 13
+        EditLabel.Caption = 'I'
+        LabelPosition = lpLeft
+        LabelSpacing = 3
+        TabOrder = 1
+      end
+      object leDstep: TLabeledEdit
+        Left = 256
+        Top = 17
+        Width = 89
+        Height = 21
+        EditLabel.Width = 10
+        EditLabel.Height = 13
+        EditLabel.Caption = 'D'
+        LabelPosition = lpLeft
+        LabelSpacing = 3
+        TabOrder = 2
+      end
+    end
+    object GroupBox2: TGroupBox
+      Left = 351
+      Top = 1
+      Width = 372
+      Height = 47
+      Align = alClient
+      Caption = 'CONSTANT TORQUE'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      object lePtrq: TLabeledEdit
+        Left = 19
+        Top = 17
+        Width = 100
+        Height = 21
+        EditLabel.Width = 9
+        EditLabel.Height = 13
+        EditLabel.Caption = 'P'
+        LabelPosition = lpLeft
+        LabelSpacing = 3
+        TabOrder = 0
+      end
+      object leItrq: TLabeledEdit
+        Left = 141
+        Top = 17
+        Width = 97
+        Height = 21
+        EditLabel.Width = 5
+        EditLabel.Height = 13
+        EditLabel.Caption = 'I'
+        LabelPosition = lpLeft
+        LabelSpacing = 3
+        TabOrder = 1
+      end
+      object leDtrq: TLabeledEdit
+        Left = 261
+        Top = 17
+        Width = 89
+        Height = 21
+        EditLabel.Width = 10
+        EditLabel.Height = 13
+        EditLabel.Caption = 'D'
+        LabelPosition = lpLeft
+        LabelSpacing = 3
+        TabOrder = 2
+      end
     end
   end
 end

@@ -23,7 +23,7 @@ void __fastcall TSplash::Timer1Timer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TSplash::FormShow(TObject *Sender)
 {
-#ifdef _VAMAG
+#ifdef _DYNOENGINE
   Image2->Visible=true;
 #else
   Image1->Visible=true;

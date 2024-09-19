@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="..\app\DynoEngine\DynoEngine.exe"/>
+    <OBJFILES value="..\obj\DynoEngine\DynoEngine.obj ..\obj\DynoEngine\TMain.obj 
+      ..\obj\DynoEngine\TGiri_Mot.obj ..\obj\DynoEngine\TCoppia.obj 
+      ..\obj\DynoEngine\TPotenza.obj ..\obj\DynoEngine\TMap.obj 
+      ..\obj\DynoEngine\TTermo.obj ..\obj\DynoEngine\TImpostazioni.obj 
+      ..\obj\DynoEngine\TInfo.obj ..\obj\DynoEngine\TStrumenti.obj 
+      ..\obj\DynoEngine\TMisure.obj ..\obj\DynoEngine\TUtenti.obj 
+      ..\obj\DynoEngine\TRapporto.obj ..\obj\DynoEngine\TStart.obj 
+      ..\obj\DynoEngine\TAcc.obj ..\obj\DynoEngine\TOpzioni_grafici.obj 
+      ..\obj\DynoEngine\TSetup.obj ..\obj\DynoEngine\TStep_test.obj 
+      ..\obj\DynoEngine\TPilot_Freno.obj ..\obj\DynoEngine\TCarica_File.obj 
+      ..\obj\DynoEngine\TConnessione.obj ..\obj\DynoEngine\TSplash.obj 
+      ..\obj\DynoEngine\TNote.obj ..\obj\DynoEngine\TMt_cost.obj 
+      ..\obj\DynoEngine\TOil_Temp.obj ..\obj\DynoEngine\CPort.obj 
+      ..\obj\DynoEngine\CDyra.obj ..\obj\DynoEngine\CDyn3.obj 
+      ..\obj\DynoEngine\CUtils.obj ..\obj\DynoEngine\Log.obj 
+      ..\obj\DynoEngine\TFattCorr.obj ..\obj\DynoEngine\autoSave.obj 
+      ..\obj\DynoEngine\TFileList.obj ..\obj\DynoEngine\CanBus.obj 
+      ..\obj\DynoEngine\TCan.obj ..\obj\DynoEngine\TDebugMode.obj"/>
+    <RESFILES value="DynoEngine.res Immage.res elevatepriv.res"/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) TMain.dfm TGiri_Mot.dfm TCoppia.dfm TPotenza.dfm TMap.dfm 
+      TTermo.dfm TImpostazioni.dfm TInfo.dfm TStrumenti.dfm TMisure.dfm 
+      TUtenti.dfm TRapporto.dfm TStart.dfm TAcc.dfm TOpzioni_grafici.dfm 
+      TSetup.dfm TStep_test.dfm TPilot_Freno.dfm TCarica_File.dfm 
+      TConnessione.dfm TSplash.dfm TNote.dfm TMt_cost.dfm TOil_Temp.dfm 
+      TFattCorr.dfm TFileList.dfm TCan.dfm TDebugMode.dfm"/>
+    <LIBFILES value="C:\Programmi\Kvaser\Canlib\Lib\Borland\canlib32.lib"/>
+    <LIBRARIES value="Precision.lib NxThirdpartyRun.lib NxCollectionRun.lib NxGridRun.lib 
+      NxCommonRun.lib ZylTimerPack.lib TeeUI7C6.lib TeePro7C6.lib bcbsmp.lib 
+      vcwb6.lib dclocx.lib vclx.lib dclusr.lib dbrtl.lib vcldb.lib a405_r61.lib 
+      Tee7C6.lib rtl.lib vcl.lib"/>
+    <SPARELIBS value="vcl.lib rtl.lib Tee7C6.lib a405_r61.lib vcldb.lib dbrtl.lib dclusr.lib 
+      vclx.lib dclocx.lib vcwb6.lib bcbsmp.lib TeePro7C6.lib TeeUI7C6.lib 
+      ZylTimerPack.lib NxCommonRun.lib NxGridRun.lib NxCollectionRun.lib 
+      NxThirdpartyRun.lib Precision.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi vclx.bpi bcbsmp.bpi dbrtl.bpi adortl.bpi vcldb.bpi 
+      qrpt.bpi bdertl.bpi vcldbx.bpi dsnap.bpi cds.bpi bdecds.bpi ibxpress.bpi 
+      visualclx.bpi visualdbclx.bpi vclie.bpi xmlrtl.bpi inet.bpi inetdbbde.bpi 
+      inetdbxpress.bpi inetdb.bpi nmfast.bpi bcbie.bpi soaprtl.bpi dclocx.bpi 
+      dbexpress.bpi dbxcds.bpi indy.bpi bcb2kaxserver.bpi a405_r61.bpi 
+      TeeDB7C6.bpi Tee7C6.bpi TeeUI7C6.bpi TeeLanguage7C6.bpi TeePro7C6.bpi 
+      TeeGL7C6.bpi TeeQR7C6.bpi TeeImage7C6.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DYNOTRACTOR;_DYNOENGINE;CAN_BUS"/>
+    <SYSDEFINES value="NO_STRICT"/>
+    <MAINSOURCE value="DynoEngine.cpp"/>
+    <INCLUDEPATH value="C:\Sviluppo\DYNO_V3\src;C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;&quot;C:\Program Files\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;&quot;C:\Programmi\ZylTimer\zyltimer\CBuilder 6&quot;;..\..\..\tms;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Addons&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Grid&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources&quot;;&quot;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race&quot;;$(BCB)\Imports;C:\APRO;..;&quot;Dyno Race II&quot;;$(BCB)\include;$(BCB)\include\vcl;&quot;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include&quot;;C:\Programmi\TWS;C:\Sviluppo\DynoCanLib\DynoCanLib;C:\Programmi\Kvaser\Canlib\INC"/>
+    <LIBPATH value="C:\Sviluppo\DYNO_V3\src;C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;&quot;C:\Program Files\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;&quot;C:\Programmi\ZylTimer\zyltimer\CBuilder 6&quot;;..\..\..\tms;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Addons&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Collection&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources\Next Grid&quot;;&quot;C:\Programmi\Berg\Next Suite\Sources&quot;;&quot;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race&quot;;$(BCB)\Imports;C:\APRO;&quot;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib&quot;;..;&quot;Dyno Race II&quot;..\app;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS;C:\Programmi\Kvaser\Canlib\Lib\Borland;C:\Sviluppo\DYNO_V3\Lib"/>
+    <WARNINGS value="-w8092 -w8091 -w-par -wdef -wamb"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -VF -X- -a8 -6 -b- -k- -vi -c -tW 
+      -tWM"/>
+    <PFLAGS value="-N2..\obj\DynoEngine -N0..\obj\DynoEngine -$Y- -$L- -$D- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-l..\app\DynoEngine -I..\obj\DynoEngine -D&quot;&quot; -aa -Tpe -x -Gn -w"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="DynoEngine.res" FORMNAME="" UNITNAME="DynoEngine.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DynoEngine.cpp" FORMNAME="" UNITNAME="DynoEngine" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TMain.cpp" FORMNAME="Main" UNITNAME="TMain" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TGiri_Mot.cpp" FORMNAME="Giri_Mot" UNITNAME="TGiri_Mot" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TCoppia.cpp" FORMNAME="Coppia" UNITNAME="TCoppia" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TPotenza.cpp" FORMNAME="Potenza" UNITNAME="TPotenza" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TMap.cpp" FORMNAME="Map" UNITNAME="TMap" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TTermo.cpp" FORMNAME="Termo" UNITNAME="TTermo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TImpostazioni.cpp" FORMNAME="Impostazioni" UNITNAME="TImpostazioni" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TInfo.cpp" FORMNAME="Info" UNITNAME="TInfo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TStrumenti.cpp" FORMNAME="Strumenti" UNITNAME="TStrumenti" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TMisure.cpp" FORMNAME="Misure" UNITNAME="TMisure" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TUtenti.cpp" FORMNAME="Utenti" UNITNAME="TUtenti" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TRapporto.cpp" FORMNAME="Rapporto" UNITNAME="TRapporto" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TStart.cpp" FORMNAME="Start" UNITNAME="TStart" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TAcc.cpp" FORMNAME="Acc" UNITNAME="TAcc" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TOpzioni_grafici.cpp" FORMNAME="Opzioni_grafici" UNITNAME="TOpzioni_grafici" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TSetup.cpp" FORMNAME="Setup" UNITNAME="TSetup" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TStep_test.cpp" FORMNAME="Step_test" UNITNAME="TStep_test" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TPilot_Freno.cpp" FORMNAME="Pilot_Freno" UNITNAME="TPilot_Freno" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TCarica_File.cpp" FORMNAME="Carica_File" UNITNAME="TCarica_File" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TConnessione.cpp" FORMNAME="Connessione" UNITNAME="TConnessione" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Immage.rc" FORMNAME="" UNITNAME="Immage.rc" CONTAINERID="RC" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TSplash.cpp" FORMNAME="Splash" UNITNAME="TSplash" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TNote.cpp" FORMNAME="Note" UNITNAME="TNote" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TMt_cost.cpp" FORMNAME="Mt_cost" UNITNAME="TMt_cost" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TOil_Temp.cpp" FORMNAME="Oil_Temp" UNITNAME="TOil_Temp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="elevatepriv.rc" FORMNAME="" UNITNAME="elevatepriv.rc" CONTAINERID="RC" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DynoTractor - Info Versioni.txt" FORMNAME="" UNITNAME="DynoTractor - Info Versioni.txt" CONTAINERID="" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="variabili.h" FORMNAME="" UNITNAME="variabili.h" CONTAINERID="" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CPort.cpp" FORMNAME="" UNITNAME="CPort" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CDyra.cpp" FORMNAME="" UNITNAME="CDyra" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CDyn3.cpp" FORMNAME="" UNITNAME="CDyn3" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CUtils.cpp" FORMNAME="" UNITNAME="CUtils" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Log.cpp" FORMNAME="" UNITNAME="Log" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Structs.h" FORMNAME="" UNITNAME="Structs.h" CONTAINERID="" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TFattCorr.cpp" FORMNAME="FattCorr" UNITNAME="TFattCorr" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="autoSave.cpp" FORMNAME="" UNITNAME="autoSave" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TFileList.cpp" FORMNAME="frmFileList" UNITNAME="TFileList" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Programmi\Kvaser\Canlib\Lib\Borland\canlib32.lib" FORMNAME="" UNITNAME="canlib32.lib" CONTAINERID="LibTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CanBus.cpp" FORMNAME="" UNITNAME="CanBus" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Programmi\Kvaser\Canlib\INC\canlib.h" FORMNAME="" UNITNAME="canlib.h" CONTAINERID="" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TCan.cpp" FORMNAME="frmCan" UNITNAME="TCan" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TDebugMode.cpp" FORMNAME="frmDebugMode" UNITNAME="TDebugMode" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=3
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1040
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=Dimsport s.r.l.
+FileDescription=Dynamometer
+FileVersion=1.0.0.3
+InternalName=Dyno Engine
+LegalCopyright=Dimsport 2008-2024
+LegalTrademarks=
+OriginalFilename=DynoEngine
+ProductName=Dyno Engine
+ProductVersion=1
+Comments=Software di controllo banco prova motore
+
+[Excluded Packages]
+C:\Programmi\Borland\CBuilder6\Bin\dbx60.bpl=Borland SQL Explorer UI Package
+C:\Programmi\Borland\CBuilder6\Bin\dclbde60.bpl=Borland BDE DB Components
+c:\programmi\borland\cbuilder6\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
+c:\programmi\borland\cbuilder6\Projects\Bpl\Ccomrbike.bpl=CComrBike
+c:\programmi\borland\cbuilder6\Projects\Bpl\CComrbyke1.bpl=CComrbyke1
+
+[HistoryLists\hlIncludePath]
+Count=20
+Item0=C:\Sviluppo\DYNO_V3\src;C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS;C:\Sviluppo\DynoCanLib\DynoCanLib;C:\Programmi\Kvaser\Canlib\INC
+Item1=C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS;C:\Sviluppo\DynoCanLib\DynoCanLib;C:\Programmi\Kvaser\Canlib\INC
+Item2=..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS;C:\Sviluppo\DynoCanLib\DynoCanLib;C:\Programmi\Kvaser\Canlib\INC
+Item3=..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item4=C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item5=C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item6=C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;..\..\..\..\Berg\Next Suite\Sources\Next Grid;..\..\..\..\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item7=..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item8=..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TmS
+Item9=C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TmS
+Item10=C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item11=C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item12=$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include;C:\Programmi\TWS
+Item13=$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include
+Item14=$(BCB)\Imports;C:\APRO;..\;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include
+Item15=..\..\..\TMS;$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;D:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include
+Item16=$(BCB)\Imports;C:\APRO;..;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;D:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include
+Item17=$(BCB)\Imports;C:\APRO;..\;Dyno Race II;$(BCB)\include;$(BCB)\include\vcl;D:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include
+Item18=$(BCB)\include;$(BCB)\include\vcl;D:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Include
+Item19=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=20
+Item0=C:\Sviluppo\DYNO_V3\src;C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;&quot;Dyno Race II&quot;..\app;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS;C:\Programmi\Kvaser\Canlib\Lib\Borland;C:\Sviluppo\DYNO_V3\Lib
+Item1=C:\Programmi\Borland\CBuilder6\Projects;..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;&quot;Dyno Race II&quot;..\app;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS;C:\Programmi\Kvaser\Canlib\Lib\Borland;C:\Sviluppo\DYNO_V3\Lib
+Item2=..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;&quot;Dyno Race II&quot;..\app;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS;C:\Programmi\Kvaser\Canlib\Lib\Borland;C:\Sviluppo\DYNO_V3\Lib
+Item3=..\..\commons;C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;&quot;Dyno Race II&quot;..\app;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item4=C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;&quot;Dyno Race II&quot;..\app;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item5=C:\Program Files\Berg\Next Suite\Sources\Next Collection;C:\Program Files\Borland\CBuilder6\Projects;C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item6=C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item7=C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item8=C:\Programmi\ZylTimer\zyltimer\CBuilder 6;..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;..\..\..\..\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item9=..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item10=..\..\..\tms;C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TmS
+Item11=C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;..\..\..\..\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TmS
+Item12=C:\Programmi\Berg\Next Suite\Sources\Next Addons;C:\Programmi\Berg\Next Suite\Sources\Next Collection;C:\Programmi\Berg\Next Suite\Sources\Next Grid;C:\Programmi\Berg\Next Suite\Sources;C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item13=C:\Documents and Settings\Administrator\Documenti\Banco Prova Potenza\DYNO-RACE\Software\Dyno_Race_new\Dyno_Race;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item14=$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Programmi\TWS
+Item15=$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item16=..\..\..\TMS;$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item17=$(BCB)\Imports;C:\APRO;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;..\;Dyno Race II;$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item18=$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item19=$(BCB)\Projects\Lib;C:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib;$(BCB)\lib\obj;$(BCB)\lib;D:\Programmi\Steema Software\TeeChart 706 for Builder 6\Builder6\Lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=12
+Item0=_DYNOTRACTOR;_DYNOENGINE;CAN_BUS
+Item1=_DYNOTRACTOR;_DYNOENGINE;CAN_BUS;_DEBUG
+Item2=_DYNOTRACTOR;_DYNOENGINE
+Item3=_DYNOTRACTOR;CAN_BUS;_DYNOENGINE
+Item4=_DYNOTRACTOR;CAN_BUS
+Item5=_DYNOTRACTOR;CAN_BUS;_DEBUG
+Item6=_DYNOTRACTOR;_DEBUG
+Item7=_DYNOTRACTOR
+Item8=_DYNOTRACTOR;;_DEBUG
+Item9=_DYNOTRACTOR;
+Item10=_DYNOTRACTOR;_VAMAG
+Item11=_DEBUG
+
+[HistoryLists\hlIntOutputDir]
+Count=2
+Item0=..\obj\DynoEngine
+Item1=..\obj
+
+[HistoryLists\hlFinalOutputDir]
+Count=4
+Item0=..\app\DynoEngine\
+Item1=..\app\DynoEngine
+Item2=..\app\
+Item3=..\app
+
+[HistoryLists\hIBPIOutputDir]
+Count=2
+Item0=..\app\DynoEngine
+Item1=..\app
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

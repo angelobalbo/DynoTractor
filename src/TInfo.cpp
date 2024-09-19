@@ -49,7 +49,7 @@ void __fastcall TInfo::FormShow(TObject *Sender)
 // Dati finestra informazioni
  Label10->Caption= Produttore;
  Label4->Caption= Link;
-#ifdef _VAMAG
+#ifdef _DYNOENGINE
   Image2->Visible=true;
 #else
   Image1->Visible=true;

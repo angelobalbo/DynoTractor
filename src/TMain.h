@@ -761,8 +761,6 @@ __published:	// IDE-managed Components
   void __fastcall Fattoredicorrezione6Click(TObject *Sender);
   void __fastcall Fattoredicorrezione7Click(TObject *Sender);
   void __fastcall Fattoredicorrezione8Click(TObject *Sender);
-  void __fastcall btnPIDClick(TObject *Sender);
-  void __fastcall btnRfrClick(TObject *Sender);
   void __fastcall ApriDatSerialeClick(TObject *Sender);
   void __fastcall bAssistanceClick(TObject *Sender);
   void __fastcall sbDataInClick(TObject *Sender);
